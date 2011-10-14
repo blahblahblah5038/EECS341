@@ -1,0 +1,35 @@
+Q.a:
+SELECT p.pname FROM PRODUCTS p, ORDERS o, AGENTS a WHERE o.aid=a.aid AND o.pid=p.pid AND a.aname='Jenny Doe'
+
+Awesome Sauce,	
+Charlie Sheen's Guide to Winning,	
+
+
+
+Q4:
+SELECT aname FROM AGENTS a WHERE NOT EXISTS (SELECT o.aid FROM ORDERS o, CUSTOMERS c WHERE o.aid = a.aid AND o.cid = c.cid AND a.city != c.city)
+
+Jenny Doe,	
+Hurr Durr,	
+Dude Dudeson,	
+
+
+
+Q.b:
+SELECT p1.city, p1.pname FROM PRODUCTS p1 WHERE NOT EXISTS (SELECT * FROM PRODUCTS p2 WHERE p1.pid!=p2.pid AND p1.price>p2.price AND p2.city=p1.city)
+
+Factoryland,	Awesome Sauce,	
+Stupidsville,	How to Be Dumb for Non-Dummies,	
+Bobsville,	Bob's Cookbook,	
+
+
+
+Q.c:
+SELECT DISTINCT o1.month, p1.pname FROM PRODUCTS p1, ORDERS o1 WHERE p1.pid = o1.pid AND NOT EXISTS (SELECT * FROM PRODUCTS p2, ORDERS o2 WHERE p1.pid!=p2.pid AND p2.pid = o2.pid AND p1.price<p2.price AND o1.month = o2.month)
+
+January,	Awesome Sauce,	
+February,	Charlie Sheen's Guide to Winning,	
+March,	Bob's Cookbook,	
+
+
+
