@@ -1,0 +1,1 @@
+java.sql.SQLException: Incorrect integer value: 'this is not a number' for column 'discnt_decrease' at row 1
