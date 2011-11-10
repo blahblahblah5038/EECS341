@@ -1,27 +1,49 @@
 <?php
- 
-//initialize the CAS library
-require_once('CAS/CAS.php');
+// Example for a simple client
+
+// Load the settings from the central config file
+//include_once('config.php');
+// Load the CAS lib
+include_once('CAS/CAS.php');
+
+// Uncomment to enable debugging
+phpCAS::setDebug();
+
+// Initialize phpCAS
 phpCAS::client(CAS_VERSION_2_0, 'login.case.edu', 443, '/cas');
- 
-//if the user is requesting to be logged in
-if (isset($_REQUEST['login'])) {
-   phpCAS::forceAuthentication();
-   //the user is known to be logged in to CAS at this point
-   $_SESSION['loggedInLocally'] = true;  //set a local variable telling the program we are logged in
-   $_SESSION['username'] = phpCAS::getUser();  //this stores their network user id
-}
- 
-//if we want to log out of the program
+//phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context);
+
+// For production use set the CA certificate that is the issuer of the cert 
+// on the CAS server and uncomment the line below
+// phpCAS::setCasServerCACert($cas_server_ca_cert_path);
+
+// For quick testing you can disable SSL validation of the CAS server. 
+// THIS SETTING IS NOT RECOMMENDED FOR PRODUCTION. 
+// VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL! 
+phpCAS::setNoCasServerValidation();
+
+// force CAS authentication
+phpCAS::forceAuthentication();
+
+// at this step, the user has been authenticated by the CAS server
+// and the user's login name can be read with phpCAS::getUser().
+
+// logout if desired
 if (isset($_REQUEST['logout'])) {
-   $_SESSION['loggedInLocally'] = false;
-   unset($_SESSION['username']);
+        phpCAS::logout();
 }
- 
-if (isset($_SESSION['loggedinLocally']) && $_SESSION['loggedInLocally']===true) {
-   echo "You are logged in to the application ".phpCAS::getUser();
-} else {
-   echo "You are not logged in to the application.  Log in by specifying the 'login' log parameter to this script.";
-}
- 
+
+// for this test, simply print that the authentication was successfull
 ?>
+<html>
+  <head>
+    <title>phpCAS simple client</title>
+  </head>
+  <body>
+    <h1>Successfull Authentication!</h1>
+    <?php include 'script_info.php' ?>
+    <p>the user's login is <b><?php echo phpCAS::getUser(); ?></b>.</p>
+    <p>phpCAS version is <b><?php echo phpCAS::getVersion(); ?></b>.</p>
+    <p><a href="?logout=">Logout</a></p>
+  </body>
+</html>
