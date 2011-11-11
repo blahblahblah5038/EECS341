@@ -1,3 +1,5 @@
+<?php include("auth.php"); ?>
+
 <html>
 <head>
 	<title>Archery Club Website / EECS 341 Project</title>
