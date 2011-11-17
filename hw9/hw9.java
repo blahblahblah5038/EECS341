@@ -1,3 +1,6 @@
+//Wesley Gould
+//EECS341 HW9
+
 import java.sql.*;
 
 public class  hw9
