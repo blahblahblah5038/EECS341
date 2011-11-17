@@ -1,12 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>db_files</title>
-</head>
-
-<body>
-
 <?PHP
 class db_files
 {
@@ -182,6 +173,3 @@ class db_files
 
 } // end of class
 ?>
-
-</body>
-</html>
