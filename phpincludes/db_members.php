@@ -5,7 +5,7 @@
 // Contacts
 function addContact($first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
 {
-	$querystr = "INSERT INTO contact (first_name, last_name, address, city, state, zip, email, phone) VALUES (" +TT
+	$querystr = "INSERT INTO contact (first_name, last_name, address, city, state, zip, email, phone) VALUES (" +
 		$first_name + ", " +
 		$last_name + ", " +
 		$address + ", " +
