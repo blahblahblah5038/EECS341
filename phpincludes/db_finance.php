@@ -23,8 +23,8 @@ class db_finance
 	{
 		
 		//	Run queries to find tuples with date = $date
-		$item_query		=	'SELECT requested, allocated, balance FROM budget_item WHERE budget_date = \''.$date.'\'';
-		$budget_query	=	'SELECT total_requested, total_allocated, balance FROM budget WHERE start_date = \''.$date.'\'';
+		$item_query		=	"SELECT requested, allocated, balance FROM budget_item WHERE budget_date = '"		.$date.	"'";
+		$budget_query	=	"SELECT total_requested, total_allocated, balance FROM budget WHERE start_date = '"	.$date.	"'";
 		
 		$item_result	=	run_query($GLOBALS['dbc'],	$item_query) or die('Error in query');
 		$budget_result	=	run_query($GLOBALS['dbc'],	$budget_query) or die('Error in query');

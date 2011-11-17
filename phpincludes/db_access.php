@@ -1,12 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>db_access</title>
-</head>
-
-<body>
-
 <?PHP
 class db_access
 {
@@ -204,5 +195,3 @@ class db_access
 }	// end of class
 
 ?>
-</body>
-</html>
