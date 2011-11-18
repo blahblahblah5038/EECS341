@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<div class="formlabel">How can I improve my website?</div>
+    <div class="formfield">
+    	<select name="suggestion">
+        	<option value="Couldn't be better." selected="selected">Office Expenses.</option>
+            <option value="More about the cats.">More about the cats.</option>
+            <option value="More about the family.">More about the family</option>
+            <option value="More about Elvis.">More about Elvis.</option>
+    	</select>
+        
+	</div>
+    
+    <div class="formfield">
+    	<select name="?">
+        	<option value="Item">Item</option>
+            <option value="Cost">Cost</option>
+        </select>
+    </div>
+    
+    <div class="formfield">
+    	Wuat<input name="Item" type="text" size="4"><br />
+        Wu tan
+    </div>
+    
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    	Enter number of rows <input name="rows" type="text" size="4"><br />
+	    and columns <input name="columns" type="text" size="4"><br />
+    	<input type="submit" name="submit" value="Draw Table">
+    </form>
+    
+    <table>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    	<tr>
+			<td>Where</td>
+            <td><input name="Where" type="text" size="40"></td>
+        </tr>
+        
+        <tr>
+        	<td>When</td>
+            <td><input name="When" type="text" size="40"></td>
+        </tr>
+        
+        <tr>
+        	<td>Number of People</td>
+            <td><input name="NumPeople" type="text" size="40"></td>
+        </tr>
+        
+        <tr>
+        	<td>Number of Vehicles</td>
+            <td><input name="NumVehicles" type="text" size="40"></td>
+        </tr>
+        
+        <tr>
+        	<td>Mileage</td>
+            <td><input name="Mileage" type="text" size="40"></td>
+        </tr>
+        
+        <tr>
+        	<td>Total Cost</td>
+            <td><input name="TotCost" type="text" size="40"></td>
+       	</tr>
+        
+
+    </form>
+    </table>
+    
+</body>
+</html>

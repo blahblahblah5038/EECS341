@@ -119,7 +119,7 @@ class db_files
 		
 		// Run query
 		$query	=	"INSERT INTO trashbin (fid, pid, date_added) VALUES ("
-					.$fid.", ".$pid.", ".SQL_TIMESTAMP.")";
+					.$fid.", ".$pid.", CURRENT_TIMESTAMP)";
 		
 		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 	}
