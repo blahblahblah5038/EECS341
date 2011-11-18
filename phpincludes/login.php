@@ -6,9 +6,6 @@
 // Load the CAS lib
 include_once('CAS/CAS.php');
 
-// Uncomment to enable debugging
-phpCAS::setDebug();
-
 // Initialize phpCAS
 phpCAS::client(CAS_VERSION_2_0, 'login.case.edu', 443, '/cas');
 //phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context);
