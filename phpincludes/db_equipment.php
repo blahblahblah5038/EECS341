@@ -2,6 +2,8 @@
 // Functions regarding equipment
 // run_query from include("db_connect.php");
 
+
+
 function addEquipment($type, $serialnum, $brand, $owner)
 {
 	$querystr = "INSERT INTO inventory (type, serialnum, brand, owner) VALUES (" .
@@ -135,6 +137,65 @@ function deleteEquipment($eid)
 {
 	$querystr = "DELETE FROM equipment WHERE eid=" . $eid;
 	run_query($querystr);
+}
+
+function getEquipment()
+{
+	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory";
+	$query = run_query($querystr);
+	return $query;
+}
+
+function getEquipmentByOwner($pid)
+{
+	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory WHERE owner=" . $pid;
+	$query = run_query($querystr);
+	return $query;
+}
+
+function getEquipmentByBorrower($pid)
+{
+	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory " .
+		"WHERE eid IN (" .
+		"SELECT eid, pid FROM equipment_loans " .
+		"WHERE pid=" . $pid . ")";
+	$query = run_query($querystr);
+	return $query;
+}
+
+function viewEquipment($eid, $type)
+{
+	// type can be: blank, S, L, A, R (for stabilizer, limb, arrow, and riser)
+	// return equipment details for a specific item
+	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory WHERE eid=" . $eid;
+	$query = run_query($querystr);
+	$equip = mysqli_fetch_row($query);
+	
+	if ($type != '')
+	{
+		$details = array();
+		$querystr = "";
+		switch ($type)
+		{
+			case 'S': // stabilizer
+				$querystr = "SELECT length FROM stabilizer WHERE eid=" . $eid;
+				break;
+			case 'L': // limb
+				$querystr = "SELECT interface, distinguishing_marks, draw_strength FROM limb WHERE eid=" . $eid;
+				break;
+			case 'A': // arrow
+				$querystr = "SELECT model, complete_arrow, bare_shaft, fixable, notes FROM arrow WHERE eid=" . $eid;
+				break;
+			case 'R': // riser
+				$querystr = "SELECT interface, height, distinguishing_marks, handedness, button_format, button, arrow_rest FROM riser WHERE eid=" . $eid;
+				break;
+		}
+		$query = run_query($querystr);
+		$details = mysqli_fetch_row($query);
+		$equip = array_merge($equip, $details);
+	}
+	
+	return $equip;
 }
 
 //TODO: timestamp ?
