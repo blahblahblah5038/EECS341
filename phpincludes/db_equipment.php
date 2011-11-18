@@ -208,4 +208,17 @@ function loan($eid, $borrower, $condition, $notes)
 		$notes . ")";
 	run_query($querystr);
 }
+
+function isCheckedOut($eid)
+{
+	$querystr = "SELECT eid FROM equipment_loans WHERE eid=" . $eid;
+	$query = run_query($querystr);
+	switch (mysqli_num_rows($query))
+	{
+		case 0:
+			return FALSE;
+		default:
+			return TRUE;
+	}
+}
 ?>
