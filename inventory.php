@@ -26,7 +26,7 @@ HERE;
 		// Allow checking in/out for all users
 		echo "<div class='admin'>";
 		
-		echo "</div>"
+		echo "</div>";
 	}
 	// Show member info
 	// i.e., which equipments are checked out to you
