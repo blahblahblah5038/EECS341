@@ -7,7 +7,7 @@
 include_once('CAS/CAS.php');
 
 // Initialize phpCAS
-phpCAS::client(CAS_VERSION_2_0, 'login.case.edu', 443, '/cas');
+include_once('phpincludes/CASinit.php')
 //phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context);
 
 // For production use set the CA certificate that is the issuer of the cert 
