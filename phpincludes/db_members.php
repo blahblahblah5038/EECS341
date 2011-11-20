@@ -1,6 +1,6 @@
 <?php
 // Functions regarding members
-// run_query from include("db_connect.php");
+// db_connect::run_query from include("db_connect.php");
 
 // Contacts
 function addContact($first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
@@ -14,7 +14,7 @@ function addContact($first_name, $last_name, $address, $city, $state, $zip, $ema
 		$zip . ", " .
 		$email . ", " .
 		$phone . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editContact($pid, $first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
@@ -29,13 +29,13 @@ function editContact($pid, $first_name, $last_name, $address, $city, $state, $zi
 		", email=" . $email .
 		", phone=" . $phone .
 		" WHERE pid=" . $pid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function deleteContact($pid)
 {
 	$querystr = "DELETE FROM contact WHERE pid=" . $pid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 // Members
@@ -54,7 +54,7 @@ function addMember($pid, $netid, $studentid, $bow_preference, $handedness, $memb
 		$emergency_phone . ", " .
 		$insurance_company . ", " .
 		$policy_number . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editMember($mid, $netid, $studentid, $bow_preference, $handedness, $membership_expiration, $usca_id, $usca_expiration, $emergency_name, $emergency_phone, $insurance_company, $policy_number)
@@ -72,13 +72,13 @@ function editMember($mid, $netid, $studentid, $bow_preference, $handedness, $mem
 		" insurance_company=" . $insurance_company . 
 		" policy_number=" . $policy_number .
 		" WHERE mid=" . $mid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function deleteMember($mid)
 {
 	$querystr = "DELETE FROM member WHERE mid=" . $mid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 // Certifications
@@ -89,7 +89,7 @@ function addCertification($pid, $type, $expiration, $notes)
 		$type . ", " .
 		$expiration . ", " .
 		$notes . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editCertification($cid, $pid, $type, $expiration, $notes)
@@ -100,13 +100,13 @@ function editCertification($cid, $pid, $type, $expiration, $notes)
 		" expiration=" . expiration .
 		" notes=" . notes .
 		" WHERE cid=" . $cid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function deleteCertification($cid)
 {
 	$querystr = "DELETE FROM certification WHERE cid=" . $cid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 // Scores
@@ -122,7 +122,7 @@ function addScore($pid, $total, $location, $score_date, $division, $scorecard, $
 		$scorecard . ", " .
 		$tens . ", " .
 		$nines . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editScore($sid, $pid, $total, $location, $score_date, $division, $scorecard, $tens, $nines)
@@ -137,12 +137,12 @@ function editScore($sid, $pid, $total, $location, $score_date, $division, $score
 		" tens=" . $tens .
 		" nines=" . $nines .
 		" WHERE sid=" . $sid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function deleteScore($sid)
 {
 	$querystr = "DELETE FROM score WHERE sid=" . $sid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 ?>

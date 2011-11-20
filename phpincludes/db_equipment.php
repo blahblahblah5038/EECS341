@@ -1,6 +1,6 @@
 <?php
 // Functions regarding equipment
-// run_query from include("db_connect.php");
+// db_connect::run_query from include("db_connect.php");
 
 
 
@@ -11,7 +11,7 @@ function addEquipment($type, $serialnum, $brand, $owner)
 		$serialnum . "," .
 		$brand . "," .
 		$owner . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 	
 	// return eid
 	$querystr = "SELECT eid FROM inventory WHERE" .
@@ -20,7 +20,7 @@ function addEquipment($type, $serialnum, $brand, $owner)
 		" AND brand=" . $brand .
 		" AND owner=" . $owner;
 	
-	$query = run_query($querystr);
+	$query = db_connect::run_query($querystr);
 	$row = mysqli_fetch_row($query);
 	$eid = $row[0];
 	return $eid;
@@ -32,7 +32,7 @@ function addStabilizer($type, $serialnum, $brand, $owner, $length)
 	$querystr = "INSERT INTO stabilizer (eid, length) VALUES (" .
 		$eid . "," .
 		$length . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function addLimb($type, $serialnum, $brand, $owner, $interface, $distinguishing_marks, $draw_strength)
@@ -43,7 +43,7 @@ function addLimb($type, $serialnum, $brand, $owner, $interface, $distinguishing_
 		$interface . "," .
 		$distinguishing_marks . "," .
 		$draw_strength . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function addArrow($type, $serialnum, $brand, $owner, $model, $complete_arrow, $bare_shaft, $fixable, $notes)
@@ -56,7 +56,7 @@ function addArrow($type, $serialnum, $brand, $owner, $model, $complete_arrow, $b
 		$bare_shaft . "," .
 		$fixable . "," .
 		$notes . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function addRiser($type, $serialnum, $brand, $owner, $interface, $height, $distinguishing_marks, $handedness, $button_format, $button, $arrow_rest)
@@ -71,7 +71,7 @@ function addRiser($type, $serialnum, $brand, $owner, $interface, $height, $disti
 		$button_format . "," .
 		$button . "," .
 		$arrow_rest . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 // Edit Functions
@@ -83,14 +83,14 @@ function editEquipment($eid, $type, $serialnum, $brand, $owner)
 		" brand=" . $brand .
 		" owner=" . $owner .
 		" WHERE eid=" . $eid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editStabilizer($eid, $type, $serialnum, $brand, $owner, $length)
 {
 	$eid = editEquipment($eid, $type, $serialnum, $brand, $owner);
 	$querystr = "UPDATE stabilizer SET length=" . $length . " WHERE eid=" . $eid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editLimb($eid, $type, $serialnum, $brand, $owner, $interface, $distinguishing_marks, $draw_strength)
@@ -101,7 +101,7 @@ function editLimb($eid, $type, $serialnum, $brand, $owner, $interface, $distingu
 		" distinguishing_marks=" .$distinguishing_marks . 
 		" draw_strength=" .$draw_strength .
 		" WHERE eid=" . $eid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editArrow($eid, $type, $serialnum, $brand, $owner, $model, $complete_arrow, $bare_shaft, $fixable, $notes)
@@ -114,7 +114,7 @@ function editArrow($eid, $type, $serialnum, $brand, $owner, $model, $complete_ar
 		" fixable=" .$fixable . 
 		" notes=" .$notes .
 		" WHERE eid=" . $eid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function editRiser($eid, $type, $serialnum, $brand, $owner, $interface, $height, $distinguishing_marks, $handedness, $button_format, $button, $arrow_rest)
@@ -129,27 +129,27 @@ function editRiser($eid, $type, $serialnum, $brand, $owner, $interface, $height,
 		" button=" . $button . 
 		" arrow_rest=" . $arrow_rest .
 		" WHERE eid=" . $eid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 // Other functions
 function deleteEquipment($eid)
 {
 	$querystr = "DELETE FROM equipment WHERE eid=" . $eid;
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function getEquipment()
 {
 	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory";
-	$query = run_query($querystr);
+	$query = db_connect::run_query($querystr);
 	return $query;
 }
 
 function getEquipmentByOwner($pid)
 {
 	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory WHERE owner=" . $pid;
-	$query = run_query($querystr);
+	$query = db_connect::run_query($querystr);
 	return $query;
 }
 
@@ -159,7 +159,7 @@ function getEquipmentByBorrower($pid)
 		"WHERE eid IN (" .
 		"SELECT eid, pid FROM equipment_loans " .
 		"WHERE pid=" . $pid . ")";
-	$query = run_query($querystr);
+	$query = db_connect::run_query($querystr);
 	return $query;
 }
 
@@ -168,7 +168,7 @@ function viewEquipment($eid, $type)
 	// type can be: blank, S, L, A, R (for stabilizer, limb, arrow, and riser)
 	// return equipment details for a specific item
 	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory WHERE eid=" . $eid;
-	$query = run_query($querystr);
+	$query = db_connect::run_query($querystr);
 	$equip = mysqli_fetch_row($query);
 	
 	if ($type != '')
@@ -190,7 +190,7 @@ function viewEquipment($eid, $type)
 				$querystr = "SELECT interface, height, distinguishing_marks, handedness, button_format, button, arrow_rest FROM riser WHERE eid=" . $eid;
 				break;
 		}
-		$query = run_query($querystr);
+		$query = db_connect::run_query($querystr);
 		$details = mysqli_fetch_row($query);
 		$equip = array_merge($equip, $details);
 	}
@@ -206,13 +206,13 @@ function loan($eid, $borrower, $condition, $notes)
 		$borrower . "," .
 		$condition . "," .
 		$notes . ")";
-	run_query($querystr);
+	db_connect::run_query($querystr);
 }
 
 function isCheckedOut($eid)
 {
 	$querystr = "SELECT eid FROM equipment_loans WHERE eid=" . $eid;
-	$query = run_query($querystr);
+	$query = db_connect::run_query($querystr);
 	switch (mysqli_num_rows($query))
 	{
 		case 0:

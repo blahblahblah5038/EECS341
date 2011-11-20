@@ -19,7 +19,7 @@ function conn($server, $user, $pwd)
 }
 
 // Run query and return result set
-function run_query($querystr)
+function db_connect::run_query($querystr)
 {
 	// todo: sanitize?
 	$query = @mysqli_query($GLOBALS['dbc'], $query)

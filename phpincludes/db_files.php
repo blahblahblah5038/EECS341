@@ -1,4 +1,5 @@
 <?PHP
+include_once('phpincludes/db_access.php');
 class db_files
 {
 
@@ -16,14 +17,14 @@ class db_files
 	//	Output:			file ID, echo errors
 	//	Errors:			query error, person does not exist
 	//	Actions:		adds file to file_uploads table
-	//	Function Calls:	personExists(), run_query(), mysqli_free_result(), findFID(), addFileOwner()
+	//	Function Calls:	db_access::personExists(), db_connect::run_query(), mysqli_free_result(), findFID(), addFileOwner()
 	//					
 	//	NOTES:			Returns -1 if no file is uploaded
 	public function addFile($pid, $file_name, $description, $data)
 	{
 		// Check that person exists
 		// If pid is invalid, print error message and return -1
-		if(! personExists($pid) )
+		if(! db_access::personExists($pid) )
 		{
 			echo "No files were uploaded. The person specified by pid $pid does not exist.";
 			return -1;
@@ -35,7 +36,7 @@ class db_files
 					."', '"	.$description
 					."', "	.$data.")";
 					
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or	die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or	die("Error in query");
 		mysqli_free_result($result);
 		
 		// Find FID value, add owner, and return FID
@@ -49,13 +50,13 @@ class db_files
 	//	Output:			file ID, echo errors
 	//	Errors:			query error, person does not exist, no FID found, multiple FID found
 	//	Actions:		returns file ID
-	//	Function Calls:	personExists(), run_query(), mysqli_num_rows(), mysqli_fetch_row() mysqli_free_result()
+	//	Function Calls:	db_access::personExists(), db_connect::run_query(), mysqli_num_rows(), mysqli_fetch_row() mysqli_free_result()
 	//					
 	//	NOTES:			Returns -1 if no file is uploaded
 	//					Description is optional
 	public function findFID($pid, $file_name, $description)
 	{
-		if(! personExists($pid) )
+		if(! db_access::personExists($pid) )
 			return -1;
 		
 		// Pose query, description is optional
@@ -64,7 +65,7 @@ class db_files
 		if($description != null)
 			$query	.=	" AND description = '$description'";
 				
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		
 		// If no results are return, print error message, free memory, and return -1
 		if( mysqli_num_rows($result) == 0 )
@@ -89,13 +90,13 @@ class db_files
 	//	Output:			handle for file owners (rows of PIDs)
 	//	Errors:			query error
 	//	Actions:		returns table of file owners
-	//	Function Calls:	run_query()
+	//	Function Calls:	db_connect::run_query()
 	//					
 	//	NOTES:			no error checking
 	public function findFileOwners($fid)
 	{
 		$query	=	"SELECT pid FROM file_permissions WHERE fid = $fid";
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		return	$result;
 	}
 
@@ -105,13 +106,13 @@ class db_files
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, deleter or file does not exist
 	//	Actions:		adds file FID to trashbin for deletion
-	//	Function Calls:	run_query()
+	//	Function Calls:	db_connect::run_query()
 	//					
 	//	NOTES:			
 	public function deleteFile($fid, $pid)
 	{
 		// Check if both person and file exists, if not print error, and return
-		if(!	(( personExists($pid) )	&&	( fileExists($fid) ) ))
+		if(!	(( db_access::personExists($pid) )	&&	( fileExists($fid) ) ))
 		{
 			echo "The file was not moved or deleted. Either the person ($pid) or file ($fid) does not exist.";
 			return;
@@ -121,7 +122,7 @@ class db_files
 		$query	=	"INSERT INTO trashbin (fid, pid, date_added) VALUES ("
 					.$fid.", ".$pid.", CURRENT_TIMESTAMP)";
 		
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 	}
 	
 	//	Name:			addFileOwner()
@@ -129,13 +130,13 @@ class db_files
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, new owner or file does not exist
 	//	Actions:		adds owner for a file
-	//	Function Calls:	personExists(), fileExists(), run_query(), mysqli_free_result()
+	//	Function Calls:	db_access::personExists(), fileExists(), db_connect::run_query(), mysqli_free_result()
 	//					
 	//	NOTES:			
 	public function addFileOwner($fid, $pid)
 	{
 		// Check if both person and file exists, if not print error, and return
-		if(!	(( personExists($pid) )	&&	( fileExists($fid) ) ))
+		if(!	(( db_access::personExists($pid) )	&&	( fileExists($fid) ) ))
 		{
 			echo "No file owner was added. Either the person ($pid) or file ($fid) does not exist.";
 			return;
@@ -143,7 +144,7 @@ class db_files
 		
 		// Run query, free memory
 		$query	=	"INSERT INTO file_permissions (fid, pid) VALUES ( $fid, $pid )";
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		mysqli_free_result($result);
 	}
 
@@ -152,14 +153,14 @@ class db_files
 	//	Output:			TRUE/FALSE, echo errors
 	//	Errors:			query error
 	//	Actions:		checks for file
-	//	Function Calls:	run_query(), mysqli_num_rows mysqli_free_result()
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows mysqli_free_result()
 	//					
 	//	NOTES:			
 	public function fileExists($fid)
 	{
 		// Run query
 		$query	=	"SELECT * FROM file_uploads WHERE fid = $fid";
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		$output	=	FALSE;
 		
 		// if any tuples are returned, return TRUE;

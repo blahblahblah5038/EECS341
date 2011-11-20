@@ -1,4 +1,5 @@
 <?PHP
+include_once ('phpincludes/db_connect.php');
 class db_access
 {
 	
@@ -9,7 +10,30 @@ class db_access
 	 *		NOTE:	uses SQL_TIMESTAMP instead of a date (UNTESTED)			*
 	 *																		*
 	 ************************************************************************/
-	 
+	
+   	//	Name:			personExists()
+	//	Input:			person ID
+	//	Output:			true/false, echo errors
+	//	Actions:		checks if person exists 
+	//	Function Calls:	personExists(), SQL_TIMESTAMP(), wasOfficer()
+	//
+	//	NOTES:			uses SQL_TIMESTAMP instead of date
+	public function personExists($pid)
+	{
+	    // Run query
+		$query	=	"SELECT * FROM contact WHERE pid = $pid";
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		
+		// Set output to TRUE if any tuples are returned, free memory, and return output
+		$output	=	FALSE;
+		if( mysqli_num_rows($result) > 0 )
+			$output	=	TRUE;
+			
+		mysqli_free_result($result);
+		return	$output;
+
+    }
+ 
 	//	Name:			isAdmin()
 	//	Input:			person ID
 	//	Output:			true/false, echo errors

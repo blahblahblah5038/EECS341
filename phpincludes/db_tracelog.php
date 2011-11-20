@@ -15,13 +15,13 @@ class db_tracelog
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, person does not exist
 	//	Actions:		adds record to tracelog with timestamp
-	//	Function Calls:	timestamp(), run_query()
+	//	Function Calls:	timestamp(), db_connect::run_query()
 	//					
 	//	NOTES:			CALLS timestamp(): NEED TO SPECIFY WHICH BUILT-IN COMMAND TO USE
 	public function tracelog($pid, $action)
 	{
 		// Check if person exists
-		if(	personExists($pid)	)
+		if(	db_access::personExists($pid)	)
 		{
 			$timestamp	=	timestamp();
 			$query		=	"INSERT INTO tracelog(pid, action, timestamp) VALUES ("
@@ -29,7 +29,7 @@ class db_tracelog
 							.$action	."', '"
 							.$timestamp	."')";
 						
-			$result		=	run_query(	$GLOBALS['dbd'],	$query	)	or die("Error in query");
+			$result		=	db_connect::run_query(	$GLOBALS['dbd'],	$query	)	or die("Error in query");
 		}
 		else
 		{
@@ -42,7 +42,7 @@ class db_tracelog
 	//	Output:			handle for result tuples, echo errors
 	//	Errors:			query error, no tuples returned
 	//	Actions:		returns tuples from tracelog added between specified dates
-	//	Function Calls:	run_query(), mysqli_num_rows(), mysqli_free_result()
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows(), mysqli_free_result()
 	//					
 	//	NOTES:			returns FALSE if no tuples are found
 	public function viewTracelog($start_date, $end_date)
@@ -51,7 +51,7 @@ class db_tracelog
 					.$start_date	."' AND '"
 					.$end_date		."'";
 					
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		
 		// If no tuples are found, print error message, free memory, and return FALSE
 		if( mysqli_num_rows($result) == 0 )
@@ -70,20 +70,20 @@ class db_tracelog
 	//	Output:			handle for result tuples, echo errors
 	//	Errors:			query error, person does not exist, no tuples returned
 	//	Actions:		returns tuples from tracelog added between specified dates by user PID
-	//	Function Calls:	personExists(), run_query(), mysqli_num_rows(), mysqli_free_result()
+	//	Function Calls:	db_access::personExists(), db_connect::run_query(), mysqli_num_rows(), mysqli_free_result()
 	//					
 	//	NOTES:			returns FALSE if no tuples are found or person does not exist
 	public function viewTraceLogByUser($pid, $start_date, $end_date)
 	{
 		// Check if person exists
-		if( personExists($pid) )
+		if( db_access::personExists($pid) )
 		{
 			$query	=	"SELECT * FROM tracelog WHERE "
 						."pid = "				.$pid		." AND "
 						."timestamp BETWEEN '"	.$start_date
 						."' AND '"				.$end_date."'";
 			
-			$result	=	run_query(	$GLOBALS['dbd'],	$query	)	or die("Error in query");
+			$result	=	db_connect::run_query(	$GLOBALS['dbd'],	$query	)	or die("Error in query");
 			
 			// If no tuples are found, print error message, free memory, and return false
 			if( mysqli_num_rows($result) == 0 )
@@ -108,7 +108,7 @@ class db_tracelog
 	//	Output:			handle for result tuples, echo errors
 	//	Errors:			query error, no tuples returned
 	//	Actions:		returns tuples from tracelog added between specified dates with specific action tag
-	//	Function Calls:	run_query(), mysqli_num_rows(), mysqli_free_result()
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows(), mysqli_free_result()
 	//					
 	//	NOTES:				
 	public function viewTracelogByAction($action, $start_date, $end_date)
@@ -118,7 +118,7 @@ class db_tracelog
 					.$start_date."' AND '".$end_date."' AND "
 					."action LIKE '$action%";
 					
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		
 		// Check if query returned any results, if not print error message, clear memory, return FALSE
 		if(	mysqli_num_rows($result) == 0 )

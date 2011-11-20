@@ -1,4 +1,5 @@
 <?php
+include_once('phpincludes/db_access.php');
 class db_finance
 {
 	
@@ -16,7 +17,7 @@ class db_finance
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, no items returned, wrong totals
 	//	Actions:		checks if totals from budget_items = totals from budget (req., alloc., bal.)
-	//	Function Calls:	run_query(), mysqli_fetch_row(), mysqli_free_result(), mysqli_num_rows()
+	//	Function Calls:	db_connect::run_query(), mysqli_fetch_row(), mysqli_free_result(), mysqli_num_rows()
 	//	
 	//	NOTES:
 	public function validateBudget($date)
@@ -26,8 +27,8 @@ class db_finance
 		$item_query		=	"SELECT requested, allocated, balance FROM budget_item WHERE budget_date = '"		.$date.	"'";
 		$budget_query	=	"SELECT total_requested, total_allocated, balance FROM budget WHERE start_date = '"	.$date.	"'";
 		
-		$item_result	=	run_query($GLOBALS['dbc'],	$item_query) or die('Error in query');
-		$budget_result	=	run_query($GLOBALS['dbc'],	$budget_query) or die('Error in query');
+		$item_result	=	db_connect::run_query($GLOBALS['dbc'],	$item_query) or die('Error in query');
+		$budget_result	=	db_connect::run_query($GLOBALS['dbc'],	$budget_query) or die('Error in query');
 		
 		// There are are results...
 		if ( (mysqli_num_rows($item_result) > 0) && (mysqli_num_rows($budget_result) > 0 ) )
@@ -90,7 +91,7 @@ class db_finance
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, start date already in use
 	//	Actions:		checks if exists and creates tuple if not found
-	//	Function Calls:	budgetExists(), run_query(), mysqli_free_result()
+	//	Function Calls:	budgetExists(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			
 	public function addBudget($start_date, $end_date, $total_requested, $total_allocated, $description)
@@ -106,7 +107,7 @@ class db_finance
 						.", "	.$total_allocated	// starting balance at creation = total allocation
 						.", '"	.$description."')";
 						
-			$results	=	run_query( $GLOBALS['dbc'], $query ) or die("Error in query");
+			$results	=	db_connect::run_query( $GLOBALS['dbc'], $query ) or die("Error in query");
 			mysqli_free_result($results);
 		}
 		else
@@ -121,7 +122,7 @@ class db_finance
 	//	Output:			nothing returned,	echo errors
 	//	Errors:			query error, budget does not exist, budget item already exists
 	//	Actions:		checks if exists and creates tuple if not found
-	//	Function Calls:	budgetExists(), budgetItemExists(), run_query(), mysqli_free_result()
+	//	Function Calls:	budgetExists(), budgetItemExists(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			budgetItemExists can return false if the budget does not exist, so
 	//					both testing methods must be run
@@ -142,7 +143,7 @@ class db_finance
 							.", "	.$allocated			// starting balance = allocated amount
 							.", '"	.$description."')";
 							
-				$results	=	run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
+				$results	=	db_connect::run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
 				mysqli_free_result($results);
 			}
 			else
@@ -161,13 +162,13 @@ class db_finance
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, person does not exist
 	//	Actions:		creates new transaction for member and adds dues tuple
-	//	Function Calls:	pesonExists(), addTransaction(), findTransaction(), run_query(), mysqli_free_result()
+	//	Function Calls:	pesonExists(), addTransaction(), findTransaction(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			
 	public function addDues($pid, $budget_date, $trans_date, $amount, $description)
 	{
 		// Check if person exists
-		if( personExists($pid) )
+		if( db_access::personExists($pid) )
 		{
 			// Create transaction
 			addTransaction("Membership Dues", $budget_date, $trans_date, $amount, $description, null);
@@ -182,7 +183,7 @@ class db_finance
 						.", "	.$amount
 						.", '"	.$description."')";
 						
-			$results	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+			$results	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 			mysqli_free_result($results);
 		}
 		else
@@ -196,7 +197,7 @@ class db_finance
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, budget does not exist, budget item does not exist
 	//	Actions:		
-	//	Function Calls:	budgetItemExists(), run_query(), mysqli_free_result()
+	//	Function Calls:	budgetItemExists(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			insertion into transaction table causes a TRIGGER to activate
 	//					this TRIGGER will update the balances of the budget_item and budget tables
@@ -217,7 +218,7 @@ class db_finance
 						.", '"	.$description
 						."', "	.$receipt.")";
 						
-			$results	= run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
+			$results	= db_connect::run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
 			mysqli_free_result($results);
 		}
 		else
@@ -231,7 +232,7 @@ class db_finance
 	//	Output:			nothing returned,	echo errors
 	//	Errors:			query error, budget does not exist
 	//	Actions:		overrides budget (specified by start date) with new info
-	//	Function Calls:	budgetExists(), run_query(), mysqli_free_result()
+	//	Function Calls:	budgetExists(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			UPDATING THE BUDGET IS NOT RECOMMENDED AFTER BUDGET_ITEMS HAVE BEEN CREATED
 	//					CARE MUST BE TAKEN TO ENSURE THE BALANCE IS CORRECT
@@ -248,7 +249,7 @@ class db_finance
 						." description = '"			.$description."'"
 						." WHERE start_date = '"	.$start_date."'";
 						
-			$result	=	run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
+			$result	=	db_connect::run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
 			mysqli_free_result($result);
 		}
 		else
@@ -263,7 +264,7 @@ class db_finance
 	//	Errors:			query error, budget does not exist, budget_item does not exist
 	//	Actions:		overrides budget_item (specified by start date and name) with new info
 	//					DOES NOT UPDATE BUDGET OR TRANSACTIONS
-	//	Function Calls:	budgetExists(), budgetItemExists(), run_query(), mysqli_free_result()
+	//	Function Calls:	budgetExists(), budgetItemExists(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			UPDATING THE BUDGET_ITEM IS NOT RECOMMENDED AFTER TRANSACTIONS HAVE BEEN CREATED
 	//					CARE MUST BE TAKEN TO ENSURE THE BALANCE IS CORRECT
@@ -284,7 +285,7 @@ class db_finance
 							." WHERE name = "		.$name
 							." AND budget_date = '"	.$budget_date."'";
 							
-				$result	=	run_query(	$GLOBALS['dbc'], $query	)	or die("Error in query");
+				$result	=	db_connect::run_query(	$GLOBALS['dbc'], $query	)	or die("Error in query");
 				mysqli_free_result($result);
 			
 			}
@@ -307,17 +308,17 @@ class db_finance
 	//						1 to counter old trans (-1 * old amount)
 	//						1 to add new trans for person
 	//					finds dues item with old trans_id and overrides info
-	//	Function Calls:	personExists(), addTransaction(), findTransaction(), run_query(), mysqli_num_rows(), mysqli_fetch_row(), mysqli_free_result()
+	//	Function Calls:	db_access::personExists(), addTransaction(), findTransaction(), db_connect::run_query(), mysqli_num_rows(), mysqli_fetch_row(), mysqli_free_result()
 	//
 	//	NOTES:			Does not check for previous dues entity, assumes it exists because of old_trans_id
 	public function editDues($pid, $old_trans_id, $trans_date, $new_amount, $new_description)
 	{
 		// Check that member exists
-		if ( personExists($pid) )
+		if ( db_access::personExists($pid) )
 		{
 			// Find old transaction amount 
 			$query1		=	"SELECT * FROM transaction WHERE trans_id = ".$old_trans_id;
-			$result1	=	run_query(	$GLOBALS['dbc'],	$query1	)	or die("Error in query");
+			$result1	=	db_connect::run_query(	$GLOBALS['dbc'],	$query1	)	or die("Error in query");
 			
 			
 			if( mysqli_num_rows($result1) == 0 )
@@ -341,7 +342,7 @@ class db_finance
 								."'	WHERE pid = "		.$pid
 								." AND trans_id = "		.$old_trans_id;
 								
-				$result2	=	run_query(	$GLOBALS['dbc'],	$query2	)	or die("Error in query");
+				$result2	=	db_connect::run_query(	$GLOBALS['dbc'],	$query2	)	or die("Error in query");
 				mysqli_free_result($result2);
 				
 			}
@@ -363,13 +364,13 @@ class db_finance
 	//	Output:			true/false,	echo errors
 	//	Errors:			query error
 	//	Actions:		
-	//	Function Calls:	run_query(), mysqli_num_rows(), mysqli_free_result()
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows(), mysqli_free_result()
 	//	
 	//	NOTES:			ASSUMES DATE IS ENTERED CORRECTLY
 	private function budgetExists($date)
 	{
 		$query		=	"SELECT * FROM budget WHERE start_date = '$date'";
-		$results	=	run_query(	$GLOBALS['dbc'],	$query	) or die("Error in query");
+		$results	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	) or die("Error in query");
 		$value		=	mysqli_num_rows($results);
 		mysqli_free_result($results);
 		return ($value > 0);
@@ -380,7 +381,7 @@ class db_finance
 	//	Output:			true/false,	echo errors
 	//	Errors:			query error
 	//	Actions:		checks if budget and budgetItem exist
-	//	Function Calls:	budgetExists(), run_query(), mysqli_num_rows(), mysqli_free_result()
+	//	Function Calls:	budgetExists(), db_connect::run_query(), mysqli_num_rows(), mysqli_free_result()
 	//	
 	//	NOTES:			can return false if budget doesn't exist
 	public function budgetItemExists($name, $start_date)
@@ -392,7 +393,7 @@ class db_finance
 						."name = '".$name."' AND "
 						."budget_date = '".$start_date."'";
 						
-			$results	=	run_query( $GLOBALS['dbc'],	$query	) or die("Error in query");
+			$results	=	db_connect::run_query( $GLOBALS['dbc'],	$query	) or die("Error in query");
 			$value		=	mysqli_num_rows($results);
 			mysqli_free_result($results);
 			return ($value > 0);
@@ -408,7 +409,7 @@ class db_finance
 	//	Output:			true/false, echo errors
 	//	Errors:			query error
 	//	Actions:		checks if dues tuple exists
-	//	Function Calls:	run_query(), mysqli_num_rows(), mysqli_free_result()
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows(), mysqli_free_result()
 	//					
 	//	NOTES:			
 	public function duesExists($pid, $trans_id)
@@ -417,7 +418,7 @@ class db_finance
 					."pid = "		.$pid ." AND "
 					."trans_id = "	.$trans_id;
 		
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		$value	=	mysqli_num_rows($result);
 		mysqli_free_result($result);
 		return	($value > 0);
@@ -428,7 +429,7 @@ class db_finance
 	//	Output:			returns transaction id, echo errors
 	//	Errors:			query error, no results from search, more than 1 result from search
 	//	Actions:		searches transaction table for specific transaction and returns trans_id value
-	//	Function Calls:	run_query(), mysqli_num_rows(), mysqli_fetch_row(), mysqli_free_result()
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows(), mysqli_fetch_row(), mysqli_free_result()
 	//	
 	//	NOTES:			enter null for unknown fields
 	public function findTransaction($item_name, $budget_date, $trans_date, $amount, $description, $receipt)
@@ -451,7 +452,7 @@ class db_finance
 			
 		$query	.=	"TRUE";
 		
-		$results	=	run_query( $GLOBALS['dbs'],	$query	)	or die("Error in query");
+		$results	=	db_connect::run_query( $GLOBALS['dbs'],	$query	)	or die("Error in query");
 		$num_rows	=	mysqli_num_rows($results);
 		
 		if ($num_rows == 0)
