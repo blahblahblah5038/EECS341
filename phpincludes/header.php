@@ -1,6 +1,6 @@
 <?
 include_once('CAS/CAS.php');
-include_once('phpincludes/CASinit.php');
+phpCAS::client(CAS_VERSION_2_0, 'login.case.edu', 443, '/cas');
 ?>
 
 <html>
