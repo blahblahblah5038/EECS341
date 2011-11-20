@@ -15,7 +15,7 @@
 	for all users.
 	*/
 ?>
-<?php if (!isMember(phpCAS::getUser())) {
+<?php if (!db_access::isMember(phpCAS::getUser())) {
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
 HERE;

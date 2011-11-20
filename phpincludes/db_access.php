@@ -87,7 +87,7 @@ class db_access
 	public function isMember($pid)
 	{
 		// Check if person exists
-		if(! personExists($pid) )
+		if(!db_access::personExists($pid) )
 		{
 			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
