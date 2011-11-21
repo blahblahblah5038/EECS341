@@ -1,19 +1,20 @@
 <?php
-include_once("hidden/db_login_info.php");
 class db_connect
 {
     // Functions to connect to database
         
     // Connect to database
-    function conn($server, $user, $pwd)
+    function conn()
     {
+        require_once("hidden/db_login_info.php");
     	if(!isset($GLOBALS['dbc']))
     	{
+            echo $dbuser." ".$dbhost." ".$dbpass;
     		$GLOBALS['dbc'] = @mysqli_connect($dbhost, $dbuser, $dbpass)
-    			OR die ("<p>Could not connect to database</p>");
+    			OR die ("<p>1:Could not connect to database</p>");
 		
     		@mysqli_select_db($GLOBALS['dbc'], $dbname)
-    			OR die ("<p>Could not select the database</p>");
+    			OR die ("<p>2:Could not select the database</p>");
     	}
     }
 
@@ -21,9 +22,11 @@ class db_connect
     function run_query($querystr)
     {
     	// todo: sanitize?
-    	$query = @mysqli_query($GLOBALS['dbc'], $query)
+    	$query = @mysqli_query($GLOBALS['dbc'], $querystr)
     		OR die("<p>Error processing query</p>");
     	return $query;
     }
 }
+
+db_connect::conn();
 ?>

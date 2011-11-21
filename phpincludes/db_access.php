@@ -22,7 +22,7 @@ class db_access
 	{
 	    // Run query
 		$query	=	"SELECT * FROM contact WHERE pid = $pid";
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query($query) or die("Error in query");
 		
 		// Set output to TRUE if any tuples are returned, free memory, and return output
 		$output	=	FALSE;
