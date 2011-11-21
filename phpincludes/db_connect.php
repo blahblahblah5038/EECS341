@@ -9,7 +9,6 @@ class db_connect
         require_once("hidden/db_login_info.php");
     	if(!isset($GLOBALS['dbc']))
     	{
-            echo $dbuser." ".$dbhost." ".$dbpass;
     		$GLOBALS['dbc'] = @mysqli_connect($dbhost, $dbuser, $dbpass)
     			OR die ("<p>1:Could not connect to database</p>");
 		
