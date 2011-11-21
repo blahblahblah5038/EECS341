@@ -1,4 +1,5 @@
 <?php
+include_once("hidden/db_login_info.php");
 class db_connect
 {
     // Functions to connect to database
@@ -8,10 +9,6 @@ class db_connect
     {
     	if(!isset($GLOBALS['dbc']))
     	{
-    		$dbhost = "localhost";
-    		$dbuser = "dbuser";
-    		$dbpass = "password";
-    		$dbname = "dbname";
     		$GLOBALS['dbc'] = @mysqli_connect($dbhost, $dbuser, $dbpass)
     			OR die ("<p>Could not connect to database</p>");
 		
