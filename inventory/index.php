@@ -3,7 +3,7 @@
 	include("../phpincludes/login.php");
 	include("../phpincludes/db_access.php");
 	include("../phpincludes/db_equipment.php");
-	
+
 	/* from the specs...
 	The club has numerous pieces of equipment that need tracked,
 	which fall into the general categories of parts and arrows.
@@ -19,48 +19,50 @@
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
 HERE;
-} else {
-	// is a member
-	if (db_access::isEquipmentManager(phpCAS::getUser())) {
-		// Allow adding equipment to the inventory
-		// Allow checking in/out for all users
-		echo "<div class='admin'>";
-		
-		echo "</div>";
-	}
-	// Show member info
-	// i.e., which equipments are checked out to you
-	// (call getEquipByOwner, getEquipByBorrower)
-	$userequip = getEquipmentByOwner($pid);
-	$row = mysqli_fetch_row($userequip);
-	echo "<h3>My Equipment</h3>";
-	while ($row)
-	{
-		//TODO: print links
-		$row = mysqli_fetch_row($userequip);
+} else { // is a member
+	$userpid = db_access::getPidFromCaseId(phpCAS::getUser());
+	
+	if (db_access::isEquipmentManager($userpid)) {
+		echo "<a href='admin.php'>Administration</a>";
 	}
 	
-	$borrowed = getEquipmentByBorrower($pid);
-	$row = mysqli_fetch_row($borrowed);
-	echo "<h3>My Borrowed Equipment</h3>";
+	// Display member equipment info
+	$userequip = getEquipmentByOwner($userpid);
+	$row = mysqli_fetch_row($userequip);
+	echo "<h3>My Equipment</h3>";
+	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th>";
 	while ($row)
 	{
-		//TODO: print links
+		//TODO: links
+		$row = mysqli_fetch_row($userequip);
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
+	}
+	echo "</table>";
+	
+	$borrowed = getEquipmentByBorrower($userpid);
+	$row = mysqli_fetch_row($borrowed);
+	echo "<h3>My Borrowed Equipment</h3>";
+	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th>";
+	while ($row)
+	{
+		//TODO: links
 		$row = mysqli_fetch_row($borrowed);
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
 	}
 	
 	// Show inventory
-	// probably shouldn't show owner if not admin?
 	$equiplist = getEquipment();
 	$row = mysqli_fetch_row($equiplist);
-	print "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th></tr>";
+	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th></tr>";
 	while ($row)
 	{
 		$row = mysqli_fetch_row($equiplist);
 		//TODO: links for checking in/out
-		print "<tr><td>".$row[0]."</td><td>".$row[1]."</td><td>".$row[1]."</td><td>".$row[1]."</td></tr>";
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
+		
+		echo "</tr>";
 	}
-	print "</table>";
+	echo "</table>";
 }
 ?>
 
