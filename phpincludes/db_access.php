@@ -216,6 +216,18 @@ class db_access
 		return	$output;
 	}
 	
+	// Return PID of a person, given a Case Network ID (like abc123)
+	public function getPidFromCaseId($caseid)
+	{
+		// use like: $pid = db_access::getPidFromCaseId(phpCAS::getUser())
+		$querystr = "SELECT pid FROM members WHERE netid=".$caseid;
+		$result = run_query($GLOBALS['dbc'], $query) or die("Error finding PID");
+		if (mysqli_num_rows($result) == 0)
+			return '';
+		$row = mysqli_fetch_row($result);
+		return $row[0];
+	}
+	
 }	// end of class
 
 ?>
