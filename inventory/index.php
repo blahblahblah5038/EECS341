@@ -1,8 +1,8 @@
 <?php
-	include("phpincludes/header.php");
-	include("phpincludes/login.php");
-	include("phpincludes/db_access.php");
-	include("phpincludes/db_equipment.php");
+	include("/phpincludes/header.php");
+	include("/phpincludes/login.php");
+	include("/phpincludes/db_access.php");
+	include("/phpincludes/db_equipment.php");
 	
 	/* from the specs...
 	The club has numerous pieces of equipment that need tracked,

@@ -6,7 +6,7 @@ phpCAS::client(CAS_VERSION_2_0, 'login.case.edu', 443, '/cas');
 <html>
 <head>
 	<title>Archery Club Website / EECS 341 Project</title>
-	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link rel="stylesheet" type="text/css" href="/styles.css" />
 </head>
 <body>
 <div id="header">
