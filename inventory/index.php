@@ -15,6 +15,7 @@
 	for all users.
 	*/
 ?>
+<h2>Inventory</h2>
 <?php if (!db_access::isMember(phpCAS::getUser())) {
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
@@ -49,6 +50,7 @@ HERE;
 		$row = mysqli_fetch_row($borrowed);
 		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
 	}
+	echo "</table>";
 	
 	// Show inventory
 	$equiplist = getEquipment();
@@ -58,14 +60,9 @@ HERE;
 	{
 		$row = mysqli_fetch_row($equiplist);
 		//TODO: links for checking in/out
-		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
-		
-		echo "</tr>";
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td></tr>";
 	}
 	echo "</table>";
 }
 ?>
-
-<h2>Inventory</h2>
-
 <?php include("phpincludes/footer.php"); ?>
