@@ -21,7 +21,7 @@
 HERE;
 } else {
 	// is a member
-	if (isEquipmentManager(phpCAS::getUser())) {
+	if (db_access::isEquipmentManager(phpCAS::getUser())) {
 		// Allow adding equipment to the inventory
 		// Allow checking in/out for all users
 		echo "<div class='admin'>";
