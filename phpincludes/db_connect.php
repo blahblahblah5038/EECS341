@@ -6,7 +6,7 @@ class db_connect
     // Connect to database
     function conn()
     {
-        require_once("hidden/db_login_info.php");
+        require_once("../hidden/db_login_info.php");
     	if(!isset($GLOBALS['dbc']))
     	{
     		$GLOBALS['dbc'] = @mysqli_connect($dbhost, $dbuser, $dbpass)

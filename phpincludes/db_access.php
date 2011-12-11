@@ -1,5 +1,5 @@
 <?PHP
-include_once ('phpincludes/db_connect.php');
+include_once ('db_connect.php');
 class db_access
 {
 	
