@@ -119,7 +119,7 @@ class db_access
 		
 		// Run query
 		$query	=	"SELECT * FROM member WHERE pid = $pid";
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		
 		// Set output to TRUE if any tuples are returned, free memory, and return output
 		$output	=	FALSE;
@@ -207,7 +207,7 @@ class db_access
 		$query	.= "TRUE";
 			
 		// Run query, free memory, and return TRUE if any results are found		
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		$output	=	FALSE;
 		if( mysqli_num_rows($result) > 0 )
 			$output	=	TRUE;
@@ -220,8 +220,8 @@ class db_access
 	public function getPidFromCaseId($caseid)
 	{
 		// use like: $pid = db_access::getPidFromCaseId(phpCAS::getUser())
-		$querystr = "SELECT pid FROM members WHERE netid=".$caseid;
-		$result = run_query($GLOBALS['dbc'], $query) or die("Error finding PID");
+		$querystr = "SELECT pid FROM member WHERE netid=".$caseid;
+		$result = db_connect::run_query($GLOBALS['dbc'], $query) or die("Error finding PID");
 		if (mysqli_num_rows($result) == 0)
 			return '';
 		$row = mysqli_fetch_row($result);
