@@ -22,7 +22,7 @@ class db_connect
     {
     	// todo: sanitize?
     	$query = mysqli_query($GLOBALS['dbc'], $querystr)
-    		OR die("<p>1 - Error processing query:".mysqli_error($GLOBALS['dbc']));
+    		OR die("<p>1 - Error processing query '".$querystr."':".mysqli_error($GLOBALS['dbc']));
     	return $query;
     }
 }
