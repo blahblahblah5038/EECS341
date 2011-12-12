@@ -1,6 +1,7 @@
 <?
 include_once('CAS/CAS.php');
 phpCAS::client(CAS_VERSION_2_0, 'login.case.edu', 443, '/cas');
+session_start();
 ?>
 
 <html>

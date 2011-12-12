@@ -21,7 +21,7 @@ class db_access
 	public function personExists($pid)
 	{
 	    // Run query
-		$query	=	"SELECT * FROM contact WHERE pid = $pid";
+		$query	=	"SELECT * FROM contact WHERE pid = '$pid'";
 		$result	=	db_connect::run_query($query) or die("Error in query");
 		
 		// Set output to TRUE if any tuples are returned, free memory, and return output
@@ -118,7 +118,7 @@ class db_access
 		}
 		
 		// Run query
-		$query	=	"SELECT * FROM member WHERE pid = $pid";
+		$query	=	"SELECT * FROM member WHERE pid = '$pid'";
 		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 		
 		// Set output to TRUE if any tuples are returned, free memory, and return output
@@ -148,7 +148,7 @@ class db_access
 	//	NOTES:			Returns -1 if position does not exist
 	private function getPositionID($title)
 	{
-		$query	=	"SELECT pos_id FROM officer_positions WHERE title = $title";
+		$query	=	"SELECT pos_id FROM officer_positions WHERE title = '$title'";
 		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
 
 		// If no results are found, return -1
@@ -196,10 +196,10 @@ class db_access
 		$query	=	"SELECT * FROM officer_history WHERE ";
 		
 		if(	$pid != null )
-			$query	.=	"pid = "	.$pid	." AND ";
+			$query	.=	"pid = '"	.$pid	."' AND ";
 		
 		if(	$pos_id != null)
-			$query	.=	"pos_id = "	.$pos_id	." AND ";
+			$query	.=	"pos_id = '"	.$pos_id	."' AND ";
 		
 		if( $date != null)
 			$query	.=	$date." BETWEEN start_date AND end_date AND";
@@ -220,7 +220,7 @@ class db_access
 	public function getPidFromCaseId($caseid)
 	{
 		// use like: $pid = db_access::getPidFromCaseId(phpCAS::getUser())
-		$querystr = "SELECT pid FROM member WHERE netid=".$caseid;
+		$querystr = "SELECT pid FROM member WHERE netid='".$caseid."'";
 		$result = db_connect::run_query($GLOBALS['dbc'], $query) or die("Error finding PID");
 		if (mysqli_num_rows($result) == 0)
 			return '';
