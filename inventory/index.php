@@ -16,6 +16,7 @@
 	*/
 ?>
 <h2>Inventory</h2>
+
 <?php if (!db_access::isMember(phpCAS::getUser())) {
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
@@ -65,4 +66,4 @@ HERE;
 	echo "</table>";
 }
 ?>
-<?php include("phpincludes/footer.php"); ?>
+<?php include("../phpincludes/footer.php"); ?>
