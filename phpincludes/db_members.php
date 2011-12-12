@@ -3,6 +3,17 @@
 // db_connect::run_query from include("db_connect.php");
 
 // Contacts
+
+function getContact($pid)
+{
+       $querystr = "SELECT * FROM contact ";
+       if($pid!==NULL)
+       {
+           $querystr = $querystr."WHERE pid=".$pid;
+       }
+       return db_connect::run_query($querystr);
+}
+
 function addContact($first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
 {
 	$querystr = "INSERT INTO contact (first_name, last_name, address, city, state, zip, email, phone) VALUES (" .

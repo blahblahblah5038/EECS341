@@ -17,7 +17,7 @@ HERE;
         $pid = db_access::getPidFromCaseId(phpCas::getUser());
 	echo "<h2>Current Club Contact Info</h2>"
         //show contacts
-        $members = getMembers(NULL);
+        $members = getContact(NULL);
         $row = mysqli_fetch_row($equiplist);
 
         $admin = db_access::isAdmin($pid);
