@@ -25,7 +25,7 @@ HERE;
         echo "<table><tr><th> </th><th>Name</th><th>Address</th><th>e-mail address</th><th>Phone</th><th> </th></tr>";
         while($row)
         {
-            echo "<td> "
+            echo "<td> ";
             if($admin)
             {
                  echo "<form action='editcontact.php' method='POST'>";
