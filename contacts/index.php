@@ -8,14 +8,14 @@
        In order for the club to keep track of contacts, there will be a contacts table of all of the people that are in the club records including the person’s name, a unique PID (Person IDentifier), and some basic contact information (address, e-mail, phone).  This portion of the database may contain both members and non-members. It is simply a way of associating other records with a person, and also a way for club members to look up contact info. This PID field is a primary key that points back to a particular person and will often be used as a foreign key elsewhere in the database.
         */
 ?>
-<h2>Inventory</h2>
+<h2>Contact Info</h2>
 <?php if (!db_access::isMember(phpCAS::getUser())) {
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
 HERE;
 } else { 
         $pid = db_access::getPidFromCaseId(phpCas::getUser());
-	echo "<h2>Current Club Contact Info</h2>";
+       
         //show contacts
         $members = db_access::getContact(NULL);
         $row = mysqli_fetch_row($equiplist);
