@@ -15,7 +15,7 @@
 HERE;
 } else { 
         $pid = db_access::getPidFromCaseId(phpCas::getUser());
-	echo "<h2>Current Club Contact Info</h2>"
+	echo "<h2>Current Club Contact Info</h2>";
         //show contacts
         $members = db_access::getContact(NULL);
         $row = mysqli_fetch_row($equiplist);
