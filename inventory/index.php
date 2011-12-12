@@ -17,13 +17,13 @@
 ?>
 <h2>Inventory</h2>
 
-<?php if (!db_access::isMember(phpCAS::getUser())) {
+<?php
+$userpid = db_access::getPidFromCaseId(phpCAS::getUser());
+if (!db_access::isMember($userpid)) {
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
 HERE;
 } else { // is a member
-	$userpid = db_access::getPidFromCaseId(phpCAS::getUser());
-	
 	if (db_access::isEquipmentManager($userpid)) {
 		echo "<a href='admin.php'>Administration</a>";
 	}
