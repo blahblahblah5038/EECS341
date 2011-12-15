@@ -50,6 +50,17 @@ function deleteContact($pid)
 }
 
 // Members
+function getMembers($pid)
+{
+       $querystr = "SELECT * FROM member ";
+       if($pid!==NULL)
+       {
+           $querystr = $querystr."WHERE pid=".$pid;
+       }
+       return db_connect::run_query($querystr);
+}
+
+
 function addMember($pid, $netid, $studentid, $bow_preference, $handedness, $membership_expiration, $usca_id, $usca_expiration, $emergency_name, $emergency_phone, $insurance_company, $policy_number)
 {
 	$querystr = "INSERT INTO member (pid, netid, studentid, bow_preference, handedness, membership_expiration, usca_id, usca_expiration, emergency_name, emergency_phone, insurance_company, policy_number) VALUES ( " .
@@ -83,6 +94,12 @@ function editMember($mid, $netid, $studentid, $bow_preference, $handedness, $mem
 		" insurance_company=" . $insurance_company . 
 		" policy_number=" . $policy_number .
 		" WHERE mid=" . $mid;
+	db_connect::run_query($querystr);
+}
+
+function deleteMemberWithPid($pid)
+{
+	$querystr = "DELETE FROM member WHERE pid=" . $pid;
 	db_connect::run_query($querystr);
 }
 
