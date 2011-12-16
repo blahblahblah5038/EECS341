@@ -81,7 +81,7 @@ function addMember($pid, $netid, $studentid, $bow_preference, $handedness, $memb
 
 function editMember($mid, $netid, $studentid, $bow_preference, $handedness, $membership_expiration, $usca_id, $usca_expiration, $emergency_name, $emergency_phone, $insurance_company, $policy_number)
 {
-	$querystr = "UPDATE member SET "
+	$querystr = "UPDATE member SET ".
 		" netid=" . $netid . 
 		" studentid=" . $studentid . 
 		" bow_preference=" . $bow_preference . 

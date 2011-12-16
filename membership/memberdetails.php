@@ -14,14 +14,14 @@
          include("../phpincludes/db_access.php");
          include("../phpincludes/db_equipment.php");
     
-    if(!if(db_access::isAdmin($pid)))
+    if(!db_access::isAdmin($pid))
     {
          echo "Error, you are not a club officer.  Go away.";
     }
     else
     {
-         $row = {};
-         if(isset($_POST['details'])
+         $row = "";
+         if(isset($_POST['details']))
          {
              $detailsset = true;
              echo "<h2>Detailed Contact Info</h2>";
@@ -32,12 +32,12 @@
          {
              $detailsset = false;
              echo "<h2>Add New Contact</h2>";
-             $row = {"","","","","","","","","","","","","",""};
+             $row = array("","","","","","","","","","","","","","");
          }
 
 
-         echo "<form action='member_success.php' method='POST'>"
-         echo "<table>"
+         echo "<form action='member_success.php' method='POST'>";
+         echo "<table>";
          echo "<TD>Member ID:<TD><input type='text'      name='mid'              value='".$row[0]."' /><TR>";
          echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[1]."' /><TR>";
          echo "<TD>Network ID:<TD><input type='text'      name='netid'              value='".$row[2]."' /><TR>";
@@ -52,7 +52,7 @@
          echo "<TD>Emergency Contact Phone:<TD><input type='text'      name='emerphone'              value='".$row[11]."' /><TR>";
          echo "<TD>Health Insurance Company:<TD><input type='text'      name='insurer'              value='".$row[12]."' /><TR>";
          echo "<TD>Policy Number:<TD><input type='text'      name='policy'              value='".$row[13]."' /><TR>";
-         echo "</table>"
+         echo "</table>";
          
          if($detailsset)
          {

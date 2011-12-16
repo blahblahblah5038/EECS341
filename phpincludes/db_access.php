@@ -45,14 +45,14 @@ class db_access
 	public function isAdmin($pid)
 	{
 		// Check if person exists
-		if(! personExists($pid) )
+		if(! db_access::personExists($pid) )
 		{
 			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
 		}
 		
 		//	Call wasOfficer with PID, and current date to see if is a current officer
-		return	(	wasOfficer($pid, null, SQL_TIMESTAMP)	);		
+		return	(	db_access::wasOfficer($pid, null, SQL_TIMESTAMP)	);		
 	}
 
 
@@ -67,7 +67,7 @@ class db_access
 	public function isBudgetAdmin()
 	{
 		// Check if person exists
-		if(! personExists($pid) )
+		if(! db_access::personExists($pid) )
 		{
 			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
@@ -89,7 +89,7 @@ class db_access
 	public function isEquipmentManager($pid)
 	{
 		// Check if person exists
-		if(! personExists($pid) )
+		if(! db_access::personExists($pid) )
 		{
 			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
@@ -202,7 +202,7 @@ class db_access
 			$query	.=	"pos_id = '"	.$pos_id	."' AND ";
 		
 		if( $date != null)
-			$query	.=	$date." BETWEEN start_date AND end_date AND";
+		//	$query	.=	$date." BETWEEN start_date AND end_date AND ";
 		
 		$query	.= "TRUE";
 			

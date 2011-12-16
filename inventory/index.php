@@ -32,24 +32,23 @@ HERE;
 	$userequip = getEquipmentByOwner($userpid);
 	$row = mysqli_fetch_row($userequip); //FYI, I think this may be incorrect, see contacts/index.php -wes
 	echo "<h3>My Equipment</h3>";
-	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th>";
-	while ($row)
+	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th></tr>";
+	while ( $row = mysqli_fetch_row($userequip))
 	{
 		//TODO: links
-		$row = mysqli_fetch_row($userequip);
-		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td></tr>";
 	}
 	echo "</table>";
 	
 	$borrowed = getEquipmentByBorrower($userpid);
 	$row = mysqli_fetch_row($borrowed);
 	echo "<h3>My Borrowed Equipment</h3>";
-	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th>";
+	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th></tr>";
 	while ($row)
 	{
 		//TODO: links
 		$row = mysqli_fetch_row($borrowed);
-		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td>";
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td></tr>";
 	}
 	echo "</table>";
 	
