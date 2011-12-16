@@ -149,7 +149,7 @@ class db_access
 	private function getPositionID($title)
 	{
 		$query	=	"SELECT pos_id FROM officer_positions WHERE title = '$title'";
-		$result	=	run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	run_query(	$query	)	or die("Error in query");
 
 		// If no results are found, return -1
 		$output	=	-1;
@@ -207,7 +207,7 @@ class db_access
 		$query	.= "TRUE";
 			
 		// Run query, free memory, and return TRUE if any results are found		
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		$output	=	FALSE;
 		if( mysqli_num_rows($result) > 0 )
 			$output	=	TRUE;
@@ -220,9 +220,9 @@ class db_access
 	public function getPidFromCaseId($caseid)
 	{
 		// use like: $pid = db_access::getPidFromCaseId(phpCAS::getUser())
-		$querystr = "SELECT pid FROM member WHERE netid='".$caseid."'";
-		$result = db_connect::run_query($GLOBALS['dbc'], $query) or die("Error finding PID");
-		if (mysqli_num_rows($result) == 0)
+		$querystr = "SELECT pid FROM member WHERE netid='".strval($caseid)."'";
+        $result = db_connect::run_query($querystr) or die("Error finding PID");
+	if (mysqli_num_rows($result) == 0)
 			return '';
 		$row = mysqli_fetch_row($result);
 		return $row[0];

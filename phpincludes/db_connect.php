@@ -21,7 +21,7 @@ class db_connect
     function run_query($querystr)
     {
     	// todo: sanitize?
-    	$query = mysqli_query($GLOBALS['dbc'], strval($querystr))
+		$query = mysqli_query($GLOBALS['dbc'], $querystr)
     		OR die("<p>1 - Error processing query '".$querystr."':".mysqli_error($GLOBALS['dbc']));
     	return $query;
     }

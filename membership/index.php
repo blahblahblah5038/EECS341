@@ -27,7 +27,7 @@ HERE;
         echo "<table><tr><th>Case ID</th><th>Student ID</th><th> </th>";
         while($row)
         {
-            echo "<td>".$row[2]"</td><td>"$row[3]"</td><td>";
+            echo "<td>".$row[2]."</td><td>".$row[3]."</td><td>";
                  echo "<form action='memberdetails.php' method='POST'>";
                  echo "<input type='hidden' name='pid' value='".$row[0]."' />";
                  echo "<input type='submit' value='Details' name='details'></form>";
