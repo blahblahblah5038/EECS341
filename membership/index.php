@@ -23,6 +23,7 @@ HERE;
 
         $admin = db_access::isAdmin($pid);
 
+        echo "<form action='memberdetails.php' method='POST'> <input type='submit' value='Add New Member' name='newuser'></form>";
         echo "<table><tr><th>Case ID</th><th>Student ID</th><th> </th></tr>";
         while($row = mysqli_fetch_row($members))
         {
@@ -33,7 +34,6 @@ HERE;
             echo "</td>";
         }
         echo "</table>";
-        echo "<form action='memberdetails.php' method='POST'> <input type='submit' value='newuser' name='newuser'></form>;
 }
 ?>
 <?php include("phpincludes/footer.php"); ?>
