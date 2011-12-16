@@ -29,7 +29,7 @@ class db_tracelog
 							.$action	."', '"
 							.$timestamp	."')";
 						
-			$result		=	db_connect::run_query(	$GLOBALS['dbd'],	$query	)	or die("Error in query");
+			$result		=	db_connect::run_query(	$query	)	or die("Error in query");
 		}
 		else
 		{
@@ -51,7 +51,7 @@ class db_tracelog
 					.$start_date	."' AND '"
 					.$end_date		."'";
 					
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query($query)	or die("Error in query");
 		
 		// If no tuples are found, print error message, free memory, and return FALSE
 		if( mysqli_num_rows($result) == 0 )
@@ -83,7 +83,7 @@ class db_tracelog
 						."timestamp BETWEEN '"	.$start_date
 						."' AND '"				.$end_date."'";
 			
-			$result	=	db_connect::run_query(	$GLOBALS['dbd'],	$query	)	or die("Error in query");
+			$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 			
 			// If no tuples are found, print error message, free memory, and return false
 			if( mysqli_num_rows($result) == 0 )
@@ -118,7 +118,7 @@ class db_tracelog
 					.$start_date."' AND '".$end_date."' AND "
 					."action LIKE '$action%";
 					
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		
 		// Check if query returned any results, if not print error message, clear memory, return FALSE
 		if(	mysqli_num_rows($result) == 0 )

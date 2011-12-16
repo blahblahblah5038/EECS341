@@ -36,7 +36,7 @@ class db_files
 					."', '"	.$description
 					."', "	.$data.")";
 					
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or	die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or	die("Error in query");
 		mysqli_free_result($result);
 		
 		// Find FID value, add owner, and return FID
@@ -65,7 +65,7 @@ class db_files
 		if($description != null)
 			$query	.=	" AND description = '$description'";
 				
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		
 		// If no results are return, print error message, free memory, and return -1
 		if( mysqli_num_rows($result) == 0 )
@@ -96,7 +96,7 @@ class db_files
 	public function findFileOwners($fid)
 	{
 		$query	=	"SELECT pid FROM file_permissions WHERE fid = $fid";
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		return	$result;
 	}
 
@@ -122,7 +122,7 @@ class db_files
 		$query	=	"INSERT INTO trashbin (fid, pid, date_added) VALUES ("
 					.$fid.", ".$pid.", CURRENT_TIMESTAMP)";
 		
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 	}
 	
 	//	Name:			addFileOwner()
@@ -144,7 +144,7 @@ class db_files
 		
 		// Run query, free memory
 		$query	=	"INSERT INTO file_permissions (fid, pid) VALUES ( $fid, $pid )";
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		mysqli_free_result($result);
 	}
 
@@ -160,7 +160,7 @@ class db_files
 	{
 		// Run query
 		$query	=	"SELECT * FROM file_uploads WHERE fid = $fid";
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		$output	=	FALSE;
 		
 		// if any tuples are returned, return TRUE;

@@ -27,8 +27,8 @@ class db_finance
 		$item_query		=	"SELECT requested, allocated, balance FROM budget_item WHERE budget_date = '"		.$date.	"'";
 		$budget_query	=	"SELECT total_requested, total_allocated, balance FROM budget WHERE start_date = '"	.$date.	"'";
 		
-		$item_result	=	db_connect::run_query($GLOBALS['dbc'],	$item_query) or die('Error in query');
-		$budget_result	=	db_connect::run_query($GLOBALS['dbc'],	$budget_query) or die('Error in query');
+		$item_result	=	db_connect::run_query($item_query) or die('Error in query');
+		$budget_result	=	db_connect::run_query($budget_query) or die('Error in query');
 		
 		// There are are results...
 		if ( (mysqli_num_rows($item_result) > 0) && (mysqli_num_rows($budget_result) > 0 ) )
@@ -107,7 +107,7 @@ class db_finance
 						.", "	.$total_allocated	// starting balance at creation = total allocation
 						.", '"	.$description."')";
 						
-			$results	=	db_connect::run_query( $GLOBALS['dbc'], $query ) or die("Error in query");
+			$results	=	db_connect::run_query( $query ) or die("Error in query");
 			mysqli_free_result($results);
 		}
 		else
@@ -143,7 +143,7 @@ class db_finance
 							.", "	.$allocated			// starting balance = allocated amount
 							.", '"	.$description."')";
 							
-				$results	=	db_connect::run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
+				$results	=	db_connect::run_query( $query	)	or die("Error in query");
 				mysqli_free_result($results);
 			}
 			else
@@ -183,7 +183,7 @@ class db_finance
 						.", "	.$amount
 						.", '"	.$description."')";
 						
-			$results	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+			$results	=	db_connect::run_query(	$query	)	or die("Error in query");
 			mysqli_free_result($results);
 		}
 		else
@@ -218,7 +218,7 @@ class db_finance
 						.", '"	.$description
 						."', "	.$receipt.")";
 						
-			$results	= db_connect::run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
+			$results	= db_connect::run_query( $query	)	or die("Error in query");
 			mysqli_free_result($results);
 		}
 		else
@@ -249,7 +249,7 @@ class db_finance
 						." description = '"			.$description."'"
 						." WHERE start_date = '"	.$start_date."'";
 						
-			$result	=	db_connect::run_query( $GLOBALS['dbc'],	$query	)	or die("Error in query");
+			$result	=	db_connect::run_query( $query	)	or die("Error in query");
 			mysqli_free_result($result);
 		}
 		else
@@ -285,7 +285,7 @@ class db_finance
 							." WHERE name = "		.$name
 							." AND budget_date = '"	.$budget_date."'";
 							
-				$result	=	db_connect::run_query(	$GLOBALS['dbc'], $query	)	or die("Error in query");
+				$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 				mysqli_free_result($result);
 			
 			}
@@ -318,7 +318,7 @@ class db_finance
 		{
 			// Find old transaction amount 
 			$query1		=	"SELECT * FROM transaction WHERE trans_id = ".$old_trans_id;
-			$result1	=	db_connect::run_query(	$GLOBALS['dbc'],	$query1	)	or die("Error in query");
+			$result1	=	db_connect::run_query(	$query1	)	or die("Error in query");
 			
 			
 			if( mysqli_num_rows($result1) == 0 )
@@ -342,7 +342,7 @@ class db_finance
 								."'	WHERE pid = "		.$pid
 								." AND trans_id = "		.$old_trans_id;
 								
-				$result2	=	db_connect::run_query(	$GLOBALS['dbc'],	$query2	)	or die("Error in query");
+				$result2	=	db_connect::run_query(	$query2	)	or die("Error in query");
 				mysqli_free_result($result2);
 				
 			}
@@ -370,7 +370,7 @@ class db_finance
 	private function budgetExists($date)
 	{
 		$query		=	"SELECT * FROM budget WHERE start_date = '$date'";
-		$results	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	) or die("Error in query");
+		$results	=	db_connect::run_query(	$query	) or die("Error in query");
 		$value		=	mysqli_num_rows($results);
 		mysqli_free_result($results);
 		return ($value > 0);
@@ -393,7 +393,7 @@ class db_finance
 						."name = '".$name."' AND "
 						."budget_date = '".$start_date."'";
 						
-			$results	=	db_connect::run_query( $GLOBALS['dbc'],	$query	) or die("Error in query");
+			$results	=	db_connect::run_query( $query	) or die("Error in query");
 			$value		=	mysqli_num_rows($results);
 			mysqli_free_result($results);
 			return ($value > 0);
@@ -418,7 +418,7 @@ class db_finance
 					."pid = "		.$pid ." AND "
 					."trans_id = "	.$trans_id;
 		
-		$result	=	db_connect::run_query(	$GLOBALS['dbc'],	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 		$value	=	mysqli_num_rows($result);
 		mysqli_free_result($result);
 		return	($value > 0);
@@ -452,7 +452,7 @@ class db_finance
 			
 		$query	.=	"TRUE";
 		
-		$results	=	db_connect::run_query( $GLOBALS['dbs'],	$query	)	or die("Error in query");
+		$results	=	db_connect::run_query( $query	)	or die("Error in query");
 		$num_rows	=	mysqli_num_rows($results);
 		
 		if ($num_rows == 0)
