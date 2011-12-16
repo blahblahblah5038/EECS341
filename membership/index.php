@@ -33,6 +33,7 @@ HERE;
             echo "</td>";
         }
         echo "</table>";
+        echo "<form action='memberdetails.php' method='POST'> <input type='submit' value='newuser' name='newuser'></form>;
 }
 ?>
 <?php include("phpincludes/footer.php"); ?>
