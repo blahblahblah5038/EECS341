@@ -19,7 +19,7 @@ HERE;
         //show members
         
  
-        $members = db_access::getMember(NULL);
+        $members = db_access::getMembers(NULL);
         $row = mysqli_fetch_row($members);
 
         $admin = db_access::isAdmin($pid);

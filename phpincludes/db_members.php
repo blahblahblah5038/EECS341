@@ -4,7 +4,7 @@
 
 // Contacts
 
-function getContact($pid)
+function getContacts($pid)
 {
        $querystr = "SELECT * FROM contact ";
        if($pid!==NULL)
