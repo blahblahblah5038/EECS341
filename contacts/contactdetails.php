@@ -38,20 +38,21 @@
          }
        
          echo "<form action='contact_success.php'>"
-         echo "Person ID: 	<input type='text' 	name='PID'		value='".$row[0]."' /><br />";
-         echo "First Name: 	<input type='text' 	name='First Name'	value='".$row[1]."' /><br />";
-         echo "Last Name: 	<input type='text' 	name='Last Name'	value='".$row[2]."' /><br />";
-         echo "Address: 	<input type='text' 	name='Address'		value='".$row[3]."' /><br />";
-         echo "City: 		<input type='text' 	name='City'		value='".$row[4]."' /><br />";
-         echo "State: 		<input type='text' 	name='State'		value='".$row[5]."' /><br />";
-         echo "Zip code: 	<input type='text' 	name='Zip Code'		value='".$row[6]."' /><br />";
-         echo "Email: 		<input type='text' 	name='e-mail'		value='".$row[7]."' /><br />";
-         echo "Phone Number: 	<input type='text' 	name='Phone'   		value='".$row[8]."' /><br />";
-         echo "<input type='submit' value='Save' /></br>";
+         echo "<table>";
+         echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[0]."' /><TR>";
+         echo "<TD>First Name:<TD><input type='text' 	name='fname'	value='".$row[1]."' /><TR>";
+         echo "<TD>Last Name:<TD><input type='text' 	name='lname'	value='".$row[2]."' /><TR>";
+         echo "<TD>Address:<TD><input type='text' 	name='address'		value='".$row[3]."' /><TR>";
+         echo "<TD>City:<TD><input type='text' 	name='city'		value='".$row[4]."' /><TR>";
+         echo "<TD>State:<TD><input type='text' 	name='state'		value='".$row[5]."' /><TR>";
+         echo "<TD>Zip code:<TD><input type='text' 	name='zip'		value='".$row[6]."' /><TR>";
+         echo "<TD>Email:<TD><input type='text' 	name='email'		value='".$row[7]."' /><TR>";
+         echo "<TD>Phone Number:<TD><input type='text' 	name='phone'   		value='".$row[8]."' /><TR>";
+         echo "<input type='submit' value='Save' /><TR>";
          echo "</form>";
          echo "<form action='delete_contact.php'>";
          echo "<input type=hidden value='".$row[1]."' name=pid />";
-         echo "<input type='submit' value='deluser' /></br>";
+         echo "<input type='submit' value='deluser' /><TR>";
          echo "</form>";
     }  
   

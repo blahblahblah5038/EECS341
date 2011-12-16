@@ -47,7 +47,6 @@ class db_access
 		// Check if person exists
 		if(! db_access::personExists($pid) )
 		{
-			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
 		}
 		
@@ -69,7 +68,6 @@ class db_access
 		// Check if person exists
 		if(! db_access::personExists($pid) )
 		{
-			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
 		}
 		
@@ -91,7 +89,6 @@ class db_access
 		// Check if person exists
 		if(! db_access::personExists($pid) )
 		{
-			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
 		}
 		
@@ -113,7 +110,6 @@ class db_access
 		// Check if person exists
 		if(!db_access::personExists($pid) )
 		{
-			echo "The person specified by PID $pid does not exist.";
 			return	FALSE;
 		}
 		
