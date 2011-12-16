@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 ////
-//// This page shows a more detailed version of the contact information.  That 
+//// This page shows a more detailed version of the member information.  That 
 //// is to say that the main contacts page may not show all of the fields, and
 //// that this one is the most detailed view possible.
 ////
@@ -13,8 +13,6 @@
          include("../phpincludes/login.php");
          include("../phpincludes/db_access.php");
          include("../phpincludes/db_equipment.php");
-
-    if(!isset($_POST['details'])
     
     if(!if(db_access::isAdmin($pid)))
     {
@@ -38,7 +36,7 @@
          }
 
 
-         echo "<form action='contact_success.php' method='POST'>"
+         echo "<form action='member_success.php' method='POST'>"
          echo "<table>"
          echo "<TD>Member ID:<TD><input type='text'      name='mid'              value='".$row[0]."' /><TR>";
          echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[1]."' /><TR>";

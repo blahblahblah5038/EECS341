@@ -1,11 +1,10 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 ////
-//// This page shows a more detailed version of the contact information.  That 
-//// is to say that the main contacts page may not show all of the fields, and
-//// that this one is the most detailed view possible.
-////
-//// Furthermore, we will be offering edit and deletion features for officers
+////    This page is the one we go to after the user clicks a confirmation 
+////    that the other user in question is to be deleted.  This page simply
+////    performs the deletion and prints a message saying whether it worked 
+////    or not.
 ////
 ///////////////////////////////////////////////////////////////////////////////
 

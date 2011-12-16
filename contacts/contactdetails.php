@@ -22,15 +22,19 @@
     }
     else
     {
+         $row = {};
          if(isset($_POST['details'])
          {
+             $detailsset = true;
              echo "<h2>Detailed Contact Info</h2>";
              $members = db_access::getContact(NULL);
              $row = mysqli_fetch_row($members);
          }    
          else     
          {
+             $detailsset = false;
              echo "<h2>Add New Contact</h2>";
+             $row = {"","","","","","","","",""};
          }
        
          echo "<form action='contact_success.php'>"
@@ -45,8 +49,9 @@
          echo "Phone Number: 	<input type='text' 	name='Phone'   		value='".$row[8]."' /><br />";
          echo "<input type='submit' value='Save' /></br>";
          echo "</form>";
-         echo "<form action='delete_contact.php'>"
-         echo "<input type='submit' value='Delete User' /></br>";
+         echo "<form action='delete_contact.php'>";
+         echo "<input type=hidden value='".$row[1]."' name=pid />";
+         echo "<input type='submit' value='deluser' /></br>";
          echo "</form>";
     }  
   
