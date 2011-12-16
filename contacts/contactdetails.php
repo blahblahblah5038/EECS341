@@ -14,16 +14,15 @@
          include("../phpincludes/db_access.php");
          include("../phpincludes/db_equipment.php");
 
-    if(!isset($_POST['details'])
     
-    if(!if(db_access::isAdmin($pid)))
+    if(!db_access::isAdmin($pid))
     {
          echo "Error, you are not a club officer.  Go away.";
     }
     else
     {
-         $row = {};
-         if(isset($_POST['details'])
+         $row = "";
+         if(isset($_POST['details']))
          {
              $detailsset = true;
              echo "<h2>Detailed Contact Info</h2>";
@@ -34,10 +33,10 @@
          {
              $detailsset = false;
              echo "<h2>Add New Contact</h2>";
-             $row = {"","","","","","","","",""};
+             $row = array("","","","","","","","","");
          }
        
-         echo "<form action='contact_success.php'>"
+         echo "<form action='contact_success.php'>";
          echo "<table>";
          echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[0]."' /><TR>";
          echo "<TD>First Name:<TD><input type='text' 	name='fname'	value='".$row[1]."' /><TR>";
