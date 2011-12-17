@@ -9,10 +9,8 @@
 
 <?php
 $userpid = db_access::getPidFromCaseId(phpCAS::getUser());
-if (!db_access::isMember($userpid)) {
-	echo <<<HERE
-	<div class='error'>Sorry, you are not authorized to view this page.</div>
-HERE;
+if (!db_access::isMember($userpid))
+	echo "<div class='error'>Sorry, you are not authorized to view this page.</div>";
 if (!isset($_POST['eid']))
 {
 	echo "<div class='error'>No EID specified</div>";
@@ -23,7 +21,8 @@ if (!isset($_POST['eid']))
 		$isEqMan = TRUE;
 	
 	$eid = $_POST['eid'];
-	if (!db_equipment::isCheckedOut($row[0])) {
+	if (!db_equipment::isCheckedOut($row[0]))
+	{
 		if (isset($_POST['sub_checkout']) && isset($_POST['borrower']) && isset($_POST['date']) && $_POST['date'] != '')
 		{	// form was submitted, with info
 			//TODO: validate
