@@ -2,6 +2,12 @@
 // Functions regarding officers
 // db_connect::run_query from include("db_connect.php");
 
+function getOfficerHistory()
+{
+   $querystr = "SELECT * FROM officer_history H, officer_positions P, contact C WHERE H.pos_id = P.pos_id AND H.pid = C.pid";
+   return db_connect::run_query($querystr);
+}
+
 function addOfficer($pid, $pos_id, $start_date, $end_date)
 {
 	//TODO: (possibly) convert date formats?
