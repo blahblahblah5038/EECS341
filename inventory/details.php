@@ -7,7 +7,7 @@
 <h2>Inventory: View Details</h2>
 
 <?php
-private function print_info($row, $type)
+function print_info($row, $type)
 {
 	// type can be: blank, S, L, A, R (for stabilizer, limb, arrow, and riser)
 	$headers = array("EID", "Type", "Serial No.", "Brand", "Owner");

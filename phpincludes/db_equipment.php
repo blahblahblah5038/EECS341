@@ -158,7 +158,7 @@ class db_equipment
 		$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory " .
 			"WHERE eid IN (" .
 			"SELECT eid FROM equipment_loans " .
-			"WHERE pid=" . $pid . " AND checkin IS NULL)";
+			"WHERE pid=" . $pid . " AND (checkin IS NULL OR checkin > CURDATE()))";
 		$query = db_connect::run_query($querystr);
 		return $query;
 	}
@@ -209,16 +209,25 @@ class db_equipment
 		db_connect::run_query($querystr);
 	}
 
+	function viewLoans($eid)
+	{
+		$querystr = "SELECT id, eid, pid, eq_condition, notes, checkout, checkin " .
+			"FROM equipment_loans WHERE eid=" . $eid;
+		$query = db_connect::run_query($querystr);
+		return $query;
+	}
+	
 	function isCheckedOut($eid)
 	{
-		$querystr = "SELECT eid FROM equipment_loans WHERE eid=" . $eid . " AND checkin IS NULL";
+		$querystr = "SELECT id FROM equipment_loans WHERE eid=" . $eid . " AND (checkin IS NULL or checkin > CURDATE())";
 		$query = db_connect::run_query($querystr);
 		switch (mysqli_num_rows($query))
 		{
 			case 0:
-				return FALSE;
+				return 0;
 			default:
-				return TRUE;
+				$loanid = mysqli_fetch_row($query)[0];
+				return $loanid;
 		}
 	}
 
