@@ -40,8 +40,10 @@
 
          echo "<form action='member_success.php' method='POST'>";
          echo "<table>";
-         echo "<TD>Member ID:<TD><input type='text'      name='mid'              value='".$row[0]."' /><TR>";
-         echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[1]."' /><TR>";
+         echo "<TD>MID:<TD>".$row[0]."<TR>";
+         echo "<input type='hidden' name='mid' value=".$row[0]." />";
+         echo "<TD>PID:<TD>".$row[1]."<TR>";
+         echo "<input type='hidden' name='pid' value=".$row[1]." />";
          echo "<TD>Network ID:<TD><input type='text'      name='netid'              value='".$row[2]."' /><TR>";
          echo "<TD>Student ID:<TD><input type='text'      name='studid'              value='".$row[3]."' /><TR>";
          echo "<TD>Bow Type Preference:<TD><input type='text'      name='bowpref' value='".$row[4]."' /><TR>";
@@ -58,17 +60,17 @@
          
          if($detailsset)
          {
-             echo "<input type='submit' value='edituser' /></br>";
+             echo "<input type='submit' value='Save' name='edituser' />";
          }
          else
          {
-             echo "<input type='submit' value='adduser' /></br>";
+             echo "<input type='submit' value='Save' name='adduser' />";
          }
          
          echo "</form>";
          echo "<form action='delete_member.php'>";
          echo "<input type=hidden value='".$row[1]."' name=pid />";
-         echo "<input type='submit' value='deluser' /></br>";
+         echo "<input type='submit' value='Delete' name='deluser' /></br>";
          echo "</form>";
     }  
   
