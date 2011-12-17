@@ -89,11 +89,13 @@ HERE;
 		</td></tr>
 		</table>
 		<div id="stabilizerform">
+			<h4>Stabilizer</h4>
 			<table>
 				<tr><td>Length</td><td><input type="text" name="length" /></td></tr>
 			</table>
 		</div>
 		<div id="limbform">
+			<h4>Limb</h4>
 			<table>
 				<tr><td>Interface</td><td><input type="text" name="interface" /></td></tr>
 				<tr><td>Distinguishing Marks</td><td><input type="text" name="distmarks" /></td></tr>
@@ -101,6 +103,7 @@ HERE;
 			</table>
 		</div>
 		<div id="arrowform">
+			<h4>Arrow</h4>
 			<table>
 				<tr><td>Model</td><td><input type="text" name="Model" /></td></tr>
 				<tr><td>Complete Arrow</td><td><input type="text" name="completearrow" /></td></tr>
@@ -110,6 +113,7 @@ HERE;
 			</table>
 		</div>
 		<div id="riserform">
+			<h4>Riser</h4>
 			<table>
 				<tr><td>Interface</td><td><input type="text" name="interface" /></td></tr>
 				<tr><td>Height</td><td><input type="text" name="height" /></td></tr>

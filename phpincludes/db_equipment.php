@@ -226,7 +226,8 @@ class db_equipment
 			case 0:
 				return 0;
 			default:
-				$loanid = mysqli_fetch_row($query)[0];
+				$row = mysqli_fetch_row($query);
+				$loanid = $row[0];
 				return $loanid;
 		}
 	}
