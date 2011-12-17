@@ -12,10 +12,10 @@
          include("../phpincludes/header.php");
          include("../phpincludes/login.php");
          include("../phpincludes/db_access.php");
-         include("../phpincludes/db_equipment.php");
+         include("../phpincludes/db_members.php");
 
-    
-    if(!if(db_access::isAdmin($pid)))
+    $pid = db_access::getPidFromCaseId(phpCAS::getUser());    
+    if(!(db_access::isAdmin($pid)))
     {
          echo "Error, you are not a club officer.  Go away.";
     }
@@ -27,7 +27,7 @@
          }
          else if( isset($_POST['adduser']))
          {
-             if(isContact($_POST['pid'])
+             if(isContact($_POST['pid']))
              {
                  addMember($_POST['pid'], $_POST['netid'],$_POST['studid'],$_POST['bowpref'],$_POST['hand'],$_POST['clubexpir'],$_POST['memid'],$_POST['uscaexpir'],$_POST['emername'],$_POST['emerphone'],$_POST['insurer'], $_POST['policy']);
              }

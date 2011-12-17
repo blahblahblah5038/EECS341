@@ -16,7 +16,7 @@ function isContact($pid)
 
 function getContacts($pid)
 {
-       $querystr = "SELECT * FROM contact ";
+       $querystr = "SELECT * FROM contact LEFT JOIN member ";
        if($pid!==NULL)
        {
            $querystr = $querystr."WHERE pid=".$pid;
