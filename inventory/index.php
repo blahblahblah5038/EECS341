@@ -30,7 +30,7 @@ HERE;
 	
 	// Display member equipment info
 	$userequip = getEquipmentByOwner($userpid);
-	$row = mysqli_fetch_row($userequip); //FYI, I think this may be incorrect, see contacts/index.php -wes
+	$row = mysqli_fetch_row($userequip);
 	echo "<h3>My Equipment</h3>";
 	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th></tr>";
 	while ( $row = mysqli_fetch_row($userequip))

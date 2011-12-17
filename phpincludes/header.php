@@ -11,14 +11,20 @@ session_start();
 </head>
 <body>
 <div id="header">
-	Header Text Goes Here
+	CWRU Archery Club
 </div>
 <div id="navbar">
 	<h2>Links</h2>
 	<ul>
-		<li><a href="index.php">Home</a></li>
-		<li><a href="#">Somewhere</a></li>
-		<li><a href="#">Elsewhere</a></li>
+		<li><a href="/index.php">Home</a></li>
+		<li><a href="/calendar/">Calendar</a></li>
+		<li><a href="/contacts/">Contacts</a></li>
+		<li><a href="/membership/">Members</a></li>
+		<li><a href="/fileuploads/">File Uploads</a></li>
+		<li><a href="/inventory/">Inventory</a></li>
+		<li><a href="/finance/">Finance</a></li>
+		<li><a href="/officer_positions/">Officer Positions</a></li>
+		<li><a href="/officers/">Officers</a></li>
 	</ul>
 </div>
 <div id="sidebar">

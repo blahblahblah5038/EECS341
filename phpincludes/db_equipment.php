@@ -2,8 +2,6 @@
 // Functions regarding equipment
 // db_connect::run_query from include("db_connect.php");
 
-
-
 function addEquipment($type, $serialnum, $brand, $owner)
 {
 	$querystr = "INSERT INTO inventory (type, serialnum, brand, owner) VALUES (" .
@@ -157,7 +155,7 @@ function getEquipmentByBorrower($pid)
 {
 	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory " .
 		"WHERE eid IN (" .
-		"SELECT eid, pid FROM equipment_loans " .
+		"SELECT eid FROM equipment_loans " .
 		"WHERE pid=" . $pid . ")";
 	$query = db_connect::run_query($querystr);
 	return $query;
