@@ -38,7 +38,7 @@
                 require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
                 $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
-                $myCalendar	->	setDate(11, 1, 2011);
+                $myCalendar	->	setDate(date('j'), date('n'), date('Y'));
     
                 $myCalendar	->	writeScript();
             ?>
