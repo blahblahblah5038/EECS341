@@ -11,8 +11,8 @@
          include("../phpincludes/login.php");
          include("../phpincludes/db_access.php");
          include("../phpincludes/db_equipment.php");
-
-    if(!if(db_access::isAdmin($pid)))
+    $pid = db_access::getPidFromCaseId(phpCAS::getUser());
+    if(!(db_access::isAdmin($pid)))
     {
          echo "Error, you are not a club officer.  Go away.";
     }
