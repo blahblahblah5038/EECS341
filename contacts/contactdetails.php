@@ -37,7 +37,7 @@
              $row = array("","","","","","","","","");
          }
        
-         echo "<form action='contact_success.php'>";
+         echo "<form action='contact_success.php' method='post'>";
          echo "<table>";
          echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[0]."' /><TR>";
          echo "<TD>First Name:<TD><input type='text' 	name='fname'	value='".$row[1]."' /><TR>";
@@ -48,11 +48,11 @@
          echo "<TD>Zip code:<TD><input type='text' 	name='zip'		value='".$row[6]."' /><TR>";
          echo "<TD>Email:<TD><input type='text' 	name='email'		value='".$row[7]."' /><TR>";
          echo "<TD>Phone Number:<TD><input type='text' 	name='phone'   		value='".$row[8]."' /><TR>";
-         echo "<input type='submit' value='Save' /><TR>";
+         echo "<input type='submit' value='Edit Contact' name='edituser' /><TR>";
          echo "</form>";
-         echo "<form action='delete_contact.php'>";
-         echo "<input type=hidden value='".$row[1]."' name=pid />";
-         echo "<input type='submit' value='deluser' /><TR>";
+         echo "<form action='delete_contact.php' method='post'>";
+         echo "<input type=hidden value='".$row[1]."' name='pid' />";
+         echo "<input type='submit' value='Delete Contact' name='deluser' /><TR>";
          echo "</form>";
     }  
   
