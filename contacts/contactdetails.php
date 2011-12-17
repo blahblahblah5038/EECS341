@@ -14,7 +14,8 @@
          include("../phpincludes/db_access.php");
          include("../phpincludes/db_equipment.php");
 
-    
+    $pid = db_access::getPidFromCaseId(phpCAS::getUser());
+
     if(!db_access::isAdmin($pid))
     {
          echo "Error, you are not a club officer.  Go away.";
@@ -26,7 +27,7 @@
          {
              $detailsset = true;
              echo "<h2>Detailed Contact Info</h2>";
-             $members = db_access::getContact(NULL);
+             $members = getContacts($_POST['pid']);
              $row = mysqli_fetch_row($members);
          }    
          else     
