@@ -24,7 +24,7 @@ if (!isset($_POST['eid']))
 	
 	$eid = $_POST['eid'];
 	if (!db_equipment::isCheckedOut($row[0])) {
-		if (isset($_POST['sub_checkout']) && isset($_POST['borrower'] && isset($_POST['date']) && $_POST['date'] != '')
+		if (isset($_POST['sub_checkout']) && isset($_POST['borrower']) && isset($_POST['date']) && $_POST['date'] != '')
 		{	// form was submitted, with info
 			//TODO: validate
 			$borrower = $_POST['borrower'];
