@@ -12,7 +12,7 @@
          include("../phpincludes/header.php");
          include("../phpincludes/login.php");
          include("../phpincludes/db_access.php");
-         include("../phpincludes/db_equipment.php");
+         include("../phpincludes/db_members.php");
 
     $pid = db_access::getPidFromCaseId(phpCAS::getUser());
 

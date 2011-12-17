@@ -34,4 +34,4 @@ HERE;
         echo "</table>";
 }
 ?>
-<?php include("phpincludes/footer.php"); ?>
+<?php include("../phpincludes/footer.php"); ?>
