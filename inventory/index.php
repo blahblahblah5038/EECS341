@@ -65,7 +65,6 @@ HERE;
 	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th><th></th></tr>";
 	while ($row)
 	{
-		$row = mysqli_fetch_row($equiplist);
 		// All users can check equipment out, only equipment managers can check in
 		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>";
 		echo '<form action="details.php" method="POST"><input type="hidden" value="'.$row[0].'" name="eid"><input type="hidden" value="'.$row[1].'" name="type" /><input type="submit" value="Details" /></form>';
@@ -84,6 +83,7 @@ HERE;
 			echo "<form action='checkout.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='checkout' value='Check Out' /></form>";
 		
 		echo "</td></tr>";
+		$row = mysqli_fetch_row($equiplist);
 	}
 	echo "</table>";
 }

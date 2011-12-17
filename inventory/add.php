@@ -56,6 +56,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 				db_equipment::addEquipment($type, $serialno, $brand, $owner);
 				break;
 		}
+		echo "<p>Equipment successfully added.<br /><a href='/add.php'>Add another item</a><br /><a href='/inventory.php'>Back to inventory</a></p>";
 	} else { // display form
 		echo <<<HERE
 		<form action="add.php" method="POST">
