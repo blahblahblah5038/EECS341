@@ -1,5 +1,6 @@
 <?PHP
 include_once ('db_connect.php');
+include_once ('db_officers.php');
 class db_access
 {
 	
@@ -73,7 +74,7 @@ class db_access
 		
 		//	Call getPositionID to return pos_id
 		//	Call wasOfficer with PID, pos_id, and current date to see if is current treasurer
-		return	(	wasOfficer($pid, getPositionID("Treasurer"), SQL_TIMESTAMP)	);	
+		return	(	wasOfficer($pid, db_officers::getPositionID("Treasurer"), SQL_TIMESTAMP)	);	
 	}
 	
 	//	Name:			isEquipmentManager()
@@ -94,7 +95,7 @@ class db_access
 		
 		//	Call getPositionID to return pos_id
 		//	Call wasOfficer with PID, pos_id, and current date to see if is current equipment manager
-		return	(	wasOfficer($pid, getPositionID("Equipment Manager"), SQL_TIMESTAMP)	);	
+		return	(	db_access::wasOfficer($pid, db_access::getPositionID("Equipment Manager"), SQL_TIMESTAMP)	);	
 	}
 	
 	//	Name:			isMember()
@@ -145,7 +146,7 @@ class db_access
 	private function getPositionID($title)
 	{
 		$query	=	"SELECT pos_id FROM officer_positions WHERE title = '$title'";
-		$result	=	run_query(	$query	)	or die("Error in query");
+		$result	=	db_connect::run_query(	$query	)	or die("Error in query");
 
 		// If no results are found, return -1
 		$output	=	-1;

@@ -11,15 +11,17 @@
          include("../phpincludes/header.php");
          include("../phpincludes/login.php");
          include("../phpincludes/db_access.php");
-         include("../phpincludes/db_equipment.php");
+         include("../phpincludes/db_members.php");
 
-    if(!if(db_access::isAdmin($pid)))
+    $pid = db_access::getPidFromCaseId(phpCAS::getUser());
+
+    if(!(db_access::isAdmin($pid)))
     {
          echo "Error, you are not a club officer.  Go away.";
     }
     else if (isset($_POST['pid']))
     {
-         db_members::deleteContact($_POST['pid']);
+         deleteContact($_POST['pid']);
     } 
     else
     {
