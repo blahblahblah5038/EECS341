@@ -11,25 +11,25 @@
 	<table>
     	<form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
 		<tr>
-        	<td><input type="button" onClick="location.href='finance/create_budget.php'" name="CreateBudget" value="Create New Budget"></td>
+        	<td><input type="button" onClick="location.href='create_budget.php'" name="CreateBudget" value="Create New Budget"></td>
         </tr>
         <tr>
         	<td>&nbsp;</td>
         </tr>
         <tr>
-        	<td><input type="button" onClick="location.href='finance/revise_budget.php'" name="ReviseBudget" value="Revise Budget"></td>
+        	<td><input type="button" onClick="location.href='revise_budget.php'" name="ReviseBudget" value="Revise Budget"></td>
         </tr>
         <tr>
         	<td>&nbsp;</td>
         </tr>
         <tr>
-        	<td><input type="button" onClick="location.href='finance/add_view_transactions.php'" name="Transactions" value="Add/View Transaction"></td>
+        	<td><input type="button" onClick="location.href='add_view_transactions.php'" name="Transactions" value="Add/View Transaction"></td>
         </tr>
         <tr>
         	<td>&nbsp;</td>
         </tr>
         <tr>
-        	<td><input type="button" onClick="location.href='finance/budget_summary.php'" name="BudgetSummary" value="Budget Summary"></td>
+        	<td><input type="button" onClick="location.href='budget_summary.php'" name="BudgetSummary" value="Budget Summary"></td>
         </tr>
         </form>
 	</table>

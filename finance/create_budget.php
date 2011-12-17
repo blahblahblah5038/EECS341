@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Create Budget</title>
 <h1 align="center">Create A New Budget</h1>
-<script language="javascript" src="calendar.js"></script>
+<script language="javascript" src="../calendar/calendar.js"></script>
 <?PHP 
-include("db_finance.php");
-include_once("../db_connect.php");
+include("../phpincludes/db_finance.php");
+include_once("../phpincludes/db_connect.php");
+//include_once("../header.php");
 	?>
 </head>
 
@@ -18,7 +19,9 @@ include_once("../db_connect.php");
 //	$dbc	=	mysqli_connect("localhost", "root", "Svetskar97") or die("Could not connect");
 //	mysqli_select_db( $dbc, "archeryclub") or die("Could not select database");
 	
-	$financeObj1	=	new db_finance();
+	$financeObj1			=	new db_finance();
+	$SCPC_form_fields		=	array();
+	$USG_form_fields		=	array();
 	
 	/************************************************************************
 	 *																		*
@@ -48,19 +51,19 @@ include_once("../db_connect.php");
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
            <tr><td> 
 			<?PHP
-                require_once("classes/tc_calendar.php");
+                require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
-                $myCalendar	->	setIcon("images/iconCalendar.gif");
-                $myCalendar	->	setDate(11, 1, 2011);
+                $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
+                $myCalendar	->	setDate(date('j'), date('n'), date('Y'));
                 $myCalendar	->	writeScript();
             ?>
             </td><td>Start Date</td></tr>
             <tr><td>
             <?PHP
-                require_once("classes/tc_calendar.php");
+                require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("endDate", TRUE);
-                $myCalendar	->	setIcon("images/iconCalendar.gif");
-                $myCalendar	->	setDate(11, 1, 2011);
+                $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
+                $myCalendar	->	setDate(date('j'), date('n'), date('Y') + 1);
                 $myCalendar	->	writeScript();
             ?>
             </td><td>End Date</td></tr>
@@ -194,12 +197,14 @@ include_once("../db_connect.php");
         	<td>&nbsp;</td>
         </tr>
         <tr>
-        	<td>Create new line item</td>
+        	<td>&nbsp;</td>
             <td></td>
         </tr>
         <tr>
         	<td></td>
-            <td><input type="submit" value="SUBMIT" name="SubmitBudgetItems"></form></td>
+            <td><input type="submit" value="SUBMIT" name="SubmitBudgetItems">
+            	<input type="hidden" value="<?PHP echo $_REQUEST['startDate']	?>" name="startDate">
+                <input type="hidden" value="<?PHP echo $_REQUEST['endDate']		?>" name="endDate"></form></td>
             <td></td>
         </tr>
     </table>
@@ -220,6 +225,7 @@ include_once("../db_connect.php");
 	if( isset($_REQUEST['SubmitBudgetItems']))
 	{
 		$i = 0;
+		$formLength		=	array();
 		echo	"<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\"><table align=\"center\" cellpadding=\"25\" border=\"5\" bordercolordark=\"#000000\">";
 				
 		while( ($_POST['ChosenSCPC'][$i] ) || ($_POST['ChosenUSG'][$i]))
@@ -237,7 +243,7 @@ include_once("../db_connect.php");
 			// Print the Forms for SCPC items on left side
 			if($_POST['ChosenSCPC'][$i] )
 			{
-				$financeObj1->lineItemFields($_POST['ChosenSCPC'][$i], $namesSCPC, $defValueSCPC);
+				$financeObj1->lineItemFields($_POST['ChosenSCPC'][$i], $namesSCPC, $defValueSCPC, $formLength[$i]);
 				if(! empty($namesSCPC) )
 					echo	"<tr><td>".$financeObj1->echoForm1($namesSCPC, $defValueSCPC, "SCPC-$i", "submit3")."</td>";
 				else
@@ -261,6 +267,8 @@ include_once("../db_connect.php");
 			$i++;
 		}
 		echo	"<tr><td align=\"center\" colspan = \"2\"><input type=\"submit\" name=\"CompletedForms\" value=\"Submit\"></td></tr></table>";
+		echo	"<input type=\"hidden\" value=\"".$_REQUEST['startDate']."\" name=\"startDate\">"
+                ."<input type=\"hidden\" value=\"".$_REQUEST['endDate']."\" name=\"endDate\"></form>";
 	
 	}
 	
@@ -275,56 +283,76 @@ include_once("../db_connect.php");
 		// Retrieve results from forms
 		$SCPC_fields	=	array(); 
 		$USG_fields		=	array();
-		$SCPC_length	=	0;
-		$USG_length		=	0;
-		$totIncome		=	0;
-		$totExpenses	=	0;
+		$length			=	array();
 		$i				=	0;
-		$k				=	0;
+		$j				=	0;
 
-		while(! empty($_POST["SCPC-$i-0"]) )
+		// Retrieve SCPC form data
+		while(! empty($_REQUEST["SCPC-$i-$j"])	)
 		{
-			$SCPC_fields[$k]	=	$_POST["SCPC-$i-0"];
-			$SCPC_fields[++$k]	=	$_POST["SCPC-$i-1"];
+			while(	(! empty($_REQUEST["SCPC-$i-$j"]))	|| ($j < 4)	)
+			{
+				$SCPC_form_fields[$i][$j]	=	$_REQUEST["SCPC-$i-$j"];
+				$j++;
+			}
+			$length[0][$i]	=	$j;		// length[0] is SCPC; length[1] is USG;	[0][1] is from SCPC form 1
+			$j = 0;
 			$i++;
-			$k++;
 		}
+
+		$i	=	0;
+		$j	=	0;
 		
-		// Store length and reset counters
-		$SCPC_length	=	$k;
-		$i				=	0;
-		$k				=	0;
-		
-		while(! empty($_POST["USG-$i-0"]) )
+		// Retrieve USG form data
+		while(! empty($_REQUEST["USG-$i-$j"])	)
 		{
-			$USG_fields[$k]		=	$_POST["USG-$i-0"];
-			$USG_fields[++$k]	=	$_POST["USG-$i-1"];
+			while(	(! empty($_REQUEST["USG-$i-$j"]))	|| ($j < 4)	)
+			{
+				$USG_form_fields[$i][$j]	=	$_REQUEST["USG-$i-$j"];
+				$j++;
+			}
+			$length[1][$i]	=	$j;		// length[0] is SCPC; length[1] is USG;	[0][1] is form SCPC form 1
+			$j = 0;
 			$i++;
-			$k++;
 		}
-		$USG_length		=	$k;
-		
+
 		// Create table
-		$summaryTable		 =	"<form method=\"post\" action=".$_SERVER['PHP_SELF']."><div><table align=\"center\" bordercolor=\"#000000\" border=\"4\" cellspacing=\"3\" cellpadding=\"4\">";
-		$summaryTable		.=	"<tr><td>Item Name</td><td>Amount Requested</td></tr>";
-		$summaryTable		.=	"<tr><th colspan=\"2\">Sport Club Items</th></tr>";
-		for( $i = 0; $i < $SCPC_length; $i++)
+		$summaryTable		 =	"<form method=\"post\" action=".$_SERVER['PHP_SELF']."><table align=\"center\" bordercolor=\"#000000\" border=\"4\" cellspacing=\"3\" cellpadding=\"4\">";
+		$summaryTable		.=	"<tr><td>Item Name</td><td>Amount Requested</td><td>Amount Allocated</td><td>Balance</td></tr>";
+		if( count($length[0]) > 0 )
+			$summaryTable		.=	"<tr><th colspan=\"4\">Sport Club Items</th></tr>";
+		for( $i = 0; $i < count($length[0]); $i++)
 		{
-			$summaryTable	.=	"<tr><td>".$SCPC_fields[$i]."</td><td>".$SCPC_fields[++$i]."</td></tr>";
+			$summaryTable	.=	"<tr><td>".$SCPC_form_fields[$i][0]."</td><td align=\"center\">".$SCPC_form_fields[$i][1]."</td><td align=\"center\">".$SCPC_form_fields[$i][2]."</td><td align=\"center\">".$SCPC_form_fields[$i][3]."</td></tr>";
 		}
-		$summaryTable		.=	"<tr><th colspan=\"2\">USG Items</th></tr>";
-		for( $i = 0; $i < $USG_length; $i++)
+		if( count($length[1]) > 0 )
+			$summaryTable		.=	"<tr><th colspan=\"4\">USG Items</th></tr>";	
+		for( $i = 0; $i < count($length[1]); $i++)
 		{
-			$summaryTable	.=	"<tr><td>".$USG_fields[$i]."</td><td>".$USG_fields[++$i]."</td></tr>";
+			$summaryTable	.=	"<tr><td>".$USG_form_fields[$i][0]."</td><td align=\"center\">".$USG_form_fields[$i][1]."</td><td align=\"center\">".$USG_form_fields[$i][2]."</td><td align=\"center\">".$USG_form_fields[$i][3]."</td></tr>";
 		}
 		
-		$summaryTable		.=	"<tr><th>Total Income</th><th>Total Expenses</th></tr>"
-								."<tr><td>$totIncome</td><td>$totExpenses</td></tr>";
-		
+	
 		// Print Page and provide option for submission
 		echo	"<div><h3 align=\"center\">Please review the summary below.</h3><p align=\"center\">If there are any errors, please go back and fix them before clicking Submit</p></div>";
 		echo	"<div>$summaryTable</table></div>";
+		for( $y = 0; $y < count($length[0]); $y++)
+		{
+			for( $z = 0; $z < $length[0][$y]; $z++)
+				{
+					echo	"<input type=\"hidden\" name=\"hidden-SCPC-".$y."-".$z."\" 	value=\"".$SCPC_form_fields[$y][$z]."\">";
+				}
+		}
+		for( $y = 0; $y < count($length[1]); $y++)
+		{
+			for( $z = 0; $z < $length[1][$y]; $z++)
+				{
+					echo	"<input type=\"hidden\" name=\"hidden-USG-".$y."-".$z."\" 	value=\"".$USG_form_fields[$y][$z]."\">";
+				}
+		}		
 		echo	"<div align=\"center\"><br /><input type=\"SUBMIT\" name=\"CreateFinalBudget\" value=\"SUBMIT\"></div>";
+		echo	"<input type=\"hidden\" value=\"".$_REQUEST['startDate']."\" name=\"startDate\">"
+                ."<input type=\"hidden\" value=\"".$_REQUEST['endDate']."\" name=\"endDate\"></form>";
 		
 	 }
 	 
@@ -337,45 +365,109 @@ include_once("../db_connect.php");
 	 
 	 if( (isset($_REQUEST['CreateFinalBudget']))	)
 	 {
-		echo	"This form can be used but still needs tweaking.<br /> None of the data has been entered into the database yet.<br /> I'm having trouble retrieving the data.";
 		echo	"<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">"
-				."<input type=\"button\" onClick=\"location.href='../finance_main.php'\" name=\"ReturnToFinanceMain\" value=\"Return to Main Finance Page\"></form>";
-				
-		/*************************************************************/
-		$start_date1			=	"2011-02-27";
-		$end_date1			=	"2011-12-31";
-		$total_requested	=	1234.56;
+				."<input type=\"button\" onClick=\"location.href='../finance_main.php'\" name=\"ReturnToFinanceMain\" value=\"Return to Main Finance Page\"></form><br />";
+		
+		// Retrieve results from forms
+		$SCPC_fields	=	array(); 
+		$USG_fields		=	array();
+		$length			=	array();
+		$i				=	0;
+		$j				=	0;
+
+		// Retrieve SCPC form data
+		while(! empty($_REQUEST["hidden-SCPC-$i-$j"])	)
+		{
+			while(	(! empty($_REQUEST["hidden-SCPC-$i-$j"]))	|| ($j < 4)	)
+			{
+				$SCPC_form_fields[$i][$j]	=	$_REQUEST["hidden-SCPC-$i-$j"];
+				$j++;
+			}
+			$length[0][$i]	=	$j;		// length[0] is SCPC; length[1] is USG;	[0][1] is from SCPC form 1
+			$j = 0;
+			$i++;
+		}
+
+		$i	=	0;
+		$j	=	0;
+		
+		// Retrieve USG form data
+		while(! empty($_REQUEST["hidden-USG-$i-$j"])	)
+		{
+			while(	(! empty($_REQUEST["hidden-USG-$i-$j"]))	|| ($j < 4)	)
+			{
+				$USG_form_fields[$i][$j]	=	$_REQUEST["hidden-USG-$i-$j"];
+				$j++;
+			}
+			$length[1][$i]	=	$j;		// length[0] is SCPC; length[1] is USG;	[0][1] is form SCPC form 1
+			$j = 0;
+			$i++;
+		}
+		
+		$start_date1		=	$_REQUEST['startDate'];
+		$end_date1			=	$_REQUEST['endDate'];
+		$total_requested	=	0;
 		$total_allocated 	= 	0;
 		$balance			=	0;
-		$description		=	"SPORT CLUB, CREATED, 2011-12-11, 1234567";
+		$description		=	"";		
 		
-		$name				=	"Item_name";
-		$budget_date		=	$start_date1;
-		$requested			=	$total_requested;
-		$allocated			=	0;
-		$balanceItem		=	$allocated;
-		$descriptionItem	=	"concatenate all form fields";
-		
-		$financeObj1->addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
-		//while(! empty($items) )
+		//	Calculate values for the budget's creation
+		for($i = 0; $i < count($length[0]); $i++)
 		{
-			$financeObj1->addBudgetItem($name, $budget_date, $requested, $allocated, $descriptionItem);
+			$total_requested	+=	$SCPC_form_fields[$i][1];
+			$total_allocated	+=	$SCPC_form_fields[$i][2];
+			$balance			+=	$SCPC_form_fields[$i][3];
 		}
+
+		if( $total_requested != 0 )
+			$description	.=	"SPORT CLUB, ";
+		else
+			$description	.=	"USG, ";
+		
+		for($i = 0; $i < count($length[1]); $i++)
+		{
+			$total_requested	+=	$USG_form_fields[$i][1];
+			$total_allocated	+=	$USG_form_fields[$i][2];
+			$balance			+=	$USG_form_fields[$i][3];
+		}
+
+		$description		.=	"CREATED, ".date('Y-m-d');
+
+		//	Insert new budget tuple into BUDGET table
+		$financeObj1->addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
+		
+		//	Insert new budget item tuples into BUDGET_ITEM table
+		for($i = 0; $i < count($length[0]); $i++)
+		{
+			$descriptionItem	=	"";
+			
+			// Concatenate all extra form info in description
+			for($j = 4; $j < $length[0][$i]; $j++)
+			{
+				if( $j != 4 )
+					$descriptionItem	.=	", ";
+				$descriptionItem	.=	$SCPC_form_fields[$i][$j];
+			}
+			$financeObj1->addBudgetItem($SCPC_form_fields[$i][0], $start_date1, $SCPC_form_fields[$i][1], $SCPC_form_fields[$i][2], $SCPC_form_fields[$i][3], $descriptionItem);
+		}
+			
+		for($i = 0; $i < count($length[1]); $i++)
+		{
+			$descriptionItem	=	"";
+			
+			// Concatenate all extra form info in description
+			for($j = 4; $j < $length[1][$i]; $j++)
+			{
+				if( $j != 4 )
+					$descriptionItem	.=	", ";
+				$descriptionItem	.=	$USG_form_fields[$i][$j];
+			}
+			$financeObj1->addBudgetItem($USG_form_fields[$i][0], $start_date1, $USG_form_fields[$i][1], $USG_form_fields[$i][2], $USG_form_fields[$i][3], $descriptionItem);
+		}
+
+		//	Validate the budget to make sure it is correct
 		$financeObj1->validateBudget($start_date1);
-/*	//	db_connect::conn();
-		$query	=	"INSERT INTO budget (start_date, end_date, total_requested, total_allocated, balance, description) VALUES ("
-						."'"	.$start_date1
-						."', '"	.$end_date1
-						."', "	.$total_requested
-						.", "	.$total_allocated
-						.", "	.$total_allocated	// starting balance at creation = total allocation
-						.", '"	.$description."')";
-						
-//		mysqli_query($dbc, $query ) or die(mysqli_error($dbc));
-//		db_connect::run_query($query);
-//		echo "True or False: <br />";
-//	echo $financeObj1->budgetExists($start_date1);
-	*/
+		
 		
 	 }
 	?>

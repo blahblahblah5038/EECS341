@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Revise Budget</title>
 <h1 align="center">Revising An Existing Budget</h1>
-<script language="javascript" src="calendar.js"></script>
+<script language="javascript" src="../calendar/calendar.js"></script>
 <?PHP 
-include("db_finance.php");
-include_once("../db_connect.php")	?>
+include("../phpincludes/db_finance.php");
+include_once("../phpincludes/db_connect.php")	?>
 </head>
 
 <body>
@@ -40,9 +40,9 @@ include_once("../db_connect.php")	?>
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
         <tr><td>
             <?PHP
-                require_once("classes/tc_calendar.php");
+                require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
-                $myCalendar	->	setIcon("images/iconCalendar.gif");
+                $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
                 $myCalendar	->	setDate(11, 1, 2011);
                 $myCalendar	->	writeScript();
             ?>
@@ -78,7 +78,6 @@ include_once("../db_connect.php")	?>
 		$query	=	"SELECT * FROM budget A, budget_item B WHERE '".$_REQUEST['startDate']
 					."' BETWEEN A.start_date AND A.end_date AND B.budget_date = A.start_date";
 					
-//		$result	=	mysqli_query($dbc, $query);
 		$result	=	db_connect::run_query($query) or die ("Error in query");
 		
 		if( mysqli_num_rows($result) == 0	)
@@ -90,6 +89,24 @@ include_once("../db_connect.php")	?>
 			echo	"Num of rows: ".mysqli_num_rows($result)."<br />";
 			$row	=	mysqli_fetch_row($result);
 			$newDate	=	$row[0];	
+			$end_date	=	$row[1];
+			echo		"<br />$newDate<br />";
+			echo		"<br />$end_date<br />";
+			
+			/****************************************/
+			
+			$query2		=	"SELECT DATEDIFF('".$end_date."', '".$newDate."') AS DiffDate";
+			$result2	=	db_connect::run_query($query2);
+			if( mysqli_num_rows($result2) == 0)
+				echo "no rows returned";
+			$row2		=	mysqli_fetch_row($result2);
+			echo		"<br />Date Diff: ".$row2[0]."<br />";
+			echo		"<br />Date Diff: ".$row2."<br />";
+			
+			
+			
+			
+			
 			
 		/*	$start_date	=	date($row[0]);
 			echo $start_date;
