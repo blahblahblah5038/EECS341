@@ -81,11 +81,11 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 			$row = mysqli_fetch_row($memberlist);
 			while ($row)	// display netid, submit pid
 			{
-				$row = mysqli_fetch_row($memberlist);
 				echo "<option value='".$row[1]."'";
 				if ($row[1] == $info[4])
 					echo ' selected="selected" ';
 				echo ">".$row[2]."</option>";
+				$row = mysqli_fetch_row($memberlist);
 			}
 			
 			echo '</select></td></tr></table>';
