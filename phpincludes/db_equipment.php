@@ -153,10 +153,11 @@ function getEquipmentByOwner($pid)
 
 function getEquipmentByBorrower($pid)
 {
+	// return equipment that is currently checked out by the borrower
 	$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory " .
 		"WHERE eid IN (" .
 		"SELECT eid FROM equipment_loans " .
-		"WHERE pid=" . $pid . ")";
+		"WHERE pid=" . $pid . " AND checkin IS NULL)";
 	$query = db_connect::run_query($querystr);
 	return $query;
 }
@@ -196,20 +197,20 @@ function viewEquipment($eid, $type)
 	return $equip;
 }
 
-//TODO: timestamp ?
-function loan($eid, $borrower, $condition, $notes)
+function loan($eid, $borrower, $condition, $notes, $checkout)
 {
-	$querystr = "INSERT INTO equipment_loans (eid, pid, eq_condition, notes) VALUES (" .
+	$querystr = "INSERT INTO equipment_loans (eid, pid, eq_condition, notes, checkout) VALUES (" .
 		$eid . "," .
 		$borrower . "," .
 		$condition . "," .
-		$notes . ")";
+		$notes . "," .
+		$checkout . ")";
 	db_connect::run_query($querystr);
 }
 
 function isCheckedOut($eid)
 {
-	$querystr = "SELECT eid FROM equipment_loans WHERE eid=" . $eid;
+	$querystr = "SELECT eid FROM equipment_loans WHERE eid=" . $eid . " AND checkin IS NULL";
 	$query = db_connect::run_query($querystr);
 	switch (mysqli_num_rows($query))
 	{
@@ -218,5 +219,11 @@ function isCheckedOut($eid)
 		default:
 			return TRUE;
 	}
+}
+
+function checkin($id, $checkin)
+{
+	$querystr = "UPDATE equipment_loans SET checkin=".$checkin." WHERE id=".$id;
+	$query = db_connect::run_query($querystr);
 }
 ?>
