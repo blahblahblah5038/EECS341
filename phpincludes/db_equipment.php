@@ -3,7 +3,6 @@
 // db_connect::run_query from include("db_connect.php");
 class db_equipment
 {
-
 	function addEquipment($type, $serialnum, $brand, $owner)
 	{
 		$querystr = "INSERT INTO inventory (type, serialnum, brand, owner) VALUES (" .

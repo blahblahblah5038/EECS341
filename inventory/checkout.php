@@ -39,7 +39,7 @@ if (!isset($_POST['eid']))
 			echo "<table>";
 			if ($isEqMan) {
 				// For equipment manager: drop-down list of members
-				$memberlist = db_members::getMembers(NULL);
+				$memberlist = getMembers(NULL);
 				$row = mysqli_fetch_row($memberlist);
 				echo "<tr><td>Borrower</td><td><select name='borrower'>";
 				while ($row)	// display netid, submit pid

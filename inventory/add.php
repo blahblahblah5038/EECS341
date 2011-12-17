@@ -75,7 +75,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 			<select name="owner">
 HERE;
 		// print list of members for options
-		$memberlist = db_members::getMembers(NULL);
+		$memberlist = getMembers(NULL);
 		$row = mysqli_fetch_row($memberlist);
 		while ($row)	// display netid, submit pid
 		{
