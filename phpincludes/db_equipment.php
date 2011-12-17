@@ -14,7 +14,7 @@ class db_equipment
 		
 		// return eid
 		$querystr = "SELECT eid FROM inventory WHERE" .
-			"type='" . $type .
+			" type='" . $type .
 			"' AND serialnum='" . $serialnum .
 			"' AND brand='" . $brand .
 			"' AND owner=" . $owner;
