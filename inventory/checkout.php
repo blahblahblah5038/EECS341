@@ -44,8 +44,8 @@ if (!isset($_POST['eid']))
 				echo "<tr><td>Borrower</td><td><select name='borrower'>";
 				while ($row)	// display netid, submit pid
 				{
-					$row = mysqli_fetch_row($memberlist);
 					echo "<option value='".$row[1]."'>".$row[2]."</option>";
+					$row = mysqli_fetch_row($memberlist);
 				}
 			} else {
 				// For other members: only check out for themselves
