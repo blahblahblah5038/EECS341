@@ -4,8 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Budget Summary</title>
 <h1 align="center">Budget Summary</h1>
-<script language="javascript" src="calendar.js"></script>
-<?PHP include("financeMethods.php");	?>
+<script language="javascript" src="../calendar/calendar.js"></script>
+<?PHP include("../phpincludes/financeMethods.php");	?>
 </head>
 
 <body>
@@ -35,9 +35,9 @@
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
         <tr><td>
             <?PHP
-                require_once("classes/tc_calendar.php");
+                require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
-                $myCalendar	->	setIcon("images/iconCalendar.gif");
+                $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
                 $myCalendar	->	setDate(11, 1, 2011);
     
                 $myCalendar	->	writeScript();
