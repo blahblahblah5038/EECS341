@@ -7,19 +7,6 @@
 <h2>Inventory: Delete Item</h2>
 
 <?php
-private function print_info($row, $type)
-{
-	// type can be: blank, S, L, A, R (for stabilizer, limb, arrow, and riser)
-	$headers = array("EID", "Type", "Serial No.", "Brand", "Owner");
-
-	
-	echo "<table>";
-	for ($i = 0; $i < count($row); $i++)
-		echo "<tr><td>".$headers[$i]."</td><td>".$info[$i]."</td></tr>";
-	
-	echo "</table>";
-}
-
 $userpid = db_access::getPidFromCaseId(phpCAS::getUser());
 if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) {
 	echo <<<HERE

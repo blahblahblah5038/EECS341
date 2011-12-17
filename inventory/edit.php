@@ -62,7 +62,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 		} else { // display form
 			
 			// get equipment info here
-			$info = viewEquipment($eid, $type);
+			$info = db_equipment::viewEquipment($eid, $type);
 			// eid, type, serialno, brand, owner
 			// then additional fields depending on type: see details.php for list of headers
 		
