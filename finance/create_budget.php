@@ -366,7 +366,7 @@ include_once("../phpincludes/db_connect.php");
 	 if( (isset($_REQUEST['CreateFinalBudget']))	)
 	 {
 		echo	"<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">"
-				."<input type=\"button\" onClick=\"location.href='../finance_main.php'\" name=\"ReturnToFinanceMain\" value=\"Return to Main Finance Page\"></form><br />";
+				."<input type=\"button\" onClick=\"location.href='finance_main.php'\" name=\"ReturnToFinanceMain\" value=\"Return to Main Finance Page\"></form><br />";
 		
 		// Retrieve results from forms
 		$SCPC_fields	=	array(); 

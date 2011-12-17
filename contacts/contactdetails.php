@@ -39,7 +39,7 @@
        
          echo "<form action='contact_success.php' method='post'>";
          echo "<table>";
-         echo "<TD>Person ID:<TD>".$row[0]." <TR><input type=hidden value=".$row[0]." name=pid />";
+         echo "<input type=hidden value=".$row[0]." name=pid />";
          echo "<TD>First Name:<TD><input type='text' 	name='fname'	value='".$row[1]."' /><TR>";
          echo "<TD>Last Name:<TD><input type='text' 	name='lname'	value='".$row[2]."' /><TR>";
          echo "<TD>Address:<TD><input type='text' 	name='address'		value='".$row[3]."' /><TR>";

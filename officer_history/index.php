@@ -3,7 +3,7 @@
 	include("../phpincludes/login.php");
 	include("../phpincludes/db_access.php");
 	include("../phpincludes/db_members.php");
-
+    include_once("../phpincludes/db_officers.php");
 	/* from the specs...
        handles officers    
     */
@@ -14,23 +14,16 @@
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
 HERE;
 } else { 
-        $pid = db_access::getPidFromCaseId(phpCas::getUser());
        
         //show officers
         
  
-        $members = getOfficers(NULL);
+        $members = getOfficerHistory();
 
-        $admin = db_access::isAdmin($pid);
-
-        echo "<table><tr><th>Name</th><th>Case ID</th><th>Student ID</th><th> </th></tr>";
+        echo "<table><tr><th>Name</th><th>Title</th><th>Start Date</th><th>End Date</th></tr>";
         while($row = mysqli_fetch_row($members))
         {
-            echo "<tr><td>".$row[14]." ".$row[15]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>";
-                 echo "<form action='memberdetails.php' method='POST'>";
-                 echo "<input type='hidden' name='pid' value='".$row[1]."' />";
-                 echo "<input type='submit' value='Details' name='details'></form>";
-            echo "</td>";
+            echo "<tr><td>".$row[8]." ".$row[9]."</td><td>".$row[5]."</td><td>".$row[2]."</td><td>".$row[3]."</td>";
         }
         echo "</table>";
 }
