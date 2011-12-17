@@ -1,16 +1,13 @@
 \documentclass{article}
+
+\usepackage{amssymb}
+
 \author{Wesley Gould, John Clark, and Elizabeth McNany}
 \date{17 December 2011}
 \title{EECS 341 Final Report Difficult Queries}
 
 \begin {document}
 \maketitle
-
-
-\def\ojoin{\setbox0=\hbox{$\bowtie$}%
-  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
-\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
-
 
 \section{Queries We Used}
 
@@ -70,15 +67,30 @@ Our five hardest queries were:\newline
 \end{enumerate}
 
 \subsection{RA}
+Note that the $\ltimes$ symbol is supposed to represent a left outer join, but we had a hard tim finding the correct latex symbol.
 
 \begin{enumerate}
-\item $\left(\sigma_{pid=contact.pid} contact \right) \leftouterjoin_{contact.pid=member.pid} member$  
+\item $\left(\sigma_{pid=contact.pid} contact \right) \ltimes_{contact.pid=member.pid} member$  
 \item $\pi_{member.pid}\left(\sigma_{member.netid=caseid} member\right)$
-\item $\left(\sigma_{pid=member.pid} member \right) \leftouterjoin_{contact.pid=member.pid} contact$
-\item 
-\item
+\item $\left(\sigma_{pid=member.pid} member \right) \ltimes_{contact.pid=member.pid} contact$
+\item $ \left(officer\_history \bowtie_{officer\_history.pos\_id=officer.pos\_id} officer\_positions\right) \bowtie_{pid=contact.pid} contact$
+\item $ \left(\left(\sigma_{end\_date>=CURDATE()>=start\_date}officer\_history\right) \bowtie_{pos\_id=officer.pos\_id} officer\_positions\right) $ $\bowtie_{pid=contact.pid} contact$
 \end{enumerate}
 
 \subsection{RC}
+
+For this section, officer\_history will be denoted by O, officer\_positions by P, contact by C, and member by M.
+
+\begin{enumerate}
+\item $\{t^{(22)}|(\exists(c)(C(c)\wedge c.pid=pid \wedge $ $t[1]=c.pid\wedge $ $t[2]=c.first\_name\wedge$ $t[3]=c.last\_name\wedge$ $t[4]=c.address\wedge$ $t[5]=c.city\wedge$ $t[6]=c.state\wedge$ $t[7]=c.zipcode\wedge$ $t[8]=c.email\wedge$ $t[9]=c.phone\wedge\exists(m)(M(m)\wedge m.pid=c.pid\wedge$ $t[10]=m.mid\wedge$ $t[11]=m.netid\wedge$ $t[12]=m.studentid\wedge$ $t[13]=m.bow\_preference\wedge$ $t[14]=m.handedness\wedge$ $t[15]=m.membership\_expiration\wedge$ $t[16]=m.usca\_id\wedge$ $t[17]=m.usca\_expiration\wedge$ $t[18]=m.emergency\_name\wedge$ $t[19]=m.emergency\_phone\wedge$ $t[20]=m.insurance\_company\wedge$ $t[21]=m.policy\_number)))\}$
+\item $\{t^1|\exists(m) M(m)\wedge t[1]=m.pid\wedge m.netid=caseid\}$
+\item $\{t^{(22)}|(\exists(m)(M(m)\wedge m.pid=c.pid\wedge$ $t[1]=m.mid\wedge$ $t[2]=m.netid\wedge$ $t[3]=m.studentid\wedge$ $t[4]=m.bow\_preference\wedge$ $t[5]=m.handedness\wedge$ $t[6]=m.membership\_expiration\wedge$ $t[7]=m.usca\_id\wedge$ $t[8]=m.usca\_expiration\wedge$ $t[9]=m.emergency\_name\wedge$ $t[10]=m.emergency\_phone\wedge$ $t[11]=m.insurance\_company\wedge$ $t[12]=m.policy\_number\wedge \exists(c)(C(c)\wedge c.pid=pid \wedge $ $t[13]=c.pid\wedge $ $t[14]=c.first\_name\wedge$ $t[15]=c.last\_name\wedge$ $t[16]=c.address\wedge$ $t[17]=c.city\wedge$ $t[18]=c.state\wedge$ $t[19]=c.zipcode\wedge$ $t[20]=c.email\wedge$ $t[21]=c.phone)))\}$
+
+\item  $\{t^{(14)}|\exists(o)(O(o)\wedge t[1]=o.pid \wedge$ $t[2]=o.pos\_id \wedge$ $t[3]=o.start\_date \wedge$ $t[4]=o.end\_date \wedge \exists(p)(P(p)\wedge p.pos\_id=o.pod\_id  \wedge$ $t[5]=p.title \wedge$ $t[6]=p.description \wedge \exists(c)(C(c)\wedge p.pid=c.pid \wedge$ $t[7]=c.first\_name \wedge$ $t[8]=c.last\_name\wedge$ $t[9]=c.address\wedge$ $t[10]=c.city \wedge$ $t[11]=c.state\wedge$ $t[12]=c.zipcode\wedge$ $t[13]=c.email\wedge$ $t[14]=c.phone )))\}$
+
+\item \item  $\{t^{(14)}|\exists(o)(O(o)\wedge t[1]=o.pid \wedge$ $t[2]=o.pos\_id \wedge$ $t[3]=o.start\_date \wedge$ $t[4]=o.end\_date \wedge \exists(p)(P(p)\wedge p.pos\_id=o.pod\_id  \wedge$ $t[5]=p.title \wedge$ $t[6]=p.description \wedge \exists(c)(C(c)\wedge p.pid=c.pid \wedge$ $t[7]=c.first\_name \wedge$ $t[8]=c.last\_name\wedge$ $t[9]=c.address\wedge$ $t[10]=c.city \wedge$ $t[11]=c.state\wedge$ $t[12]=c.zipcode\wedge$ $t[13]=c.email\wedge$ $t[14]=c.phone ))\wedge o.start\_date<=CURDATE()<=o.end\_date  )\}$
+
+
+\end{enumerate}
 
 \end{document}
