@@ -8,6 +8,12 @@ function getOfficerHistory()
    return db_connect::run_query($querystr);
 }
 
+function getCurrentOfficers()
+{
+    $querystr = "SELECT * FROM officer_history H, officer_positions P, contact C WHERE H.pos_id = P.pos_id AND H.pid = C.pid AND CURDATE() BETWEEN start_date AND end_date";
+    return db_connect::run_query($querystr);
+}
+
 function addOfficer($pid, $pos_id, $start_date, $end_date)
 {
 	//TODO: (possibly) convert date formats?
