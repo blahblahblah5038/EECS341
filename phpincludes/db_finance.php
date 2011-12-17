@@ -772,6 +772,50 @@ class db_finance
 				break;
 		}
 	}
+	
+	//	Name:			updateBudgetItem()
+	//	Input:			item name, budget date, new request, new allocate, new balance
+	//	Output:			return nothing, echo errors
+	//	Errors:			query error
+	//	Actions:		updates the budget and budget_item tables with new values
+	//	Function Calls:	db_connect::run_query(), mysqli_num_rows(), mysqli_fetch_row(), mysqli_free_result
+	//					db_finance::editBudget(), db_finance::editBudgetItem()
+	//	
+	//	NOTES:
+	public function updateBudgetItem($name, $budget_date, $requested, $allocated, $balance)
+	{		
+			$name			=	"Affiliation Dues";
+			$budget_date	=	"2011-08-01";
+			$end_date;
+			$requested		=	0;
+			$allocated		=	0;
+			$balance		=	0;
+			$description	=	"";
+			$oldValues		=	array();
+			$query1			=	"SELECT * FROM budget_item WHERE name = '".$name."' AND budget_date = '".$budget_date."'";
+			$query2			=	"SELECT * FROM budget WHERE start_date = '".$budget_date."'";
+			$result1		=	db_connect::run_query($query1);
+			$result2		=	db_connect::run_query($query2);
+			if( ( mysqli_num_rows($result1) != 1 ) && ( mysqli_num_rows($result2) != 1 ) )
+				echo	"Error";
+			else
+			{
+				$row1 = mysqli_fetch_row($result1);
+				for($i = 0; $i < 6; $i++)
+					$oldValues[$i]	=	$row1[$i];
+					
+				$row2		=	mysqli_fetch_row($result2);
+				$end_date	=	$row2[1];
+				
+				$description	.=	"EDIT, ".date('Y-m-d').", ".$oldValues[5];
+				db_finance::editBudgetItem($name, $budget_date, $requested, $allocated, $balance, $description);
+				db_finance::editBudget($budget_date, $end_date, $row2[2] - $oldValues[2] + $requested, $row2[3] - $oldValues[3] + $allocated, $row2[4] - $oldValues[4] + $balance, "EDIT, ".date('Y-m-d').", $name, ".$description);
+				echo	"<br />Edit budget item: $name; budget: $budget_date<br />";
+			}
+			mysqli_free_result($result1);
+			mysqli_free_result($result2);
+	}
+	
 /*	
 	//	Name:			printBudgetsFromDate()
 	//	Input:			date within applicable range of budget
