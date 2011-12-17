@@ -19,13 +19,13 @@
     else if (isset($_POST['pid']))
     {
          echo "<h2>Detailed Contact Info</h2>";
-         echo "Are you sure you want to delete that user?"
+         echo "Are you sure you want to delete that user?";
          echo "<form action='delete_confirmed.php' method='POST'>";
          echo "<input type='hidden' name='pid' value='".$_POST['pid']."' />";
          echo "<input type='submit' value='Yes' name='details'></form>";
          echo "<form action='index.php' method='POST'>";
          echo "<input type='hidden' name='pid' value='".$_POST['pid']."' />";
-         echo "<input type='submit' value='Yes' name='details'></form>";
+         echo "<input type='submit' value='No' name='details'></form>";
     }
     else  echo "ERROR: POST not set right\n";
   

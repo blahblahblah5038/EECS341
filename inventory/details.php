@@ -62,7 +62,7 @@ HERE;
 	print_info($row, $type);
 	
 	// Link to check out
-	if (isCheckedOut($row[0])) {
+	if (db_equipment::isCheckedOut($row[0])) {
 		echo "<span class='error'>Checked Out</span>";
 		
 		if ($isEqMan)

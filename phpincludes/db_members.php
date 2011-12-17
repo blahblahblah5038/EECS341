@@ -16,10 +16,10 @@ function isContact($pid)
 
 function getContacts($pid)
 {
-       $querystr = "SELECT * FROM contact LEFT JOIN member ";
+       $querystr = "SELECT * FROM contact LEFT JOIN member ON contact.pid=member.pid ";
        if($pid!==NULL)
        {
-           $querystr = $querystr."WHERE pid=".$pid;
+           $querystr = $querystr."WHERE contact.pid=".$pid;
        }
        return db_connect::run_query($querystr);
 }
@@ -27,29 +27,29 @@ function getContacts($pid)
 function addContact($first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
 {
 	$querystr = "INSERT INTO contact (first_name, last_name, address, city, state, zipcode, email, phone) VALUES ('" .
-		$first_name . "','" .
-		$last_name . "','" .
-		$address . "','" .
-		$city . "','" .
-		$state . "','" .
-		$zip . "','" .
-		$email . "','" .
-		$phone . "')";
+		($first_name ?  $first_name : NULL)  . "','" .
+		($last_name ?  $last_name : NULL)  . "','" .
+		($address ?  $address : NULL)  . "','" .
+		($city ?  $city : NULL)  . "','" .
+		($state ?  $state : NULL)  . "','" .
+		($zip ?  $zip : NULL)  . "','" .
+		($email ?  $email : NULL)  . "','" .
+		($phone ?  $phone : NULL)  . "')";
 	db_connect::run_query($querystr);
 }
 
 function editContact($pid, $first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
 {
 	$querystr = "UPDATE contact SET " .
-		"first_name='" . $first_name .
-		"', last_name='" . $last_name .
-		"', address='" . $address .
-		"', city='" . $city .
-		"', state='" . $state .
-		"', zipcode='" . $zip.
-		"', email='" . $email .
-		"', phone='" . $phone .
-		"' WHERE pid=" . $pid;
+		"first_name='" . ($first_name ?  $first_name : NULL)  .
+		"', last_name='" . ($last_name ?  $last_name : NULL)  .
+		"', address='" . ($address ?  $address : NULL)  .
+		"', city='" . ($city ?  $city : NULL)  .
+		"', state='" . ($state ?  $state : NULL)  .
+		"', zipcode='" . ($zip ?  $zip : NULL)  .
+		"', email='" . ($email ?  $email : NULL)  .
+		"', phone='" . ($phone ?  $phone : NULL)  .
+		"' WHERE pid=" . ($pid ?  $pid : NULL)  ;
 	db_connect::run_query($querystr);
 }
 
@@ -62,10 +62,10 @@ function deleteContact($pid)
 // Members
 function getMembers($pid)
 {
-       $querystr = "SELECT * FROM member ";
+       $querystr = "SELECT * FROM member LEFT JOIN contact ON member.pid = contact.pid ";
        if($pid!==NULL)
        {
-           $querystr = $querystr."WHERE pid=".$pid;
+           $querystr = $querystr."WHERE member.pid=".$pid;
        }
        return db_connect::run_query($querystr);
 }
@@ -73,37 +73,37 @@ function getMembers($pid)
 
 function addMember($pid, $netid, $studentid, $bow_preference, $handedness, $membership_expiration, $usca_id, $usca_expiration, $emergency_name, $emergency_phone, $insurance_company, $policy_number)
 {
-	$querystr = "INSERT INTO member (pid, netid, studentid, bow_preference, handedness, membership_expiration, usca_id, usca_expiration, emergency_name, emergency_phone, insurance_company, policy_number) VALUES ( " .
-		$pid . ", " .
-		$netid . ", " .
-		$studentid. ", " .
-		$bow_preference . ", " .
-		$handedness . ", " .
-		$membership_expiration . ", " .
-		$usca_id . ", " .
-		$usca_expiration . ", " .
-		$emergency_name . ", " .
-		$emergency_phone . ", " .
-		$insurance_company . ", " .
-		$policy_number . ")";
+	$querystr = "INSERT INTO member (pid, netid, studentid, bow_preference, handedness, membership_expiration, usca_id, usca_expiration, emergency_name, emergency_phone, insurance_company, policy_number) VALUES ( '" .
+		($pid ?  $pid : NULL)  . "', '" .
+		($netid ?  $netid : NULL)  . "', '" .
+		($studentid ?  $studentid : NULL) . "', '" .
+		($bow_preference ?  $bow_preference : NULL)  . "', '" .
+		($handedness ?  $handedness : NULL)  . "', '" .
+		($membership_expiration ?  $membership_expiration : NULL)  . "', '" .
+		($usca_id ?  $usca_id : NULL)  . "', '" .
+		($usca_expiration ?  $usca_expiration : NULL)  . "', '" .
+		($emergency_name ?  $emergency_name : NULL)  . "', '" .
+		($emergency_phone ?  $emergency_phone : NULL)  . "', '" .
+		($insurance_company ?  $insurance_company : NULL)  . "', '" .
+		($policy_number ?  $policy_number : NULL)  . "')";
 	db_connect::run_query($querystr);
 }
 
 function editMember($mid, $netid, $studentid, $bow_preference, $handedness, $membership_expiration, $usca_id, $usca_expiration, $emergency_name, $emergency_phone, $insurance_company, $policy_number)
 {
 	$querystr = "UPDATE member SET ".
-		" netid=" . $netid . 
-		" studentid=" . $studentid . 
-		" bow_preference=" . $bow_preference . 
-		" handedness=" . $handedness . 
-		" membership_expiration=" . $membership_expiration . 
-		" usca_id=" . $usca_id . 
-		" usca_expiration=" . $usca_expiration . 
-		" emergency_name=" . $emergency_name . 
-		" emergency_phone=" . $emergency_phone . 
-		" insurance_company=" . $insurance_company . 
-		" policy_number=" . $policy_number .
-		" WHERE mid=" . $mid;
+		" netid='" . ($netid ?  $netid : NULL)  . 
+		"', studentid='" . ($studentid ?  $studentid : NULL)  . 
+		"', bow_preference='" . ($bow_preference ?  $bow_preference : NULL)  . 
+		"', handedness='" . ($handedness ?  $handedness : NULL)  . 
+		"', membership_expiration='" . ($membership_expiration ?  $membership_expiration : NULL)  . 
+		"', usca_id='" . ($usca_id ?  $usca_id : NULL)  . 
+		"', usca_expiration='" . ($usca_expiration ?  $usca_expiration : NULL)  . 
+		"', emergency_name='" . ($emergency_name ?  $emergency_name : NULL)  . 
+		"', emergency_phone='" . ($emergency_phone ?  $emergency_phone : NULL)  . 
+		"', insurance_company='" . ($insurance_company ?  $insurance_company : NULL)  . 
+		"', policy_number='" . ($policy_number ?  $policy_number : NULL)  .
+		"' WHERE mid=" . $mid ;
 	db_connect::run_query($querystr);
 }
 

@@ -27,7 +27,7 @@
          {
              $detailsset = true;
              echo "<h2>Detailed Contact Info</h2>";
-             $members = getMembers(NULL);
+             $members = getMembers($_POST['pid']);
              $row = mysqli_fetch_row($members);
          }    
          else     
@@ -42,8 +42,11 @@
          echo "<table>";
          echo "<TD>MID:<TD>".$row[0]."<TR>";
          echo "<input type='hidden' name='mid' value=".$row[0]." />";
-         echo "<TD>PID:<TD>".$row[1]."<TR>";
-         echo "<input type='hidden' name='pid' value=".$row[1]." />";
+         echo "<TD>PID:<TD>".($row[1]?$row[1]:$_POST['pid'])."<TR>";
+         if($detailsset)
+             echo "<input type='hidden' name='pid' value=".$row[1]." />";
+         else 
+             echo "<input type='hidden' name='pid' value=".$_POST['pid']." />";
          echo "<TD>Network ID:<TD><input type='text'      name='netid'              value='".$row[2]."' /><TR>";
          echo "<TD>Student ID:<TD><input type='text'      name='studid'              value='".$row[3]."' /><TR>";
          echo "<TD>Bow Type Preference:<TD><input type='text'      name='bowpref' value='".$row[4]."' /><TR>";
@@ -68,8 +71,11 @@
          }
          
          echo "</form>";
-         echo "<form action='delete_member.php'>";
-         echo "<input type=hidden value='".$row[1]."' name=pid />";
+         echo "<form action='delete_member.php' method='post'>";
+         if($detailsset) 
+               echo "<input type=hidden value='".$row[1]."' name='pid' />";
+         else
+               echo "<input type=hidden value='".$_POST['pid']."' name='pid' />";
          echo "<input type='submit' value='Delete' name='deluser' /></br>";
          echo "</form>";
     }  

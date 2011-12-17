@@ -1,9 +1,7 @@
-#header { }
+#header { background-color:#ccc; }
+#header li{ padding:5px; display:inline; }
 
-#navbar { background-color:#ccc; }
-#navbar li{ padding:5px; display:inline; }
-
-#sidebar { float:left; width:120px; background-color:#ccf; padding:10px; }
+#navbar { float:left; width:120px; background-color:#ccf; padding:10px; }
 
 #frame { margin-left:150px; padding:10px; }
 
