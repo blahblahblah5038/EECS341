@@ -27,11 +27,7 @@
          }
          else if( isset($_POST['adduser']))
          {
-             if(isContact($_POST['pid']))
-             {
                 addContact($_POST['fname'],$_POST['lname'],$_POST['address'],$_POST['city'],$_POST['state'],$_POST['zip'],$_POST['email'],$_POST['phone']);        
-             }
-             else echo "ERROR: Make sure that person is a contact first!";
          }
          else
          {

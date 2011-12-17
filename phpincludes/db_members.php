@@ -4,6 +4,16 @@
 
 // Contacts
 
+function isContact($pid)
+{
+     if($pid==NULL) return false;
+     else
+     {
+         if(mysqli_num_rows(getContacts($pid))==0) return false;
+         else return true;
+     }
+}
+
 function getContacts($pid)
 {
        $querystr = "SELECT * FROM contact ";
@@ -16,30 +26,30 @@ function getContacts($pid)
 
 function addContact($first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
 {
-	$querystr = "INSERT INTO contact (first_name, last_name, address, city, state, zip, email, phone) VALUES (" .
-		$first_name . ", " .
-		$last_name . ", " .
-		$address . ", " .
-		$city . ", " .
-		$state . ", " .
-		$zip . ", " .
-		$email . ", " .
-		$phone . ")";
+	$querystr = "INSERT INTO contact (first_name, last_name, address, city, state, zipcode, email, phone) VALUES ('" .
+		$first_name . "','" .
+		$last_name . "','" .
+		$address . "','" .
+		$city . "','" .
+		$state . "','" .
+		$zip . "','" .
+		$email . "','" .
+		$phone . "')";
 	db_connect::run_query($querystr);
 }
 
 function editContact($pid, $first_name, $last_name, $address, $city, $state, $zip, $email, $phone)
 {
 	$querystr = "UPDATE contact SET " .
-		"first_name=" . $first_name .
-		", last_name=" . $last_name .
-		", address=" . $address .
-		", city=" . $city .
-		", state=" . $state .
-		", zip=" . $zip.
-		", email=" . $email .
-		", phone=" . $phone .
-		" WHERE pid=" . $pid;
+		"first_name='" . $first_name .
+		"', last_name='" . $last_name .
+		"', address='" . $address .
+		"', city='" . $city .
+		"', state='" . $state .
+		"', zipcode='" . $zip.
+		"', email='" . $email .
+		"', phone='" . $phone .
+		"' WHERE pid=" . $pid;
 	db_connect::run_query($querystr);
 }
 

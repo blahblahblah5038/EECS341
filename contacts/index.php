@@ -22,6 +22,9 @@ HERE;
 
         $admin = db_access::isAdmin($pid);
 
+     echo "<form action='contactdetails.php' method='POST'> <input type='submit' value='Add New Contact' name='newuser'></form>";
+
+
         echo "<table><tr><th>Name</th><th>Address</th><th>e-mail address</th><th>Phone</th><th> </th></tr>";
         while($row=mysqli_fetch_row($members))
         {
