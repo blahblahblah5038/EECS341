@@ -21,7 +21,7 @@ if (!isset($_POST['eid']))
 		$isEqMan = TRUE;
 	
 	$eid = $_POST['eid'];
-	if (!db_equipment::isCheckedOut($row[0]))
+	if (!db_equipment::isCheckedOut($eid))
 	{
 		if (isset($_POST['sub_checkout']) && isset($_POST['borrower']) && isset($_POST['date']) && $_POST['date'] != '')
 		{	// form was submitted, with info
