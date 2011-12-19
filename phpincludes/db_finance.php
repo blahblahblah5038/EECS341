@@ -94,7 +94,7 @@ class db_finance
 	//	Function Calls:	db_finance::budgetExists(), db_connect::run_query(), mysqli_free_result()
 	//	
 	//	NOTES:			
-	public function addBudget($start_date, $end_date, $total_requested, $total_allocated, $description)
+	public function addBudget($start_date, $end_date, $total_requested, $total_allocated, $balance, $description)
 	{
 		// check if budget exists, if no create tuple
 		if (! db_finance::budgetExists($start_date) )
@@ -104,7 +104,7 @@ class db_finance
 						."', '"	.$end_date
 						."', "	.$total_requested
 						.", "	.$total_allocated
-						.", "	.$total_allocated	// starting balance at creation = total allocation
+						.", "	.$balance
 						.", '"	.$description."')";
 						
 			db_connect::run_query( $query ) or die("Error in query");
@@ -155,7 +155,7 @@ class db_finance
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, person does not exist
 	//	Actions:		creates new transaction for member and adds dues tuple
-	//	Function Calls:	db_access::personExists(), db_finance::addTransaction(), db_finance::findTransaction(), db_connect::run_query(), mysqli_free_result()
+	//	Function Calls:	db_access::personExists(), db_finance::addTransaction(), db_finance::findTransaction(), db_connect::run_query()
 	//	
 	//	NOTES:			
 	public function addDues($pid, $budget_date, $trans_date, $amount, $description)
@@ -176,8 +176,7 @@ class db_finance
 						.", "	.$amount
 						.", '"	.$description."')";
 						
-			$results	=	db_connect::run_query(	$query	)	or die("Error in query");
-			mysqli_free_result($results);
+			db_connect::run_query(	$query	)	or die("Error in query");
 		}
 		else
 		{
@@ -190,14 +189,9 @@ class db_finance
 	//	Output:			nothing returned, echo errors
 	//	Errors:			query error, budget does not exist, budget item does not exist
 	//	Actions:		
-	//	Function Calls:	db_finance::budgetItemExists(), db_connect::run_query(), mysqli_free_result()
+	//	Function Calls:	db_finance::budgetItemExists(), db_connect::run_query()
 	//	
-	//	NOTES:			insertion into transaction table causes a TRIGGER to activate
-	//					this TRIGGER will update the balances of the budget_item and budget tables
-	//
-	//					TRIGGER HAS NOT YET BEEN WRITTEN OR IMPLEMENTED
-	//
-	//					THERE IS NO WAY TO EDIT OR DELETE A TRANSACTION (by design) EXCEPT THROUGH TERMINAL
+	//	NOTES:			THERE IS NO WAY TO EDIT OR DELETE A TRANSACTION (by design) EXCEPT THROUGH TERMINAL
 	public function addTransaction($item_name, $budget_date, $trans_date, $amount, $description, $receipt)
 	{
 		// Check to make sure budget and budget_items exist, then create transaction
@@ -211,8 +205,7 @@ class db_finance
 						.", '"	.$description
 						."', "	.$receipt.")";
 						
-			$results	= db_connect::run_query( $query	)	or die("Error in query");
-			mysqli_free_result($results);
+			db_connect::run_query( $query	)	or die("Error in query");
 		}
 		else
 		{
@@ -470,7 +463,7 @@ class db_finance
 	
 	//	Name:			echoForm1()
 	//	Input:			arry of field names,
-	//					array of field default values
+	//					array of default field values
 	//					reference name for submit button
 	//	Output:			return statement to echo
 	//	Errors:			none
@@ -509,18 +502,19 @@ class db_finance
 	}
 
 	//	Name:			printBudgetItems()
-	//	Input:			budget start date, bool if to make separate table
+	//	Input:			budget start date, bool if to make separate table, type of input, reference name
 	//	Output:			returns printable table, echo errors
 	//	Errors:			query error
 	//	Actions:		makes string to print the name, requested, allocated, and balance values
 	//	Function Calls:	mysqli_query(), mysqli_fetch_row(), mysqli_free_result()
 	//	
-	//	NOTES:
+	//	NOTES:			currently only supports $selection = "checkbox"; separate table can be toggled on/off
+	//					Reference names have format $name-$i for 0 <= $i < numRows
 	public function printBudgetItems($startDate, $separateTables, $selection, $name)
 	{
 		$query1	=	"SELECT * FROM budget_item WHERE budget_date = '".$startDate."'";
-	//	$result1	=	mysqli_query($databaseConn, $query1) or die("Query Error");
 		$result1	=	db_connect::run_query( $query1	)	or die("Error in query");
+		
 		//	If there are no results, print error and button to create a new budget item
 		if( mysqli_num_rows($result1) == 0 )
 		{
