@@ -28,7 +28,8 @@ HERE;
         {
             echo "<tr><td>".$row[8]." ".$row[9]."</td><td>".$row[5]." </td><td>".$row[2]."</td><td>".$row[3]."</td><td>";
                  echo "<form action='officerdetails.php' method='POST'>";
-                 echo "<input type='hidden' name='pid' value='".$row[1]."' />";
+                 echo "<input type='hidden' name='pos_id' value='".$row[1]."' />";
+                 echo "<input type='hidden' name='pid' value='".$row[7]."' />";
                  echo "<input type='submit' value='Details' name='details'></form>";
             echo "</td>";
         }

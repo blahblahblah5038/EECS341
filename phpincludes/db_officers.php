@@ -14,9 +14,9 @@ function getCurrentOfficers()
     return db_connect::run_query($querystr);
 }
 
-function getOfficerDetails($pid)
+function getOfficerDetails($pid, $pos_id)
 {
-    $querystr = "SELECT pid, officer_positions.pos_id, title, start_date, end_date from officer_history, officer_positions where officer_history.pid=".$pid." AND officer_history.pos_id=officer_positions.pos_id AND start_date<=CURDATE()<=end_date";
+    $querystr = "SELECT pid, officer_positions.pos_id, title, start_date, end_date from officer_history, officer_positions where officer_history.pid=".$pid." AND officer_history.pos_id=".$pos_id." AND officer_history.pos_id=officer_positions.pos_id AND start_date<=CURDATE()<=end_date";
     return db_connect::run_query($querystr);
 }
 

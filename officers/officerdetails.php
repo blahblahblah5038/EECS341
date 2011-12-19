@@ -29,7 +29,7 @@
          {
              $detailsset = true;
              echo "<h2>Detailed Officer Info</h2>";
-             $members = getOfficerDetails($_POST['pid']);
+             $members = getOfficerDetails($_POST['pid'],$_POST['pos_id']);
              while($row = mysqli_fetch_row($members))
              { 
                   echo "<input type='hidden' name='edituser' value='edituser' />";

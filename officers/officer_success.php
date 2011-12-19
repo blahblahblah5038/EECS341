@@ -26,8 +26,8 @@
 
              echo print_r($_POST)."\n";
              editOfficer($_POST['pid'], $_POST['pos_id'],$_POST['start_date'],$_POST['end_date']);
- //         echo '<script language="javascript"><!--
-   //           window.location.href = "index.php"
+         echo '<script language="javascript"><!--
+             window.location.href = "index.php"
               //--></script>';
        
          }

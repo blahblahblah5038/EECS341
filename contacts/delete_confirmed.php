@@ -22,6 +22,9 @@
     else if (isset($_POST['pid']))
     {
          deleteContact($_POST['pid']);
+                echo '<script language="javascript"><!--
+               window.location.href = "index.php"
+                //--></script>';
     } 
     else
     {
