@@ -1,3 +1,4 @@
+<?PHP include_once("../phpincludes/header.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -352,3 +353,4 @@ include_once("../phpincludes/db_connect.php")	?>
 
 </body>
 </html>
+<?PHP include_once("../phpincludes/footer.php"); ?>

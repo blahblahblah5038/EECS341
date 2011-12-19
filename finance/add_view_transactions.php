@@ -1,3 +1,4 @@
+<?PHP include_once("../phpincludes/header.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,7 +8,6 @@
 <?PHP 
 include("../phpincludes/db_finance.php");
 include_once("../phpincludes/db_connect.php");
-include_once("../phpincludes/header.php");
 
 ?>
 </head>
@@ -136,7 +136,8 @@ include_once("../phpincludes/header.php");
 	}
 
 
-include_once("../phpinclude/footer.php");
+
 ?>
 </body>
 </html>
+<?PHP include_once("../phpincludes/footer.php"); ?>
