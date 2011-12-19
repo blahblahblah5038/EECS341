@@ -20,8 +20,6 @@ class db_connect
     // Run query and return result set
     function run_query($querystr)
     {
-    	//sanitize queries
-		$querystr = mysql_real_escape_string($querystr);
 		$query = mysqli_query($GLOBALS['dbc'], $querystr)
     		OR die("<p>1 - Error processing query '".$querystr."':".mysqli_error($GLOBALS['dbc']));
     	return $query;

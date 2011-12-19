@@ -8,7 +8,7 @@
 
 <?php
 $userpid = db_access::getPidFromCaseId(phpCAS::getUser());
-if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) {
+if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid))
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>
 HERE;
