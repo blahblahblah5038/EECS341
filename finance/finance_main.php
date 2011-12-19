@@ -9,7 +9,7 @@
 
 <body>
 
-	<table>
+	<table class="noborder">
     	<form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
 		<tr>
         	<td><input type="button" onClick="location.href='create_budget.php'" name="CreateBudget" value="Create New Budget"></td>
