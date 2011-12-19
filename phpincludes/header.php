@@ -11,7 +11,7 @@ session_start();
 </head>
 <body>
 <div id="header">
-	CWRU Archery Club
+	<h1>CWRU Archery Club</h1>
 </div>
 <div id="navbar">
 	<h2>Links</h2>
