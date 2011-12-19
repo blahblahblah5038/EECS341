@@ -18,9 +18,6 @@ include("../phpincludes/db_finance.php");
 
 <?PHP
 
-// make connection to database
-	$dbc	=	mysqli_connect("localhost", "root", "Svetskar97") or die("Could not connect");
-	mysqli_select_db( $dbc, "archeryclub") or die("Could not select database");
 	/************************************************************************
 	 *																		*
 	 *			ADDITIONS:													*
