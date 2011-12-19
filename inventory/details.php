@@ -43,11 +43,11 @@ HERE;
 	// Get type of equipment
 	$eid = $_POST["eid"]; //TODO: sanitize
 	$query = db_equipment::getEquipment($eid);
-	$type = mysqli_fetch_row($query)[1];
+	$row = mysqli_fetch_row($query);
+	$type = $row[1];
 	
 	// Display detailed info about the item
-	$info = db_equipment::viewEquipment($eid, $type);
-	$row = mysqli_fetch_row($info)
+	$row = db_equipment::viewEquipment($eid, $type);
 	
 	// Check if equipment manager
 	$isEqMan = FALSE;
