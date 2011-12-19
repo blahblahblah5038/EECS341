@@ -8,7 +8,9 @@
 <?PHP 
 include("../phpincludes/db_finance.php");
 include_once("../phpincludes/db_connect.php");
-//include_once("../header.php");
+include_once("../phpincludes/header.php");
+//include_once("../phpincludes/login.php");
+include_once("../phpincludes/db_access.php");
 	?>
 </head>
 
