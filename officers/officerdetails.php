@@ -23,7 +23,7 @@
     else
     {
          echo "<form action='officer_success.php' method='POST'>";
-         echo "<table>";
+         echo "<table class='noborder'>";
          $row = "";
          if(isset($_POST['details']))
          {
@@ -35,10 +35,10 @@
                   echo "<input type='hidden' name='edituser' value='edituser' />";
                   echo "<input type='hidden' name='pid' value='".$row[0]."' />";
                   echo "<input type='hidden' name='pos_id' value='".$row[1]."' />";
-                  echo "<TR><TD>Title:<TD>".$row[2];
-                  echo "<TR><TD>Start Date:<TD><input type='text' readonly='readonly' name='start_date' value='".$row[3]."' />";
-                  echo "<TR><TD>End Date:<TD><input type='text' name='end_date' value='".$row[4]."' />";
-                  echo "<TR><TD><input type='submit' name='Save' value='Save' />";
+                  echo "<TR><TD>Title:</TD><TD>".$row[2];
+                  echo "</TD></TR><TR><TD>Start Date:</TD><TD><input type='text' readonly='readonly' name='start_date' value='".$row[3]."' />";
+                  echo "</TD></TR><TR><TD>End Date:</TD><TD><input type='text' name='end_date' value='".$row[4]."' />";
+                  echo "</TD></TR><TR><TD colspan='2'><input type='submit' name='Save' value='Save' /></TD></TR>";
              }
          }    
          else     

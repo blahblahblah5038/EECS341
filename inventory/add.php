@@ -60,7 +60,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 	} else { // display form
 		echo <<<HERE
 		<form action="add.php" method="POST">
-		<table>
+		<table class='noborder' >
 		<tr><td>Type</td><td>
 			<select name="type" onChange="swapDisplay(this.options[this.selectedIndex].value)">
 				<option value="" selected="selected">---</option>
@@ -90,13 +90,13 @@ HERE;
 		</table>
 		<div id="stabilizerform" style="display:none">
 			<h4>Stabilizer</h4>
-			<table>
+			<table class='noborder' >
 				<tr><td>Length</td><td><input type="text" name="length" /></td></tr>
 			</table>
 		</div>
 		<div id="limbform" style="display:none">
 			<h4>Limb</h4>
-			<table>
+			<table class='noborder' >
 				<tr><td>Interface</td><td><input type="text" name="interface" /></td></tr>
 				<tr><td>Distinguishing Marks</td><td><input type="text" name="distmarks" /></td></tr>
 				<tr><td>Draw Length</td><td><input type="text" name="drawstrength" /></td></tr>
@@ -104,7 +104,7 @@ HERE;
 		</div>
 		<div id="arrowform" style="display:none">
 			<h4>Arrow</h4>
-			<table>
+			<table class='noborder' >
 				<tr><td>Model</td><td><input type="text" name="Model" /></td></tr>
 				<tr><td>Complete Arrow</td><td><input type="text" name="completearrow" /></td></tr>
 				<tr><td>Bare Shaft</td><td><input type="text" name="bareshaft" /></td></tr>
@@ -114,7 +114,7 @@ HERE;
 		</div>
 		<div id="riserform" style="display:none">
 			<h4>Riser</h4>
-			<table>
+			<table class='noborder' >
 				<tr><td>Interface</td><td><input type="text" name="interface" /></td></tr>
 				<tr><td>Height</td><td><input type="text" name="height" /></td></tr>
 				<tr><td>Distinguishing Marks</td><td><input type="text" name="distmarks" /></td></tr>
@@ -130,6 +130,7 @@ HERE;
 				<tr><td>Arrow Rest</td><td><input type="text" name="arrowrest" /></td></tr>
 			</table>
 		</div>
+		<br />
 		<input type="submit" name="submit" value="Add" />
 		</form>
 HERE;

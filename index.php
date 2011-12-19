@@ -2,6 +2,6 @@
 <?php
 	//phpinfo();
 ?>
-<p>This is an example page, this is the main text WOO</p>
+<p>This is the main page of the CWRU Archery Club website.  Publicly visible information and news will go here.</p>
 
 <?php include("phpincludes/footer.php"); ?>

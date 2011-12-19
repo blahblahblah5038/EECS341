@@ -35,7 +35,7 @@ if (!isset($_POST['eid']))
 		} else { // print form
 			echo "<form action='checkout.php' method='POST'>";
 			echo "<input type='hidden' value='".$eid."' name='eid' />";
-			echo "<table>";
+			echo "<table class='noborder'>";
 			if ($isEqMan) {
 				// For equipment manager: drop-down list of members
 				$memberlist = getMembers(NULL);

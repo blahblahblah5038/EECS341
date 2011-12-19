@@ -22,7 +22,7 @@
     }
     else
     {
-         $row = {};
+         $row = array();
          if(isset($_POST['details'])
          {
              $detailsset = true;
@@ -34,12 +34,12 @@
          {
              $detailsset = false;
              echo "<h2>Add New Contact</h2>";
-             $row = {"","","","","","","","","","","","","",""};
+             $row = array("","","","","","","","","","","","","","");
          }
 
 
          echo "<form action='contact_success.php' method='POST'>"
-         echo "<table>"
+         echo "<table class='noborder' >"
          echo "<TD>Member ID:<TD><input type='text'      name='mid'              value='".$row[0]."' /><TR>";
          echo "<TD>Person ID:<TD><input type='text' 	name='pid'		value='".$row[1]."' /><TR>";
          echo "<TD>Network ID:<TD><input type='text'      name='netid'              value='".$row[2]."' /><TR>";
