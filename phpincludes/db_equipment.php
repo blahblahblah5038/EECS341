@@ -78,9 +78,9 @@ class db_equipment
 	{
 		$querystr = "UPDATE inventory SET " .
 			" type='" . $type .
-			"' serialnum='" . $serialnum .
-			"' brand='" . $brand .
-			"' owner='" . $owner .
+			"', serialnum='" . $serialnum .
+			"', brand='" . $brand .
+			"', owner='" . $owner .
 			"' WHERE eid=" . $eid;
 		db_connect::run_query($querystr);
 	}
@@ -97,8 +97,8 @@ class db_equipment
 		$eid = db_equipment::editEquipment($eid, $type, $serialnum, $brand, $owner);
 		$querystr = "UPDATE limb SET " .
 			" interface='" . $interface . 
-			"' distinguishing_marks='" .$distinguishing_marks . 
-			"' draw_strength='" .$draw_strength .
+			"', distinguishing_marks='" .$distinguishing_marks . 
+			"', draw_strength='" .$draw_strength .
 			"' WHERE eid=" . $eid;
 		db_connect::run_query($querystr);
 	}
@@ -108,11 +108,11 @@ class db_equipment
 		$eid = db_equipment::editEquipment($eid, $type, $serialnum, $brand, $owner);
 		$querystr = "UPDATE arrow SET " .
 			" model=" . $model . 
-			"' complete_arrow='" .$complete_arrow . 
-			"' bare_shaft='" .$bare_shaft . 
-			"' fixable='" .$fixable . 
-			"' notes='" .$notes .
-			"' WHERE eid=" . $eid;
+			"', complete_arrow='" .$complete_arrow . 
+			"', bare_shaft='" .$bare_shaft . 
+			"', fixable='" .$fixable . 
+			"', notes='" .$notes .
+			"', WHERE eid=" . $eid;
 		db_connect::run_query($querystr);
 	}
 
@@ -120,14 +120,14 @@ class db_equipment
 	{
 		$eid = db_equipment::editEquipment($eid, $type, $serialnum, $brand, $owner);
 		$querystr = "UPDATE riser SET " .
-			" interface='" . $interface . 
-			"' height='" . $height . 
-			"' distinguishing_marks='" . $distinguishing_marks . 
-			"' handedness='" . $handedness . 
-			"' button_format='" . $button_format . 
-			"' button='" . $button . 
-			"' arrow_rest='" . $arrow_rest .
-			"' WHERE eid=" . $eid;
+			", interface='" . $interface . 
+			"', height='" . $height . 
+			"', distinguishing_marks='" . $distinguishing_marks . 
+			"', handedness='" . $handedness . 
+			"', button_format='" . $button_format . 
+			"', button='" . $button . 
+			"', arrow_rest='" . $arrow_rest .
+			"', WHERE eid=" . $eid;
 		db_connect::run_query($querystr);
 	}
 
