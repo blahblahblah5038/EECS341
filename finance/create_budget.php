@@ -15,11 +15,6 @@ include_once("../phpincludes/db_connect.php");
 <body>
 <?PHP
 
-// make connection to database
-//	$dbc	=	mysqli_connect("localhost", "root", "Svetskar97") or die("Could not connect");
-//	mysqli_select_db( $dbc, "archeryclub") or die("Could not select database");
-	
-	$financeObj1			=	new db_finance();
 	$SCPC_form_fields		=	array();
 	$USG_form_fields		=	array();
 	
@@ -36,7 +31,7 @@ include_once("../phpincludes/db_connect.php");
 
 	<?PHP
 	/*************************************************************************
-	 *
+	 *	SECTION:	I
 	 *		Code for DatePicker, select the start and end dates
 	 *
 	 *************************************************************************/
@@ -78,7 +73,7 @@ include_once("../phpincludes/db_connect.php");
 	}
 	
 	/*************************************************************************
-	 *
+	 *	SECTION:	II
 	 *		After selecting start/end dates, check to make sure that the
 	 *		budget does not already exist
 	 *
@@ -97,7 +92,7 @@ include_once("../phpincludes/db_connect.php");
 		else
 		{
 	/*************************************************************************
-	 *
+	 *	SECTION:	III
 	 *		Listbox format to select budget items for new SCPC or USG budget
 	 *		Preferred method: create EITHER SCPC or USG budget not both simultaneous
 	 *
@@ -214,7 +209,7 @@ include_once("../phpincludes/db_connect.php");
 	}
 	
 	/*************************************************************************
-	 *
+	 *	SECTION:	IV
 	 *		After clicking submit, create table of forms for each line item
 	 *		TODO:
 	 *			-Change Headers to represent Line Item Names
@@ -243,9 +238,9 @@ include_once("../phpincludes/db_connect.php");
 			// Print the Forms for SCPC items on left side
 			if($_POST['ChosenSCPC'][$i] )
 			{
-				$financeObj1->lineItemFields($_POST['ChosenSCPC'][$i], $namesSCPC, $defValueSCPC, $formLength[$i]);
+				db_finance::lineItemFields($_POST['ChosenSCPC'][$i], $namesSCPC, $defValueSCPC, $formLength[$i]);
 				if(! empty($namesSCPC) )
-					echo	"<tr><td>".$financeObj1->echoForm1($namesSCPC, $defValueSCPC, "SCPC-$i", "submit3")."</td>";
+					echo	"<tr><td>".db_finance::echoForm1($namesSCPC, $defValueSCPC, "SCPC-$i", "submit3")."</td>";
 				else
 					echo	"<tr><td>No fields found.</td>";	
 			}
@@ -255,9 +250,9 @@ include_once("../phpincludes/db_connect.php");
 			// Print the Forms for USG items on right side
 			if($_POST['ChosenUSG'][$i])
 			{
-				$financeObj1->lineItemFields($_POST['ChosenUSG'][$i], $namesUSG, $defValueUSG);
+				db_finance::lineItemFields($_POST['ChosenUSG'][$i], $namesUSG, $defValueUSG);
 				if(! empty($namesUSG) )
-					echo	"<td>".$financeObj1->echoForm1($namesUSG, $defValueUSG, "USG-$i", "submit3")."</td></tr>";
+					echo	"<td>".db_finance::echoForm1($namesUSG, $defValueUSG, "USG-$i", "submit3")."</td></tr>";
 				else
 					echo	"<td>No fields found.</td></tr>";	
 			}
@@ -273,7 +268,7 @@ include_once("../phpincludes/db_connect.php");
 	}
 	
 	/*************************************************************************
-	 *
+	 *	SECTION:	V
 	 *		After submitting CompletedForms, show summary page
 	 *		
 	 *
@@ -357,8 +352,8 @@ include_once("../phpincludes/db_connect.php");
 	 }
 	 
 	 /*************************************************************************
-	 *
-	 *		After submitting CompletedForms, show summary page
+	 *	SECTION:	VI
+	 *		After submitting CreateFinalBudget, show confirmation page
 	 *		
 	 *
 	 *************************************************************************/
@@ -434,7 +429,7 @@ include_once("../phpincludes/db_connect.php");
 		$description		.=	"CREATED, ".date('Y-m-d');
 
 		//	Insert new budget tuple into BUDGET table
-		$financeObj1->addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
+		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
 		
 		//	Insert new budget item tuples into BUDGET_ITEM table
 		for($i = 0; $i < count($length[0]); $i++)
@@ -448,7 +443,7 @@ include_once("../phpincludes/db_connect.php");
 					$descriptionItem	.=	", ";
 				$descriptionItem	.=	$SCPC_form_fields[$i][$j];
 			}
-			$financeObj1->addBudgetItem($SCPC_form_fields[$i][0], $start_date1, $SCPC_form_fields[$i][1], $SCPC_form_fields[$i][2], $SCPC_form_fields[$i][3], $descriptionItem);
+			db_finance::addBudgetItem($SCPC_form_fields[$i][0], $start_date1, $SCPC_form_fields[$i][1], $SCPC_form_fields[$i][2], $SCPC_form_fields[$i][3], $descriptionItem);
 		}
 			
 		for($i = 0; $i < count($length[1]); $i++)
@@ -462,11 +457,11 @@ include_once("../phpincludes/db_connect.php");
 					$descriptionItem	.=	", ";
 				$descriptionItem	.=	$USG_form_fields[$i][$j];
 			}
-			$financeObj1->addBudgetItem($USG_form_fields[$i][0], $start_date1, $USG_form_fields[$i][1], $USG_form_fields[$i][2], $USG_form_fields[$i][3], $descriptionItem);
+			db_finance::addBudgetItem($USG_form_fields[$i][0], $start_date1, $USG_form_fields[$i][1], $USG_form_fields[$i][2], $USG_form_fields[$i][3], $descriptionItem);
 		}
 
 		//	Validate the budget to make sure it is correct
-		$financeObj1->validateBudget($start_date1);
+		db_finance::validateBudget($start_date1);
 		
 		
 	 }
