@@ -79,7 +79,7 @@ include("../phpincludes/db_finance.php");
 		
 		if( mysqli_num_rows($result) == 0)
 		{		
-			echo "nothing";
+			echo "No entries were found for the date specified.";
 		}
 		else
 		{

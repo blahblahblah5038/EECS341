@@ -432,7 +432,8 @@ include("../phpincludes/db_finance.php");
 		$description		.=	"CREATED, ".date('Y-m-d');
 
 		//	Insert new budget tuple into BUDGET table
-		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
+		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $balance, $description);
+		
 		
 		//	Insert new budget item tuples into BUDGET_ITEM table
 		for($i = 0; $i < count($length[0]); $i++)
