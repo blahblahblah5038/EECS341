@@ -62,7 +62,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 		<form action="add.php" method="POST">
 		<table>
 		<tr><td>Type</td><td>
-			<select name="type" onChange="swapDisplay(this.options[this.selectedIndex])">
+			<select name="type" onChange="swapDisplay(this.options[this.selectedIndex].value)">
 				<option value="" selected="selected">---</option>
 				<option value="S">Stabilizer</option>
 				<option value="L">Limb</option>
