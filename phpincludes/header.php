@@ -17,15 +17,14 @@ session_start();
 	<h2>Links</h2>
 	<ul>
 		<li><a href="/index.php">Home</a></li>
-		<li><a href="/calendar/">Calendar</a></li>
 		<li><a href="/contacts/">Contacts</a></li>
 		<li><a href="/membership/">Members</a></li>
-		<li><a href="/fileuploads/">File Uploads</a></li>
+		<!--<li><a href="/fileuploads/">File Uploads</a></li>-->
 		<li><a href="/inventory/">Inventory</a></li>
-		<li><a href="/finance/">Finance</a></li>
-		<li><a href="/officer_positions/">Officer Positions</a></li>
+		<li><a href="/finance/finance_main.php">Finance</a></li>
 		<li><a href="/officers/">Current Officers</a></li>
-        <li><a href="/officer_history/">Officer History</a></li>
+        <li><a href="/officer_positions/">Officer Positions</a></li>
+		<li><a href="/officer_history/">Officer History</a></li>
 	</ul>
 </div>
 <div id="frame">
