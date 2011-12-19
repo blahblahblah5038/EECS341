@@ -193,10 +193,11 @@ include_once("../phpincludes/db_connect.php")	?>
 			// Reinitialize arrays to zero	
 			$fieldNames		=	array();
 			$defValues		=	array();
+			$superfluousLength	=	0;
 			
 			// Print headers and forms
 			echo	"<tr><th>Form $i (Date: $budgetDate[$i])</th></tr>";//: ".$_POST['ChosenSCPC'][$i]."</th>";			
-			db_finance::lineItemFields($itemName[$i], $fieldNames, $defValues);
+			db_finance::lineItemFields($itemName[$i], $fieldNames, $defValues, $superfluousLength);
 			if(! empty($fieldNames) )
 				echo	"<tr><td>".db_finance::echoForm1($fieldNames, $defValues, "FormField-$i", "submit3")."</td></tr>";
 			else
@@ -402,7 +403,7 @@ include_once("../phpincludes/db_connect.php")	?>
 		$description		.=	"CREATED, ".date('Y-m-d');
 
 		//	Insert new budget tuple into BUDGET table
-		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
+		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description, $superfluousLength);
 		
 		
 		
