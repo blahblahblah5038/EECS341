@@ -27,7 +27,7 @@ HERE;
 	$isEqMan = FALSE;
 	if (db_access::isEquipmentManager($userpid)) {
 		$isEqMan = TRUE;
-		echo "<a href='add.php'>Add Item</a>";
+		echo "<p><a href='add.php'>Add Item</a><br /><a href='log.php'>View Log</a></p>";
 	}
 	
 	// Display member equipment info

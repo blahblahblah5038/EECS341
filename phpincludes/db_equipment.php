@@ -210,6 +210,14 @@ class db_equipment
 			$checkout . "')";
 		db_connect::run_query($querystr);
 	}
+	
+	function viewAllLoans()
+	{
+		$querystr = "SELECT id, eid, pid, eq_condition, notes, checkout, checkin " .
+					"FROM equipment_loans";
+		$query = db_connect::run_query($querystr);
+		return $query;
+	}
 
 	function viewLoans($eid)
 	{
