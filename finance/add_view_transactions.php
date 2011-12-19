@@ -26,7 +26,7 @@ include_once("../phpincludes/db_connect.php");
 	if( (! isset($_REQUEST["addTransDate"])) && (! isset($_REQUEST["viewTransDate"])) )
 	{
 		$addTransSection	=	"<h3 align=\"center\">Add Transactions</h3><p>Select the desired budget</p>";
-		$addTransSection	.=	"<table cellpadding=\"5\" cellspacing=\"5\" class='noborder' >"
+		$addTransSection	.=	"<table cellpadding=\"5\" cellspacing=\"5\">"
 										."<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">"
 										   ."<tr><td>";
 		echo $addTransSection;
@@ -46,7 +46,7 @@ include_once("../phpincludes/db_connect.php");
 		echo	$addTransSection."</form></table>";
 		
 		$viewTransSection	=	"<h3 align=\"center\">View Transactions</h3><p align=\"center\">Select the desired date range to view all transactions between start and end date</p>";
-		$viewTransSection	.=	"<table cellpadding=\"5\" cellspacing=\"5\" class='noborder' >"
+		$viewTransSection	.=	"<table cellpadding=\"5\" cellspacing=\"5\">"
 										."<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">"
 										   ."<tr><td>";
 		echo $viewTransSection;

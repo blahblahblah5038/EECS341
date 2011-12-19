@@ -42,7 +42,7 @@ include("../phpincludes/db_finance.php");
     <div>
 	<h2>Please select the start and end dates for the new budget</h2>
 	</div>
-	<table cellpadding="5" cellspacing="5" class='noborder' >
+	<table cellpadding="5" cellspacing="5">
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
            <tr><td> 
 			<?PHP
@@ -105,7 +105,7 @@ include("../phpincludes/db_finance.php");
     <h3 align="center">Select all desired lines items for the new budget.<br /></h3>
     <p align="center">Make sure all items in the right box are highlighted before clicking SUBMIT</p>
     
-    <table align="center" class='noborder' >
+    <table align="center">
     	<tr>
         	<th valign="middle">Standard Sport Club Budget</th>
             <td></td>
@@ -224,6 +224,7 @@ include("../phpincludes/db_finance.php");
 	{
 		$i = 0;
 		$formLength		=	array();
+		$superfluousLength	=	0;
 		echo	"<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\"><table align=\"center\" cellpadding=\"25\" border=\"5\" bordercolordark=\"#000000\">";
 				
 		while( ($_POST['ChosenSCPC'][$i] ) || ($_POST['ChosenUSG'][$i]))
@@ -253,7 +254,7 @@ include("../phpincludes/db_finance.php");
 			// Print the Forms for USG items on right side
 			if($_POST['ChosenUSG'][$i])
 			{
-				db_finance::lineItemFields($_POST['ChosenUSG'][$i], $namesUSG, $defValueUSG);
+				db_finance::lineItemFields($_POST['ChosenUSG'][$i], $namesUSG, $defValueUSG, $superfluousLength);
 				if(! empty($namesUSG) )
 					echo	"<td>".db_finance::echoForm1($namesUSG, $defValueUSG, "USG-$i", "submit3")."</td></tr>";
 				else
@@ -432,8 +433,7 @@ include("../phpincludes/db_finance.php");
 		$description		.=	"CREATED, ".date('Y-m-d');
 
 		//	Insert new budget tuple into BUDGET table
-		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $balance, $description);
-		
+		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
 		
 		//	Insert new budget item tuples into BUDGET_ITEM table
 		for($i = 0; $i < count($length[0]); $i++)

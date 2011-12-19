@@ -34,7 +34,7 @@ include("../phpincludes/db_finance.php");
 	if(! isset($_REQUEST['submitDate']))
 	{
 	?>
-    <table cellpadding="5" cellspacing="5" class="noborder">
+    <table cellpadding="5" cellspacing="5">
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
         <tr><td>
             <?PHP
@@ -79,7 +79,7 @@ include("../phpincludes/db_finance.php");
 		
 		if( mysqli_num_rows($result) == 0)
 		{		
-			echo "No entries were found for the date specified.";
+			echo "nothing";
 		}
 		else
 		{
@@ -110,6 +110,12 @@ include("../phpincludes/db_finance.php");
 			mysqli_free_result($result);
 			echo	$output;
 		}
+	?>
+		
+	<?PHP
 	}
 	include_once("../phpincludes/footer.php");
 	?>
+</body>
+</html>
+<?PHP include_once("../phpincludes/footer.php"); ?>
