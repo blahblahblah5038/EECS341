@@ -36,7 +36,7 @@
              {
                  addMember($_POST['pid'], $_POST['netid'],$_POST['studid'],$_POST['bowpref'],$_POST['hand'],$_POST['clubexpir'],$_POST['memid'],$_POST['uscaexpir'],$_POST['emername'],$_POST['emerphone'],$_POST['insurer'], $_POST['policy']);
               echo '<script language="javascript"><!--
-              window.location.href = "index.php"
+             window.location.href = "index.php"
               //--></script>';
              }
              else echo "ERROR: Make sure that person is a contact first!";

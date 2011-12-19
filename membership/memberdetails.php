@@ -51,14 +51,13 @@
          echo "<TD>Student ID:<TD><input type='text'      name='studid'              value='".$row[3]."' /><TR>";
          echo "<TD>Bow Type Preference:<TD><input type='text'      name='bowpref' value='".$row[4]."' /><TR>";
          echo "<TD>Handedness:<TD><input type='text'      name='hand'              value='".$row[5]."' /><TR>";
-         echo "<TD>Certification ID:<TD><input type='text'      name='certid'              value='".$row[7]."' /><TR>";
          echo "<TD>Club Membership Expiration:<TD><input type='text'      name='clubexpir' value='".$row[6]."' /><TR>";
-         echo "<TD>USCA Membership ID:<TD><input type='text'      name='memid' value='".$row[9]."' /><TR>";
+         echo "<TD>USCA Membership ID:<TD><input type='text'      name='memid' value='".$row[7]."' /><TR>";
          echo "<TD>USCA Membership Expiration<TD><input type='text'      name='uscaexpir' value='".$row[8]."' /><TR>";
-         echo "<TD>Emergency Contact Name:<TD><input type='text'      name='emername'              value='".$row[10]."' /><TR>";
-         echo "<TD>Emergency Contact Phone:<TD><input type='text'      name='emerphone'              value='".$row[11]."' /><TR>";
-         echo "<TD>Health Insurance Company:<TD><input type='text'      name='insurer'              value='".$row[12]."' /><TR>";
-         echo "<TD>Policy Number:<TD><input type='text'      name='policy'              value='".$row[13]."' /><TR>";
+         echo "<TD>Emergency Contact Name:<TD><input type='text'      name='emername'              value='".$row[9]."' /><TR>";
+         echo "<TD>Emergency Contact Phone:<TD><input type='text'      name='emerphone'              value='".$row[10]."' /><TR>";
+         echo "<TD>Health Insurance Company:<TD><input type='text'      name='insurer'              value='".$row[11]."' /><TR>";
+         echo "<TD>Policy Number:<TD><input type='text'      name='policy'              value='".$row[12]."' /><TR>";
          echo "</table>";
          
          if($detailsset)
