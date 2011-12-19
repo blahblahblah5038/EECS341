@@ -7,7 +7,7 @@
 <h1 align="center">Budget Summary</h1>
 <script language="javascript" src="../calendar/calendar.js"></script>
 <?PHP
-include("../phpincludes/financeMethods.php");
+include("../phpincludes/db_finance.php");
 
 
 
@@ -65,7 +65,7 @@ include("../phpincludes/financeMethods.php");
 					.$value ."' BETWEEN A.start_date AND A.end_date"
 					." AND A.start_date = B.budget_date";
 /*********************************************************************/		
-		$result	=	mysqli_query($dbc, $query);
+		$result	=	db_connect::run_query($query);
 /*********************************************************************/		
 		// Header for table
 		$output	=	"<div><table align=\"center\" bordercolor=\"#000000\" border=\"4\" cellspacing=\"3\" cellpadding=\"4\">";
@@ -113,12 +113,6 @@ include("../phpincludes/financeMethods.php");
 			mysqli_free_result($result);
 			echo	$output;
 		}
-	?>
-		
-	<?PHP
 	}
 	include_once("../phpincludes/footer.php");
 	?>
-</body>
-</html>
-<?PHP include_once("../phpincludes/footer.php"); ?>

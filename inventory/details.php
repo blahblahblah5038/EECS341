@@ -27,11 +27,11 @@ function print_info($row, $type)
 		default: break;
 	}
 	
-	echo "<table>";
+	echo "<table><tr><th>Attribute</th><th>Value</th></tr>";
 	for ($i = 0; $i < count($row); $i++)
 		echo "<tr><td>".$headers[$i]."</td><td>".$row[$i]."</td></tr>";
 	
-	echo "</table>";
+	echo "</table><br />";
 }
 
 $userpid = db_access::getPidFromCaseId(phpCAS::getUser());
@@ -55,13 +55,13 @@ HERE;
 		$isEqMan = TRUE;
 		
 		// print buttons to edit / delete this item
-		echo "<form action='edit.php' method='POST'>" .
+		echo "<form action='edit.php' method='POST' style='display:inline'>" .
 			"<input type='hidden' value='".$row[0]."' name='eid'>" .
 			"<input type='hidden' value='".$row[1]."' name='type' />" .
 			"<input type='submit' name='edit' value='Edit' /></form> ";
-		echo "<form action='delete.php' method='POST'>" .
+		echo "<form action='delete.php' method='POST' style='display:inline'>" .
 			"<input type='hidden' value='".$row[0]."' name='eid'>" .
-			"<input type='submit' name='delete' value='Delete' /></form>";
+			"<input type='submit' name='delete' value='Delete' /></form><br />";
 	}
 	
 	print_info($row, $type);

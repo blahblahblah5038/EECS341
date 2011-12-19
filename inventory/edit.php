@@ -67,7 +67,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 			// eid, type, serialno, brand, owner
 			// then additional fields depending on type: see details.php for list of headers
 		
-			echo '<form action="edit.php" method="POST"><table>';
+			echo '<form action="edit.php" method="POST"><table class="noborder">';
 			echo '<input type="hidden" name="eid" value="'.$eid.'" />';
 			
 			// don't allow changing the type of an item
@@ -94,13 +94,13 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 			switch ($type)
 			{
 				case "S":
-					echo '<div id="stabilizerform"><table>';
+					echo '<div id="stabilizerform"><table class="noborder">';
 					echo '<tr><td>Length</td><td><input type="text" name="length" value="'.$info[5].'" /></td></tr>';
 					echo '</table></div>';
 				break;
 				
 				case "L":
-					echo '<div id="limbform"><table>';
+					echo '<div id="limbform"><table class="noborder">';
 					echo '<tr><td>Interface</td><td><input type="text" name="interface" value="'.$info[5].'" /></td></tr>';
 					echo '<tr><td>Distinguishing Marks</td><td><input type="text" name="distmarks" value="'.$info[6].'" /></td></tr>';
 					echo '<tr><td>Draw Length</td><td><input type="text" name="drawstrength" value="'.$info[7].'" /></td></tr>';
@@ -108,7 +108,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 				break;
 				
 				case "A":
-					echo '<div id="arrowform"><table>';
+					echo '<div id="arrowform"><table class="noborder">';
 					echo '<tr><td>Model</td><td><input type="text" name="Model" value="'.$info[5].'" /></td></tr>';
 					echo '<tr><td>Complete Arrow</td><td><input type="text" name="completearrow" value="'.$info[6].'" /></td></tr>';
 					echo '<tr><td>Bare Shaft</td><td><input type="text" name="bareshaft" value="'.$info[7].'" /></td></tr>';
@@ -118,7 +118,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 				break;
 				
 				case "R":
-					echo '<div id="riserform"><table>';
+					echo '<div id="riserform"><table class="noborder">';
 					echo '<tr><td>Interface</td><td><input type="text" name="interface" value="'.$info[5].'" /></td></tr>';
 					echo '<tr><td>Height</td><td><input type="text" name="height" value="'.$info[6].'" /></td></tr>';
 					echo '<tr><td>Distinguishing Marks</td><td><input type="text" name="distmarks" value="'.$info[7].'" /></td></tr>';
@@ -142,7 +142,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 				break;
 			}
 			
-			echo '<input type="submit" name="submit" value="Edit" /></form>';
+			echo '<br /><input type="submit" name="submit" value="Edit" /></form>';
 		}
 	} else { // no eid or type given
 		echo "<p class='error'>Error: Missing EID or type<br /><a href='/inventory'>Back to Inventory</a></p>";
