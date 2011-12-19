@@ -8,3 +8,5 @@
 #footer { margin:10px; padding:10px; text-align:center; }
 
 .error { color:#c00; }
+.show { display:display; }
+.noshow { display:none; }

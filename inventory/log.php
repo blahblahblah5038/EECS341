@@ -22,11 +22,12 @@ HERE;
 	echo "<table><tr><th>ID</th><th>User</th><th>Condition</th><th>Notes</th><th>Checkout</th><th>Checkin</th></tr>";
 	while ($row = mysqli_fetch_row($log))
 	{	
+		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>".$row[5]."</td><td>".$row[6]."</td>";
 		// show link to equipment details
-		echo "<tr><td><form action='details.php' method='POST'>";
+		echo "<td><form action='details.php' method='POST'>";
 		echo "<input type='hidden' name='eid' value='".$row[1]."' />";
-		echo "<input type='submit' name='submit' value='".$row[1]."' />";
-		echo "</form></td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>".$row[5]."</td><td>".$row[6]."</td></tr>";
+		echo "<input type='submit' name='submit' value='Details' /></form></td>";
+		echo "</tr>";
 	}
 	echo "</table>";
 }
