@@ -29,7 +29,7 @@ function print_info($row, $type)
 	
 	echo "<table>";
 	for ($i = 0; $i < count($row); $i++)
-		echo "<tr><td>".$headers[$i]."</td><td>".$info[$i]."</td></tr>";
+		echo "<tr><td>".$headers[$i]."</td><td>".$row[$i]."</td></tr>";
 	
 	echo "</table>";
 }
