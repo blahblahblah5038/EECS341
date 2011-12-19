@@ -12,8 +12,8 @@
          include("../phpincludes/header.php");
          include("../phpincludes/login.php");
          include("../phpincludes/db_access.php");
-         include("../phpincludes/db_equipment.php");
-    
+         include_once("../phpincludes/db_officers.php");
+    $pid = db_access::getPidFromCaseId(phpCAS::getUser());   
     if(!db_access::isAdmin($pid))
     {
          echo "Error, you are not a club officer.  Go away.";
@@ -25,7 +25,7 @@
          {
              $detailsset = true;
              echo "<h2>Detailed Position Info</h2>";
-             $members = db_access::getPosition($_POST['pos_id']);
+             $members = getPositions($_POST['pos_id']);
              $row = mysqli_fetch_row($members);
          }    
          else     
@@ -38,23 +38,20 @@
 
          echo "<form action='position_success.php' method='POST'>";
          echo "<table>";
-         echo "<TD>Title:<TD><input type='text'      name='title'              value='".$row[0]."' /><TR>";
-         echo "<TD>Description:<TD><input type='text' 	name='description'		value='".$row[1]."' /><TR>";
+         echo "<input type=hidden value='".$row[0]."' name=pos_id />";
+         echo "<TD>Title:<TD><input type='text'      name='title'              value='".$row[1]."' /><TR>";
+         echo "<TD>Description:<TD><textarea rows='5' cols='50'	name='description' >".$row[2]."</textarea><TR>";
          echo "</table>";
          
          if($detailsset)
          {
-             echo "<input type='submit' value='edituser' /></br>";
+             echo "<input type='submit' name='edituser' value='Save' /></br>";
          }
          else
          {
-             echo "<input type='submit' value='adduser' /></br>";
+             echo "<input type='submit' name='adduser' value='Save1' /></br>";
          }
          
-         echo "</form>";
-         echo "<form action='delete_position.php'>";
-         echo "<input type=hidden value='".$row[0]."' name=pos_id />";
-         echo "<input type='submit' value='deluser' /></br>";
          echo "</form>";
     }  
   

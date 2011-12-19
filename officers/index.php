@@ -27,7 +27,7 @@ HERE;
         while($row = mysqli_fetch_row($members))
         {
             echo "<tr><td>".$row[8]." ".$row[9]."</td><td>".$row[5]." </td><td>".$row[2]."</td><td>".$row[3]."</td><td>";
-                 echo "<form action='memberdetails.php' method='POST'>";
+                 echo "<form action='officerdetails.php' method='POST'>";
                  echo "<input type='hidden' name='pid' value='".$row[1]."' />";
                  echo "<input type='submit' value='Details' name='details'></form>";
             echo "</td>";

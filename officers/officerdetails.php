@@ -22,61 +22,44 @@
     }
     else
     {
+         echo "<form action='officer_success.php' method='POST'>";
+         echo "<table>";
          $row = "";
          if(isset($_POST['details']))
          {
              $detailsset = true;
-             echo "<h2>Detailed Contact Info</h2>";
-             $members = getMembers($_POST['pid']);
-             $row = mysqli_fetch_row($members);
+             echo "<h2>Detailed Officer Info</h2>";
+             $members = getOfficerDetails($_POST['pid']);
+             while($row = mysqli_fetch_row($members))
+             { 
+                  echo "<input type='hidden' name='edituser' value='edituser' />";
+                  echo "<input type='hidden' name='pid' value='".$row[0]."' />";
+                  echo "<input type='hidden' name='pos_id' value='".$row[1]."' />";
+                  echo "<TR><TD>Title:<TD>".$row[2];
+                  echo "<TR><TD>Start Date:<TD><input type='text' readonly='readonly' name='start_date' value='".$row[3]."' />";
+                  echo "<TR><TD>End Date:<TD><input type='text' name='end_date' value='".$row[4]."' />";
+                  echo "<TR><TD><input type='submit' name='Save' value='Save' />";
+             }
          }    
          else     
          {
              $detailsset = false;
-             echo "<h2>Add New Contact</h2>";
-             $row = array("","","","","","","","","","","","","","");
-         }
+             echo "<h2>Add New Officer</h2>";
+             echo "<input type='hidden' name='pid' value='".$_POST['pid']."' />";
+             echo "<input type='hidden' name='adduser' value='adduser' />"; 
+             echo "<TR><TD>Title:<TD><select name='pos_id'>";
+             $titles = getPositions(NULL);
+             while($row=mysqli_fetch_row($titles))
+             {
+                 echo "<option value='".$row[0]."'>".$row[1]."</option>";
+             }
+             echo "</select>";          
+    
+             echo "<TR><TD>Start Date:<TD><input type='text' name='start_date' value='".$row[3]."' />";
+             echo "<TR><TD>End Date:<TD><input type='text' name='end_date' value='".$row[4]."' />";
+             echo "<TR><TD><input type='submit' name='Save' value='Save' />";
 
-
-         echo "<form action='member_success.php' method='POST'>";
-         echo "<table>";
-         echo "<TD>MID:<TD>".$row[0]."<TR>";
-         echo "<input type='hidden' name='mid' value=".$row[0]." />";
-         echo "<TD>PID:<TD>".($row[1]?$row[1]:$_POST['pid'])."<TR>";
-         if($detailsset)
-             echo "<input type='hidden' name='pid' value=".$row[1]." />";
-         else 
-             echo "<input type='hidden' name='pid' value=".$_POST['pid']." />";
-         echo "<TD>Network ID:<TD><input type='text'      name='netid'              value='".$row[2]."' /><TR>";
-         echo "<TD>Student ID:<TD><input type='text'      name='studid'              value='".$row[3]."' /><TR>";
-         echo "<TD>Bow Type Preference:<TD><input type='text'      name='bowpref' value='".$row[4]."' /><TR>";
-         echo "<TD>Handedness:<TD><input type='text'      name='hand'              value='".$row[5]."' /><TR>";
-         echo "<TD>Certification ID:<TD><input type='text'      name='certid'              value='".$row[6]."' /><TR>";
-         echo "<TD>Club Membership Expiration:<TD><input type='text'      name='clubexpir' value='".$row[7]."' /><TR>";
-         echo "<TD>USCA Membership ID:<TD><input type='text'      name='memid' value='".$row[8]."' /><TR>";
-         echo "<TD>USCA Membership Expiration<TD><input type='text'      name='uscaexpir' value='".$row[9]."' /><TR>";
-         echo "<TD>Emergency Contact Name:<TD><input type='text'      name='emername'              value='".$row[10]."' /><TR>";
-         echo "<TD>Emergency Contact Phone:<TD><input type='text'      name='emerphone'              value='".$row[11]."' /><TR>";
-         echo "<TD>Health Insurance Company:<TD><input type='text'      name='insurer'              value='".$row[12]."' /><TR>";
-         echo "<TD>Policy Number:<TD><input type='text'      name='policy'              value='".$row[13]."' /><TR>";
-         echo "</table>";
-         
-         if($detailsset)
-         {
-             echo "<input type='submit' value='Save' name='edituser' />";
          }
-         else
-         {
-             echo "<input type='submit' value='Save' name='adduser' />";
-         }
-         
-         echo "</form>";
-         echo "<form action='delete_member.php' method='post'>";
-         if($detailsset) 
-               echo "<input type=hidden value='".$row[1]."' name='pid' />";
-         else
-               echo "<input type=hidden value='".$_POST['pid']."' name='pid' />";
-         echo "<input type='submit' value='Delete' name='deluser' /></br>";
          echo "</form>";
     }  
   

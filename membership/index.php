@@ -31,6 +31,10 @@ HERE;
                  echo "<input type='hidden' name='pid' value='".$row[1]."' />";
                  echo "<input type='submit' value='Details' name='details'></form>";
             echo "</td>";
+            echo "<td><form action='../officers/officerdetails.php' method='post' />";
+                 echo "<input type='hidden' name='pid' value='".$row[1]."' />";
+                 echo "<input type='hidden' name='adduser' value='adduser' />";
+                 echo "<input type='submit' name='submit' value='Add as Officer' /></form></td>";
         }
         echo "</table>";
 }

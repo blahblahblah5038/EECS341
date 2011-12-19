@@ -8,7 +8,7 @@
        handles officers    
     */
 ?>
-<h2>Members</h2>
+<h2>Officer History</h2>
 <?php if (!db_access::isMember(db_access::getPidFromCaseId(phpCAS::getUser()))) {
 	echo <<<HERE
 	<div class='error'>Sorry, you are not authorized to view this page.</div>

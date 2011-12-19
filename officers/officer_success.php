@@ -23,23 +23,21 @@
     {
          if(isset($_POST['edituser']))
          {
-             editMember($_POST['mid'], $_POST['netid'],$_POST['studid'],$_POST['bowpref'],$_POST['hand'],$_POST['clubexpir'],$_POST['memid'],$_POST['uscaexpir'],$_POST['emername'],$_POST['emerphone'],$_POST['insurer'], $_POST['policy']); 
-          echo '<script language="javascript"><!--
-              window.location.href = "index.php"
+
+             echo print_r($_POST)."\n";
+             editOfficer($_POST['pid'], $_POST['pos_id'],$_POST['start_date'],$_POST['end_date']);
+ //         echo '<script language="javascript"><!--
+   //           window.location.href = "index.php"
               //--></script>';
        
          }
          else if( isset($_POST['adduser']))
          {
              echo $_POST['pid'];
-             if(isContact($_POST['pid']))
-             {
-                 addMember($_POST['pid'], $_POST['netid'],$_POST['studid'],$_POST['bowpref'],$_POST['hand'],$_POST['clubexpir'],$_POST['memid'],$_POST['uscaexpir'],$_POST['emername'],$_POST['emerphone'],$_POST['insurer'], $_POST['policy']);
+                 addOfficer($_POST['pid'], $_POST['pos_id'],$_POST['start_date'],$_POST['end_date']);
               echo '<script language="javascript"><!--
               window.location.href = "index.php"
               //--></script>';
-             }
-             else echo "ERROR: Make sure that person is a contact first!";
          }
          else
          {
