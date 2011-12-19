@@ -165,14 +165,15 @@ class db_equipment
 
 	function viewEquipment($eid, $type)
 	{
+		// TYPE IS NO LONGER NECESSARY AND IS IGNORED
 		// type can be: blank, S, L, A, R (for stabilizer, limb, arrow, and riser)
 		// return equipment details for a specific item
 		$querystr = "SELECT eid, type, serialnum, brand, owner FROM inventory WHERE eid=" . $eid;
 		$query = db_connect::run_query($querystr);
 		$equip = mysqli_fetch_row($query);
+		$type = $equip[1];
 		
-		$valid_types = array("S", "L", "A", "R");
-		if (in_array($type, $valid_types))
+		if ($type != '')
 		{
 			$details = array();
 			$querystr = "";
