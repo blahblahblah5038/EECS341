@@ -67,17 +67,19 @@ HERE;
 	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th><th></th></tr>";
 	while ($row)
 	{
+		//TODO: human-readable type
+		$type = $row[1] ? $row[1] : 'X';
 		// All users can check equipment out, only equipment managers can check in
-		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>";
+		echo "<tr><td>".$type."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>";
 		echo '<form action="details.php" method="POST">' .
 			'<input type="hidden" value="'.$row[0].'" name="eid">' .
-			'<input type="hidden" value="'.$row[1].'" name="type" />' .
+			'<input type="hidden" value="'.$type.'" name="type" />' .
 			'<input type="submit" value="Details" /></form>';
 		
 		if ($isEqMan) {
 			echo "<form action='edit.php' method='POST'>" .
 				"<input type='hidden' value='".$row[0]."' name='eid'>" .
-				"<input type='hidden' value='".$row[1]."' name='type' />" .
+				"<input type='hidden' value='".$type."' name='type' />" .
 				"<input type='submit' name='edit' value='Edit' /></form>";
 			echo "<form action='delete.php' method='POST'>" .
 				"<input type='hidden' value='".$row[0]."' name='eid'>" .
