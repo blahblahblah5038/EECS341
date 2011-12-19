@@ -136,7 +136,7 @@ include_once("../phpincludes/db_connect.php");
 	}
 
 
-include_once("../phpinclude/footer.php");
+
 ?>
 </body>
 </html>
