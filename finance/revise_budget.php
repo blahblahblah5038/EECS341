@@ -31,7 +31,7 @@ include_once("../phpincludes/db_connect.php")	?>
 
 	<?PHP
 	/*************************************************************************
-	 *
+	 *	SECTION:	I
 	 *		Code for DatePicker, select the start and end dates
 	 *
 	 *************************************************************************/	
@@ -65,7 +65,7 @@ include_once("../phpincludes/db_connect.php")	?>
 	}
 	
 	/*************************************************************************
-	 *
+	 *	SECTION:	II
 	 *		Display the budget items for all budgets meeting selection criteria
 	 *		Create a form to select which items to modify
 	 *
@@ -136,7 +136,7 @@ include_once("../phpincludes/db_connect.php")	?>
 	}
 	
 	/*************************************************************************
-	 *
+	 *	SECTION:	III
 	 *		Create and display tables to enter updated info for budget_items
 	 *
 	 *************************************************************************/
@@ -215,7 +215,7 @@ include_once("../phpincludes/db_connect.php")	?>
 	
 	
 	/*************************************************************************
-	 *
+	 *	SECTION:	IV
 	 *		Display a summary page
 	 *		Create a form with hidden fields to transmit to the final page
 	 *
@@ -335,6 +335,8 @@ include_once("../phpincludes/db_connect.php")	?>
 			 *		-validate new budget
 			 *
 			 ***************************************************************************************/
+			 
+//			 	SECTION:	V
 	}
 	
 	/*

@@ -8,5 +8,16 @@
 #footer { margin:10px; padding:10px; text-align:center; }
 
 .error { color:#c00; }
-.show { display:display; }
-.noshow { display:none; }
+
+table { border-collapse: collapse; }
+td, th { padding:5px; vertical-align:center; border: 1px solid #777; }
+th {
+	text-align:center;
+	background-color: #999;
+	border: 1px solid #777;
+	font-weight: bold;
+}
+td form {
+	display: inline;
+	margin: 0px 10px;
+}
