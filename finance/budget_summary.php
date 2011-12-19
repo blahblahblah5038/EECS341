@@ -43,6 +43,7 @@ include("../phpincludes/financeMethods.php");
             <?PHP
                 require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
+				$myCalendar->	setPath("../calendar/");
                 $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
                 $myCalendar	->	setDate(date('j'), date('n'), date('Y'));
     
