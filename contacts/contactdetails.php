@@ -38,7 +38,7 @@
          }
        
          echo "<form action='contact_success.php' method='post'>";
-         echo "<table>";
+         echo "<table class='noborder' >";
          echo "<input type=hidden value=".$row[0]." name=pid />";
          echo "<TD>First Name:<TD><input type='text' 	name='fname'	value='".$row[1]."' /><TR>";
          echo "<TD>Last Name:<TD><input type='text' 	name='lname'	value='".$row[2]."' /><TR>";

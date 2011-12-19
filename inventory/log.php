@@ -19,7 +19,7 @@ HERE;
 	$log = db_equipment::viewAllLoans();
 	
 	echo "<h3>Checkout Log</h3>";
-	echo "<table><tr><th>ID</th><th>User</th><th>Condition</th><th>Notes</th><th>Checkout</th><th>Checkin</th></tr>";
+	echo "<table><tr><th>ID</th><th>User</th><th>Condition</th><th>Notes</th><th>Checkout</th><th>Checkin</th><th></th></tr>";
 	while ($row = mysqli_fetch_row($log))
 	{	
 		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>".$row[5]."</td><td>".$row[6]."</td>";

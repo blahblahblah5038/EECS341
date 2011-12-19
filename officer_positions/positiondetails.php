@@ -37,11 +37,11 @@
 
 
          echo "<form action='position_success.php' method='POST'>";
-         echo "<table>";
+         echo "<table class='noborder'>";
          echo "<input type=hidden value='".$row[0]."' name=pos_id />";
-         echo "<TD>Title:<TD><input type='text'      name='title'              value='".$row[1]."' /><TR>";
-         echo "<TD>Description:<TD><textarea rows='5' cols='50'	name='description' >".$row[2]."</textarea><TR>";
-         echo "</table>";
+         echo "<TR><TD>Title:</TD><TD><input type='text' name='title' value='".$row[1]."' /></TR>";
+         echo "<TR><TD>Description:</TD><TD><textarea rows='5' cols='50' name='description' >".$row[2]."</textarea></TR>";
+         echo "</table><br />";
          
          if($detailsset)
          {

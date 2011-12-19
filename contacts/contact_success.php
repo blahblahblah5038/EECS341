@@ -24,10 +24,19 @@
          if(isset($_POST['edituser']))
          {
              editContact($_POST['pid'], $_POST['fname'],$_POST['lname'],$_POST['address'],$_POST['city'],$_POST['state'],$_POST['zip'],$_POST['email'],$_POST['phone']);        
+               echo '<script language="javascript"><!--
+              window.location.href = "index.php"
+               //--></script>';
+
          }
          else if( isset($_POST['adduser']))
          {
                 addContact($_POST['fname'],$_POST['lname'],$_POST['address'],$_POST['city'],$_POST['state'],$_POST['zip'],$_POST['email'],$_POST['phone']);        
+               echo '<script language="javascript"><!--
+              window.location.href = "index.php"
+               //--></script>';
+
+
          }
          else
          {

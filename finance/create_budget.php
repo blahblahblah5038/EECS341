@@ -42,7 +42,7 @@ include("../phpincludes/db_finance.php");
     <div>
 	<h2>Please select the start and end dates for the new budget</h2>
 	</div>
-	<table cellpadding="5" cellspacing="5">
+	<table cellpadding="5" cellspacing="5" class='noborder' >
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>">
            <tr><td> 
 			<?PHP
@@ -105,7 +105,7 @@ include("../phpincludes/db_finance.php");
     <h3 align="center">Select all desired lines items for the new budget.<br /></h3>
     <p align="center">Make sure all items in the right box are highlighted before clicking SUBMIT</p>
     
-    <table align="center">
+    <table align="center" class='noborder' >
     	<tr>
         	<th valign="middle">Standard Sport Club Budget</th>
             <td></td>

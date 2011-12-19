@@ -41,13 +41,27 @@ th {
 
 #frame { margin-left:150px; padding:10px; }
 
-#footer { margin:10px; padding:10px; text-align:center; }
+#footer {
+	margin:10px;
+	margin-top:50px;
+	padding:10px;
+	text-align:center;
+	color:#444;
+	font-size:80%;
+}
 
 #header {
 	background-color:#0a304e;
+	text-align:center;
+	height:100px;
+	margin:0px;
+}
+#header h1 {
 	color:#FFF;
 	text-shadow:1px 1px 1px #CCC;
 	font-weight:bold;
+	margin:0px;
+	padding:25px;
 }
 
 #navbar {
@@ -69,3 +83,5 @@ th {
 	list-style-type:circle;
 }
 #navbar li { padding:5px 0px; }
+
+.noborder, .noborder tr, .noborder td { border:0px none; }

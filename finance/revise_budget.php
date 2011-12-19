@@ -40,7 +40,7 @@ include_once("../phpincludes/db_connect.php")	?>
 	if(	(! isset($_REQUEST['submitDate'])) && (! isset($_REQUEST['RevisionList']) )	&& (! isset( $_REQUEST['CompletedForms']) )	)
 	{
 	?>
-    <table cellpadding="5" cellspacing="5">
+    <table cellpadding="5" cellspacing="5" class='noborder' >
     	<tr><td>Please select a date that falls in the range of the desired budget.</td></tr>
         <tr><td>&nbsp;</td></tr>
         <form method="post" action="<?PHP echo $_SERVER['PHP_SELF']; ?>" >

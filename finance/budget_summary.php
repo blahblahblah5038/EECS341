@@ -110,12 +110,6 @@ include("../phpincludes/db_finance.php");
 			mysqli_free_result($result);
 			echo	$output;
 		}
-	?>
-		
-	<?PHP
 	}
 	include_once("../phpincludes/footer.php");
 	?>
-</body>
-</html>
-<?PHP include_once("../phpincludes/footer.php"); ?>
