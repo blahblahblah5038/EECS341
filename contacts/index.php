@@ -34,7 +34,7 @@ HERE;
                  echo "<input type='hidden' name='pid' value=".$row[0]." />";
                  echo "<input type='submit' name='bleh' value='Add As Member' />";
                  echo "</form></td><td>";
-            }
+            }else echo "</td><td>";
                  echo "<form action='contactdetails.php' method='POST'>";
                  echo "<input type='hidden' name='pid' value='".$row[0]."' />";
                  echo "<input type='submit' value='Details' name='details'></form>";

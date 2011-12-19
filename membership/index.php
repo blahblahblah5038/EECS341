@@ -23,7 +23,7 @@ HERE;
 
         $admin = db_access::isAdmin($pid);
 
-        echo "<table><tr><th>Name</th><th>Case ID</th><th>Student ID</th><th> </th></tr>";
+        echo "<table><tr><th>Name</th><th>Case ID</th><th>Student ID</th><th> </th><th></th></tr>";
         while($row = mysqli_fetch_row($members))
         {
             echo "<tr><td>".$row[14]." ".$row[15]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>";
