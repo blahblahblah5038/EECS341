@@ -8,16 +8,14 @@
 
 <?php
 $userpid = db_access::getPidFromCaseId(phpCAS::getUser());
-if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid))
-	echo <<<HERE
-	<div class='error'>Sorry, you are not authorized to view this page.</div>
-HERE;
-if (!isset($_POST['eid']))
-{
+if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) {
+	echo "<div class='error'>Sorry, you are not authorized to view this page.</div>";
+}
+else if (!isset($_POST['eid'])) {
 	echo "<div class='error'>No EID specified</div>";
 } else {
 	$eid = $_POST['eid'];
-	if (db_equipment::isCheckedOut($row[0])) {
+	if (db_equipment::isCheckedOut($eid)) {
 		if (isset($_POST['sub_checkin']) && isset($_POST['date']) && $_POST['date'] != '')
 		{	// form was submitted, with info
 			//TODO: validate date
