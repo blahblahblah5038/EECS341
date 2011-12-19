@@ -6,13 +6,10 @@
 <title>Create Budget</title>
 <h1 align="center">Create A New Budget</h1>
 <script language="javascript" src="../calendar/calendar.js"></script>
+
 <?PHP 
 include("../phpincludes/db_finance.php");
-include_once("../phpincludes/db_connect.php");
-include_once("../phpincludes/header.php");
-//include_once("../phpincludes/login.php");
-include_once("../phpincludes/db_access.php");
-	?>
+?>
 </head>
 
 <body>
@@ -50,7 +47,9 @@ include_once("../phpincludes/db_access.php");
            <tr><td> 
 			<?PHP
                 require_once("../calendar/classes/tc_calendar.php");
+
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
+				$myCalendar->	setPath("../calendar/");
                 $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
                 $myCalendar	->	setDate(date('j'), date('n'), date('Y'));
                 $myCalendar	->	writeScript();
@@ -60,6 +59,7 @@ include_once("../phpincludes/db_access.php");
             <?PHP
                 require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("endDate", TRUE);
+				$myCalendar->	setPath("../calendar/");
                 $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
                 $myCalendar	->	setDate(date('j'), date('n'), date('Y') + 1);
                 $myCalendar	->	writeScript();

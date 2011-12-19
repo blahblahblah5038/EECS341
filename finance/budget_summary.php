@@ -7,7 +7,7 @@
 <h1 align="center">Budget Summary</h1>
 <script language="javascript" src="../calendar/calendar.js"></script>
 <?PHP
-include("../phpincludes/financeMethods.php");
+include("../phpincludes/db_finance.php");
 
 
 
@@ -43,6 +43,7 @@ include("../phpincludes/financeMethods.php");
             <?PHP
                 require_once("../calendar/classes/tc_calendar.php");
                 $myCalendar	=	new	tc_calendar("startDate", TRUE);
+				$myCalendar->	setPath("../calendar/");
                 $myCalendar	->	setIcon("../calendar/images/iconCalendar.gif");
                 $myCalendar	->	setDate(date('j'), date('n'), date('Y'));
     
@@ -64,7 +65,7 @@ include("../phpincludes/financeMethods.php");
 					.$value ."' BETWEEN A.start_date AND A.end_date"
 					." AND A.start_date = B.budget_date";
 /*********************************************************************/		
-		$result	=	mysqli_query($dbc, $query);
+		$result	=	db_connect::run_query($query);
 /*********************************************************************/		
 		// Header for table
 		$output	=	"<div><table align=\"center\" bordercolor=\"#000000\" border=\"4\" cellspacing=\"3\" cellpadding=\"4\">";
