@@ -64,14 +64,27 @@ HERE;
 	$equiplist = db_equipment::getEquipment();
 	$row = mysqli_fetch_row($equiplist);
 	echo "<h3>Inventory</h3>";
-	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th><th></th></tr>";
+	echo "<table><tr><th>Type</th><th>Serial No.</th><th>Brand</th><th>Owner</th><th>Status</th><th></th></tr>";
 	while ($row)
 	{
 		//TODO: human-readable type
 		$type = $row[1] ? $row[1] : '-';
 		// All users can check equipment out, only equipment managers can check in
 		echo "<tr><td>".$type."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>";
-		echo '<form action="details.php" method="POST">' .
+		
+		if (db_equipment::isCheckedOut($row[0])) {
+			echo "<span class='error'>Checked Out</span>";
+			if ($isEqMan)
+				echo "<br /><form action='checkin.php' method='POST'>" .
+					"<input type='hidden' value='".$row[0]."' name='eid'>" .
+					"<input type='submit' name='checkin' value='Check In' /></form>";
+		}
+		else
+			echo "<form action='checkout.php' method='POST'>" .
+				"<input type='hidden' value='".$row[0]."' name='eid'>" .
+				"<input type='submit' name='checkout' value='Check Out' /></form>";
+		
+		echo '</td><td><form action="details.php" method="POST">' .
 			'<input type="hidden" value="'.$row[0].'" name="eid">' .
 			'<input type="hidden" value="'.$type.'" name="type" />' .
 			'<input type="submit" value="Details" /></form>';
@@ -85,18 +98,6 @@ HERE;
 				"<input type='hidden' value='".$row[0]."' name='eid'>" .
 				"<input type='submit' name='delete' value='Delete' /></form>";
 		}
-		
-		if (db_equipment::isCheckedOut($row[0])) {
-			echo "<span class='error'>Checked Out</span>";
-			if ($isEqMan)
-				echo "<form action='checkin.php' method='POST'>" .
-					"<input type='hidden' value='".$row[0]."' name='eid'>" .
-					"<input type='submit' name='checkin' value='Check In' /></form>";
-		}
-		else
-			echo "<form action='checkout.php' method='POST'>" .
-				"<input type='hidden' value='".$row[0]."' name='eid'>" .
-				"<input type='submit' name='checkout' value='Check Out' /></form>";
 		
 		echo "</td></tr>";
 		$row = mysqli_fetch_row($equiplist);
