@@ -79,6 +79,18 @@ HERE;
 		echo "<form action='checkout.php' method='POST'>" .
 			"<input type='hidden' value='".$row[0]."' name='eid'>" .
 			"<input type='submit' name='checkout' value='Check Out' /></form>";
+			
+	// Show checkout log
+	if ($isEqMan)
+	{
+		$loans = db_equipment::viewLoans($eid);
+		
+		echo "<h3>Checkout Log</h3>";
+		echo "<table><tr><th>User</th><th>Condition</th><th>Notes</th><th>Checkout</th><th>Checkin</th></tr>";
+		while ($row = mysqli_fetch_row($loans))
+			echo "<tr><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>".$row[5]."</td><td>".$row[6]."</td></tr>";
+		echo "</table>";
+	}
 }
 ?>
 <?php include("../phpincludes/footer.php"); ?>

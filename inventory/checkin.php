@@ -15,12 +15,13 @@ else if (!isset($_POST['eid'])) {
 	echo "<div class='error'>No EID specified</div>";
 } else {
 	$eid = $_POST['eid'];
-	if (db_equipment::isCheckedOut($eid)) {
+	$loanid = db_equipment::isCheckedOut($eid);
+	if ($loanid) {
 		if (isset($_POST['sub_checkin']) && isset($_POST['date']) && $_POST['date'] != '')
 		{	// form was submitted, with info
 			//TODO: validate date
 			$date = $_POST['date'];
-			$query = db_equipment::checkin($eid, $date);
+			$query = db_equipment::checkin($loanid, $date);
 			echo "<p>Equipment has been checked in.<br /><a href='/inventory'>Back to inventory</a></p>";
 		} else { // print form
 			// TODO: print info like who is checking it in
