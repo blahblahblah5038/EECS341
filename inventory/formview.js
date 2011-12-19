@@ -21,7 +21,7 @@ function plainForm() {
 }
 
 function dispStabilizer() {
-	document.getElementById("stabilizerform").style.display = "display";
+	document.getElementById("stabilizerform").style.display = "block";
 	document.getElementById("limbform").style.display = "none";
 	document.getElementById("arrowform").style.display = "none";
 	document.getElementById("riserform").style.display = "none";
@@ -29,7 +29,7 @@ function dispStabilizer() {
 
 function dispLimb() {
 	document.getElementById("stabilizerform").style.display = "none";
-	document.getElementById("limbform").style.display = "display";
+	document.getElementById("limbform").style.display = "block";
 	document.getElementById("arrowform").style.display = "none";
 	document.getElementById("riserform").style.display = "none";
 }
@@ -37,7 +37,7 @@ function dispLimb() {
 function dispArrow() {
 	document.getElementById("stabilizerform").style.display = "none";
 	document.getElementById("limbform").style.display = "none";
-	document.getElementById("arrowform").style.display = "display";
+	document.getElementById("arrowform").style.display = "block";
 	document.getElementById("riserform").style.display = "none";
 }
 
@@ -45,5 +45,5 @@ function dispRiser() {
 	document.getElementById("stabilizerform").style.display = "none";
 	document.getElementById("limbform").style.display = "none";
 	document.getElementById("arrowform").style.display = "none";
-	document.getElementById("riserform").style.display = "display";
+	document.getElementById("riserform").style.display = "block";
 }o
