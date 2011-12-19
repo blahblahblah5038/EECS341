@@ -20,6 +20,10 @@
     else if (isset($_POST['pid']))
     {
          deleteMemberWithPid($_POST['pid']);
+                echo '<script language="javascript"><!--
+               window.location.href = "index.php"
+                //--></script>';
+
     } 
     else
     {

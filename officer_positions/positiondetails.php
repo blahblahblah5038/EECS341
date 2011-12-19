@@ -49,7 +49,7 @@
          }
          else
          {
-             echo "<input type='submit' name='adduser' value='Save1' /></br>";
+             echo "<input type='submit' name='adduser' value='Save' /></br>";
          }
          
          echo "</form>";
