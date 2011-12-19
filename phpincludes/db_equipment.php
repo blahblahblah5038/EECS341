@@ -171,7 +171,8 @@ class db_equipment
 		$query = db_connect::run_query($querystr);
 		$equip = mysqli_fetch_row($query);
 		
-		if ($type != '')
+		$valid_types = array("S", "L", "A", "R");
+		if (in_array($type, $valid_types))
 		{
 			$details = array();
 			$querystr = "";

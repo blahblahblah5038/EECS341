@@ -68,7 +68,7 @@ HERE;
 	while ($row)
 	{
 		//TODO: human-readable type
-		$type = $row[1] ? $row[1] : 'X';
+		$type = $row[1] ? $row[1] : '-';
 		// All users can check equipment out, only equipment managers can check in
 		echo "<tr><td>".$type."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>";
 		echo '<form action="details.php" method="POST">' .
