@@ -1,8 +1,8 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 ////
-//// This page shows a more detailed version of the member information.  That 
-//// is to say that the main contacts page may not show all of the fields, and
+//// This page shows a more detailed version of the officer information.  That 
+//// is to say that the main officers page may not show all of the fields, and
 //// that this one is the most detailed view possible.
 ////
 //// Furthermore, we will be offering edit and deletion features for officers
