@@ -1,4 +1,4 @@
-<?PHP //include_once("../phpincludes/header.php"); ?>
+<?PHP include_once("../phpincludes/header.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
