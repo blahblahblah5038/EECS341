@@ -41,7 +41,9 @@ HERE;
 		if (db_equipment::isCheckedOut($row[0]))
 			echo "<td><span class='error'>Checked out</td></tr>";
 		else
-			echo "<td><form action='checkout.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='checkout' value='Check Out' /></form></td></tr>";
+			echo "<td><form action='checkout.php' method='POST'>" .
+				"<input type='hidden' value='".$row[0]."' name='eid'>" .
+				"<input type='submit' name='checkout' value='Check Out' /></form></td></tr>";
 		$row = mysqli_fetch_row($userequip);
 	}
 	echo "</table>";
@@ -67,20 +69,32 @@ HERE;
 	{
 		// All users can check equipment out, only equipment managers can check in
 		echo "<tr><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[3]."</td><td>".$row[4]."</td><td>";
-		echo '<form action="details.php" method="POST"><input type="hidden" value="'.$row[0].'" name="eid"><input type="hidden" value="'.$row[1].'" name="type" /><input type="submit" value="Details" /></form>';
+		echo '<form action="details.php" method="POST">' .
+			'<input type="hidden" value="'.$row[0].'" name="eid">' .
+			'<input type="hidden" value="'.$row[1].'" name="type" />' .
+			'<input type="submit" value="Details" /></form>';
 		
 		if ($isEqMan) {
-			echo "<form action='edit.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='hidden' value='".$row[1]."' name='type' /><input type='submit' name='edit' value='Edit' /></form>";
-			echo "<form action='delete.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='delete' value='Delete' /></form>";
+			echo "<form action='edit.php' method='POST'>" .
+				"<input type='hidden' value='".$row[0]."' name='eid'>" .
+				"<input type='hidden' value='".$row[1]."' name='type' />" .
+				"<input type='submit' name='edit' value='Edit' /></form>";
+			echo "<form action='delete.php' method='POST'>" .
+				"<input type='hidden' value='".$row[0]."' name='eid'>" .
+				"<input type='submit' name='delete' value='Delete' /></form>";
 		}
 		
 		if (db_equipment::isCheckedOut($row[0])) {
 			echo "<span class='error'>Checked Out</span>";
 			if ($isEqMan)
-				echo "<form action='checkin.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='checkin' value='Check In' /></form>";
+				echo "<form action='checkin.php' method='POST'>" .
+					"<input type='hidden' value='".$row[0]."' name='eid'>" .
+					"<input type='submit' name='checkin' value='Check In' /></form>";
 		}
 		else
-			echo "<form action='checkout.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='checkout' value='Check Out' /></form>";
+			echo "<form action='checkout.php' method='POST'>" .
+				"<input type='hidden' value='".$row[0]."' name='eid'>" .
+				"<input type='submit' name='checkout' value='Check Out' /></form>";
 		
 		echo "</td></tr>";
 		$row = mysqli_fetch_row($equiplist);

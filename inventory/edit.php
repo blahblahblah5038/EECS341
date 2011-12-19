@@ -29,13 +29,13 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 			switch ($type) {
 				case "S":
 					$length = $_POST['length'];
-					db_equipment::editStabilizer($type, $serialno, $brand, $owner, $length);
+					db_equipment::editStabilizer($eid, $type, $serialno, $brand, $owner, $length);
 					break;
 				case "L":
 					$interface = $_POST['interface'];
 					$distmarks = $_POST['distmarks'];
 					$drawstr = $_POST['drawstrength'];
-					db_equipment::editLimb($type, $serialno, $brand, $owner, $interface, $distmarks, $drawstr);
+					db_equipment::editLimb($eid, $type, $serialno, $brand, $owner, $interface, $distmarks, $drawstr);
 					break;
 				case "A":
 					$model = $_POST['model'];
@@ -43,7 +43,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 					$bareshaft = $_POST['bareshaft'];
 					$fixable = $_POST['fixable'];
 					$notes = $_POST['notes'];
-					db_equipment::editArrow($type, $serialno, $brand, $owner, $model, $carr, $bareshaft, $fixable, $notes);
+					db_equipment::editArrow($eid, $type, $serialno, $brand, $owner, $model, $carr, $bareshaft, $fixable, $notes);
 					break;
 				case "R":
 					$interface = $_POST['interface'];
@@ -53,10 +53,10 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 					$bft = $_POST['buttonformat'];
 					$button = $_POST['button'];
 					$arrowrest = $_POST['arrowrest'];
-					db_equipment::editRiser($type, $serialno, $brand, $owner, $interface, $height, $distmarks, $handedness, $bft, $button, $arrowrest);
+					db_equipment::editRiser($eid, $type, $serialno, $brand, $owner, $interface, $height, $distmarks, $handedness, $bft, $button, $arrowrest);
 					break;
 				default:
-					db_equipment::editEquipment($type, $serialno, $brand, $owner);
+					db_equipment::editEquipment($eid, $type, $serialno, $brand, $owner);
 					break;
 			}
 		echo "<p>Equipment successfully edited.<br /><a href='/inventory/'>Back to inventory</a></p>";
