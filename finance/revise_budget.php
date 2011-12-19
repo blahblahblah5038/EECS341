@@ -14,11 +14,6 @@ include_once("../phpincludes/db_connect.php")	?>
 <body>
 
 <?PHP
-// make connection to database
-	$dbc	=	mysqli_connect("localhost", "root", "Svetskar97") or die("Could not connect");
-	mysqli_select_db( $dbc, "archeryclub") or die("Could not select database");
-
-	$financeObj2	=	new	db_finance();
 	/************************************************************************
 	 *																		*
 	 *	To Do List:															*
@@ -237,7 +232,7 @@ include_once("../phpincludes/db_connect.php")	?>
 				-requested amount
 				-allocated amount
 				-balance
-		*/
+		
 		
 		//	Variables
 		$A		=	array();
@@ -282,7 +277,7 @@ include_once("../phpincludes/db_connect.php")	?>
 		//	db_finance::updateBudgetItem($name, $budget_date, $requested, $allocated, $balance);
 			
 			
-	/*		
+			
 			
 			
 			$i	=	0;
@@ -340,13 +335,18 @@ include_once("../phpincludes/db_connect.php")	?>
 			 ***************************************************************************************/
 			 
 //			 	SECTION:	V
-	}
+	//}
 	
 	//if( (isset($_REQUEST['CreateFinalBudget']))	)
-	 {
+	// {
 		echo	"<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">"
 				."<input type=\"button\" onClick=\"location.href='finance_main.php'\" name=\"ReturnToFinanceMain\" value=\"Return to Main Finance Page\"></form><br />";
+		echo	"YOUR REVISIONS WERE NOT MADE TO THE DATABASE. THIS SECTION IS STILL UNDER CONSTRUCTION.";
 		
+		$notTrue	=	true;
+		
+		if(! $notTrue	)
+		{
 		// Retrieve results from forms
 		$SCPC_fields	=	array(); 
 		$USG_fields		=	array();
@@ -369,20 +369,7 @@ include_once("../phpincludes/db_connect.php")	?>
 
 		$i	=	0;
 		$j	=	0;
-	/*	
-		// Retrieve USG form data
-		while(! empty($_REQUEST["hidden-USG-$i-$j"])	)
-		{
-			while(	(! empty($_REQUEST["hidden-USG-$i-$j"]))	|| ($j < 4)	)
-			{
-				$USG_form_fields[$i][$j]	=	$_REQUEST["hidden-USG-$i-$j"];
-				$j++;
-			}
-			$length[1][$i]	=	$j;		// length[0] is SCPC; length[1] is USG;	[0][1] is form SCPC form 1
-			$j = 0;
-			$i++;
-		}
-	*/	
+	
 		$start_dates		=	array();
 		while(! empty($_REQUEST["StartDates-$i"]))
 			$start_dates[$i]	=	$_REQUEST["StartDates-$i"];
@@ -417,6 +404,12 @@ include_once("../phpincludes/db_connect.php")	?>
 		//	Insert new budget tuple into BUDGET table
 		db_finance::addBudget($start_date1, $end_date1, $total_requested, $total_allocated, $description);
 		
+		
+		
+		//start date, end date, total requested, total allocated, balance, description
+	//	name, budget start date, requested, allocated, balance, description
+		
+		
 		//	Insert new budget item tuples into BUDGET_ITEM table
 		for($i = 0; $i < count($length[0]); $i++)
 		{
@@ -429,7 +422,7 @@ include_once("../phpincludes/db_connect.php")	?>
 					$descriptionItem	.=	", ";
 				$descriptionItem	.=	$SCPC_form_fields[$i][$j];
 			}
-			db_finance::addBudgetItem($SCPC_form_fields[$i][0], $start_date1, $SCPC_form_fields[$i][1], $SCPC_form_fields[$i][2], $SCPC_form_fields[$i][3], $descriptionItem);
+			db_finance::addBudgetItem($SCPC_form_fields[$i][0], $start_dates[$j], $SCPC_form_fields[$i][1], $SCPC_form_fields[$i][2], $SCPC_form_fields[$i][3], $descriptionItem);
 		}
 			
 		for($i = 0; $i < count($length[1]); $i++)
@@ -448,7 +441,7 @@ include_once("../phpincludes/db_connect.php")	?>
 
 		//	Validate the budget to make sure it is correct
 		db_finance::validateBudget($start_date1);
-		
+		}
 		
 	 }
 	
