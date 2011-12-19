@@ -1,3 +1,4 @@
+<?PHP include_once("../phpincludes/header.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -501,3 +502,4 @@ include_once("../phpincludes/db_access.php");
 	</script>
 </body>
 </html>
+<?PHP include_once("../phpincludes/footer.php"); ?>

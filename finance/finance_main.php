@@ -1,3 +1,4 @@
+<?PHP include_once("../phpincludes/header.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -37,3 +38,4 @@
 
 </body>
 </html>
+<?PHP include_once("../phpincludes/footer.php"); ?>

@@ -1,3 +1,4 @@
+<?PHP include_once("../phpincludes/header.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -5,7 +6,12 @@
 <title>Budget Summary</title>
 <h1 align="center">Budget Summary</h1>
 <script language="javascript" src="../calendar/calendar.js"></script>
-<?PHP include("../phpincludes/financeMethods.php");	?>
+<?PHP
+include("../phpincludes/financeMethods.php");
+
+
+
+	?>
 </head>
 
 <body>
@@ -110,6 +116,8 @@
 		
 	<?PHP
 	}
+	include_once("../phpincludes/footer.php");
 	?>
 </body>
 </html>
+<?PHP include_once("../phpincludes/footer.php"); ?>
