@@ -55,8 +55,13 @@ HERE;
 		$isEqMan = TRUE;
 		
 		// print buttons to edit / delete this item
-		echo "<form action='edit.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='hidden' value='".$row[1]."' name='type' /><input type='submit' name='edit' value='Edit' /></form> ";
-		echo "<form action='delete.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='delete' value='Delete' /></form>";
+		echo "<form action='edit.php' method='POST'>" .
+			"<input type='hidden' value='".$row[0]."' name='eid'>" .
+			"<input type='hidden' value='".$row[1]."' name='type' />" .
+			"<input type='submit' name='edit' value='Edit' /></form> ";
+		echo "<form action='delete.php' method='POST'>" .
+			"<input type='hidden' value='".$row[0]."' name='eid'>" .
+			"<input type='submit' name='delete' value='Delete' /></form>";
 	}
 	
 	print_info($row, $type);
@@ -66,10 +71,14 @@ HERE;
 		echo "<span class='error'>Checked Out</span>";
 		
 		if ($isEqMan)
-			echo "<form action='checkin.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='checkin' value='Check In' /></form>";
+			echo "<form action='checkin.php' method='POST'>" .
+				"<input type='hidden' value='".$row[0]."' name='eid'>" .
+				"<input type='submit' name='checkin' value='Check In' /></form>";
 	}
 	else
-		echo "<form action='checkout.php' method='POST'><input type='hidden' value='".$row[0]."' name='eid'><input type='submit' name='checkout' value='Check Out' /></form>";
+		echo "<form action='checkout.php' method='POST'>" .
+			"<input type='hidden' value='".$row[0]."' name='eid'>" .
+			"<input type='submit' name='checkout' value='Check Out' /></form>";
 }
 ?>
 <?php include("../phpincludes/footer.php"); ?>
