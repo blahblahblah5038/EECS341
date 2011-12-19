@@ -49,6 +49,8 @@ HERE;
 	// Display detailed info about the item
 	$row = db_equipment::viewEquipment($eid, $type);
 	
+	print_info($row, $type);
+	
 	// Check if equipment manager
 	$isEqMan = FALSE;
 	if (db_access::isEquipmentManager($userpid)) {
@@ -61,10 +63,8 @@ HERE;
 			"<input type='submit' name='edit' value='Edit' /></form> ";
 		echo "<form action='delete.php' method='POST' style='display:inline'>" .
 			"<input type='hidden' value='".$row[0]."' name='eid'>" .
-			"<input type='submit' name='delete' value='Delete' /></form><br />";
+			"<input type='submit' name='delete' value='Delete' /></form><br /><br />";
 	}
-	
-	print_info($row, $type);
 	
 	// Link to check out
 	if (db_equipment::isCheckedOut($row[0])) {
