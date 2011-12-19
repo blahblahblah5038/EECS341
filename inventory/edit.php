@@ -59,6 +59,7 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 					db_equipment::editEquipment($type, $serialno, $brand, $owner);
 					break;
 			}
+		echo "<p>Equipment successfully edited.<br /><a href='/inventory/'>Back to inventory</a></p>";
 		} else { // display form
 			
 			// get equipment info here
@@ -66,11 +67,11 @@ if (!db_access::isMember($userpid) && !db_access::isEquipmentManager($userpid)) 
 			// eid, type, serialno, brand, owner
 			// then additional fields depending on type: see details.php for list of headers
 		
-			echo '<form action="add.php" method="POST"><table>';
+			echo '<form action="edit.php" method="POST"><table>';
 			echo '<input type="hidden" name="eid" value="'.$eid.'" />';
 			
 			// don't allow changing the type of an item
-			echo '<tr><td>Type</td><td><input type="hidden" value="'.$type.'" />'.$type.'</td></tr>';
+			echo '<tr><td>Type</td><td><input type="hidden" name="type" value="'.$type.'" />'.$type.'</td></tr>';
 			
 			echo '<tr><td>Serial No.</td><td><input type="text" name="serialnum" value="'.$info[2].'" /></td></tr>';
 			echo '<tr><td>Brand</td><td><input type="text" name="brand" value="'.$info[3].'" /></td></tr>';

@@ -134,7 +134,7 @@ class db_equipment
 	// Other functions
 	function deleteEquipment($eid)
 	{
-		$querystr = "DELETE FROM equipment WHERE eid=" . $eid;
+		$querystr = "DELETE FROM inventory WHERE eid=" . $eid;
 		db_connect::run_query($querystr);
 	}
 
